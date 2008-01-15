@@ -1,0 +1,12 @@
+#summary A high-level overview of this NARS implementation
+#labels Phase-Design
+
+= Introduction =
+
+The current version of open-nars implements most of NAL-1 to NAL-6, and part of NAL-7 and NAL-8, as specified in the book "Rigid Flexibility: The Logic of Intelligence".
+
+The overall architecture of NARS is very simple. Conceptually speaking, the system consists of a memory, an inference engine, a control mechanism, and a memory buffer. The memory hold a collection of concept; a concept is named by a term, and holds a collection of links to tasks and beliefs related to the term.
+
+More detailed documentations will be added gradually. For now, useful documents include:
+  * The javadoc files under Downloads
+  * The NARS publications and demonstration files at http://nars.wang.googlepages.com/
