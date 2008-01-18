@@ -1,5 +1,5 @@
+#summary Expected results of inference rules
 #labels Phase-QA
-# Expected results of inference rules
 
 Examples showing conclusions of single-step inference, listed in the order by which they are introduced into the logic in the book "Rigid Flexibility: The Logic of Intelligence".
 
