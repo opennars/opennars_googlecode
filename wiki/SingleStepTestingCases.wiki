@@ -1,0 +1,950 @@
+# Expected results of inference rules
+
+Examples showing conclusions of single-step inference, listed in the order by which they are introduced into the logic in the book "Rigid Flexibility: The Logic of Intelligence".
+
+Each example consists of one or two premises, followed by a certain number of inference step, and the derived sentences below "--------------------".
+ 
+To show all derived sentences, select menu item "Parameter/Report Silence Level" then move the scrollbar to set the value to around 10, then click "Hind" button.
+
+To run an example, do the following:
+  # reset the memory by selecting menu item "Memory/Initialize",
+  # copy the lines above the line and paste them into the Input Window,
+  # click the "OK" botton.
+
+== NAL-1 ==
+
+{{{
+
+// revision
+
+<bird --> swimmer>.
+<bird --> swimmer>. %0.1; 0.6% 
+--------------------
+<bird --> swimmer>. %0.87;0.91%
+
+// deduction
+
+<bird --> animal>.
+<robin --> bird>.
+--------------------
+<robin --> animal>. %1.00;0.81%
+
+// abduction
+
+<sport --> competition>.
+<chess --> competition>. %0.8%
+--------------------
+<chess --> sport>. %0.80;0.44%
+<sport --> chess>. %1.00;0.39%
+
+// induction
+
+<swan --> swimmer>. %0.7%
+<swan --> bird>. 
+--------------------
+<swimmer --> bird>. %1.00;0.36%
+<bird --> swimmer>. %0.70;0.44%
+
+// exemplification
+
+<robin --> bird>.
+<bird --> animal>.
+--------------------
+<animal --> robin>. %1.00;0.44%
+
+// conversion
+
+<bird --> swimmer>.
+<swimmer --> bird>?
+--------------------
+<swimmer --> bird>. %1.00;0.47%
+
+// question answering 
+
+<bird --> swimmer>.
+<bird --> swimmer>?
+--------------------
+<bird --> swimmer>. %1.00;0.90%
+
+//
+
+<bird --> swimmer>.
+<?x --> swimmer>?
+--------------------
+<bird --> swimmer>. %1.00;0.90%
+
+}}}
+
+== NAL-2 ==
+
+{{{
+
+// revision
+
+<swan <-> robin>.
+<swan <-> robin>. %0.1; 0.5%
+--------------------
+<robin <-> swan>. %0.91;0.90%
+
+// comparison
+
+<swan --> swimmer>. %0.7%
+<swan --> bird>. 
+--------------------
+<bird <-> swimmer>. %0.70;0.44%
+
+//
+
+<sport --> competition>.
+<chess --> competition>. %0.8%
+--------------------
+<chess <-> sport>. %0.80;0.44% 
+
+// analogy
+
+<swan --> swimmer>.
+<gull <-> swan>.
+--------------------
+<gull --> swimmer>. %1.00;0.72%
+
+//
+
+<gull --> swimmer>.
+<gull <-> swan>.
+--------------------
+<swan --> swimmer>. %1.00;0.72% 
+
+// resemblance
+
+<swan <-> robin>.
+<gull <-> swan>.
+--------------------
+<gull <-> robin>. %1.00;0.81%
+
+// instance and property
+
+<Tweety {-- bird>.
+--------------------
+<{Tweety} --> bird> %1.00;0.90%
+
+//
+
+<raven --] black>.
+--------------------
+<raven --> [black]> %1.00;0.90%
+
+//
+
+<Tweety {-] yellow>.
+--------------------
+<{Tweety} --> [yellow]> %1.00;0.90%
+
+// conversions between inheritance and similarity
+
+<swan --> bird>.
+<bird --> swan>. %0.1%
+--------------------
+<bird <-> swan>. %0.10;0.89%
+
+//
+
+<swan --> bird>. 
+<swan <-> bird>. %0.1%
+--------------------
+<bird --> swan>. %0.10;0.73%
+
+//
+
+<swan --> bird>. %0.9%
+<swan <-> bird>?
+--------------------
+<bird <-> swan>. %0.90;0.47%
+
+//
+
+<swan <-> bird>. %0.9%
+<swan --> bird>?
+--------------------
+<swan --> bird>. %0.90;0.81%
+
+// set definition
+
+<{Tweety} --> {Birdie}>.
+--------------------
+<{Birdie} <-> {Tweety}>. %1.00;0.90%
+
+//
+
+<{Tweety} <-> {Birdie}>.
+--------------------
+<{Tweety} --> {Birdie}>. %1.00;0.90%
+<{Birdie} --> {Tweety}>. %1.00;0.90%
+
+//
+
+<[smart] --> [bright]>.
+--------------------
+<[bright] <-> [smart]>. %1.00;0.90% 
+
+//
+
+<[smart] <-> [bright]>.
+--------------------
+<[bright] --> [smart]>. %1.00;0.90%
+<[smart] --> [bright]>. %1.00;0.90% 
+
+// structure transformation
+
+<{Tweety} <-> {Birdie}>. %0.9%
+--------------------
+<Birdie <-> Tweety>. %0.90;0.90%
+
+//
+
+<[smart] <-> [bright]>.
+--------------------
+<bright <-> smart>. %1.00;0.90%
+
+//
+
+<Tweety <-> Birdie>. %0.9%
+<{Birdie} <-> {Tweety}>?
+--------------------
+<{Birdie} <-> {Tweety}>. %0.90;0.90%
+
+// question derivation 
+
+<bird --> swimmer>.
+<?x {-- swimmer>?
+--------------------
+<bird --> {?x}>?
+<{?x} --> bird>?
+<{?x} <-> bird>? 
+
+}}}
+
+== NAL-3 ==
+
+{{{
+
+// compound composition, two premises
+
+<swan --> swimmer>. %0.9%
+<swan --> bird>. %0.8%
+--------------------
+<swan --> (|,bird,swimmer)>.%0.98;0.96%
+<swan --> (&,bird,swimmer)>.%0.72;0.83%
+<swan --> (-,swimmer,bird)>.%0.18;0.89%
+<swan --> (-,bird,swimmer)>.%0.08;0.90%
+
+//
+
+<sport --> competition>. %0.9%
+<chess --> competition>. %0.8%
+--------------------
+<(&,chess,sport) --> competition>. %0.98;0.96%
+<(|,chess,sport) --> competition>. %0.72;0.83%
+<(~,sport,chess) --> competition>. %0.18;0.89%
+<(~,chess,sport) --> competition>. %0.08;0.90%
+
+// compound decomposition, two premises
+
+<robin --> (|,bird,swimmer)>.
+<robin --> swimmer>. %0%
+--------------------
+<robin --> bird>. %1.00;0.81%
+
+//
+
+<robin --> (-,mammal,swimmer)>. %0%  
+<robin --> swimmer>. %0%
+--------------------
+<robin --> mammal>. %0.00;0.81% 
+
+// set operations
+
+<something --> {Venus, Mars, Pluto}>. %0.9%
+<something --> {Pluto, Saturn}>. %0.7%
+--------------------
+<something --> {Mars,Pluto,Saturn,Venus}>.%0.97;0.95%
+<something --> {Pluto}>.%0.63;0.84%
+<something --> {Mars,Venus}>.%0.27;0.88%
+<something --> {Saturn}>.%0.07;0.91%
+
+// composition on both sides of a statement
+
+<bird --> animal>. %0.9%
+<(&, swimmer, bird) --> (&, swimmer, animal)>?
+--------------------
+<(&,bird,swimmer) --> (&,animal,swimmer)>. %0.90;0.81%
+
+//
+
+<bird --> animal>. %0.9%
+<(-, swimmer, animal) --> (-, swimmer, bird)>?
+--------------------
+<(-,swimmer,animal) --> (-,swimmer,bird)>. %0.90;0.81% 
+
+// compound composition, one premise
+
+<swan --> bird>. %0.8%
+<swan --> (&,bird,swimmer)>?
+--------------------
+<swan --> (&,bird,swimmer)>. %0.80;0.47%
+
+//
+
+<swan --> bird>. %0.8%
+<swan --> (|,bird,swimmer)>?
+--------------------
+<swan --> (|,bird,swimmer)>. %0.80;0.72%
+
+//
+
+<swan --> bird>. %0.8%
+<(&,swan,swimmer) --> bird>?
+--------------------
+<(&,swan,swimmer) --> bird>. %0.80;0.72%
+
+//
+
+<swan --> bird>. %0.8%
+<(|,swan,swimmer) --> bird>?
+--------------------
+<(|,swan,swimmer) --> bird>. %0.80;0.47%
+
+//
+
+<swan --> bird>. %0.8%
+<swan --> (-,bird,swimmer)>?
+--------------------
+<swan --> (-,bird,swimmer)>. %0.80;0.47%
+
+//
+
+<swan --> bird>. %0.8%
+<swan --> (-,swimmer,bird)>?
+--------------------
+<swan --> (-,swimmer,bird)>. %0.20;0.72%
+
+//
+
+<swan --> bird>. %0.8%
+<swan --> (~,bird,swimmer)>?
+--------------------
+<swan --> (~,bird,swimmer)>. %0.80;0.72%
+
+// compound decomposition, one premise
+
+<robin --> (&,bird,swimmer)>. %0.9%
+--------------------
+<robin --> bird>. %0.90;0.81%
+
+//
+
+<robin --> (|,bird,swimmer)>. %0.9%  
+--------------------
+<robin --> bird>. %0.90;0.47% 
+
+//
+
+<robin --> (-,bird,swimmer)>. %0.9%
+--------------------
+<swan --> bird>. %0.90;0.81%
+<swan --> swimmer>. %0.10;0.81%
+
+// decomposition on both sides of a statement
+
+<(&, swimmer, bird) --> (&, swimmer, animal)>. %0.9%
+--------------------
+<bird --> animal>. %0.90;0.47% 
+
+//
+
+<(-, swimmer, bird) --> (-, swimmer, animal)>. %0.9%
+--------------------
+<animal --> bird>. %0.90;0.47%
+
+}}}
+
+== NAL-4 ==
+
+{{{
+
+// structural transformation
+
+<(*, acid, base) --> reaction>.
+--------------------
+<acid --> (/,reaction,_,base)>. %1.00;0.90%
+<base --> (/,reaction,acid,_)>. %1.00;0.90%
+
+//
+
+<acid --> (/,reaction,_,base)>.
+--------------------
+<(*,acid,base) --> reaction>. %1.00;0.90%
+<base --> (/,reaction,acid,_)>. %1.00;0.90%
+
+//
+
+<base --> (/,reaction,acid,_)>.
+--------------------
+<acid --> (/,reaction,_,base)>. %1.00;0.90%
+<(*,acid,base) --> reaction>. %1.00;0.90%
+
+//
+
+<neutralization --> (*, acid, base)>. %0.8%
+--------------------
+<(\,neutralization,_,base) --> acid>. %0.80;0.90%
+<(\,neutralization,acid,_) --> base>. %0.80;0.90%
+
+//
+
+<(\,neutralization,_,base) --> acid>. %0.8%
+--------------------
+<neutralization --> (*,acid,base)>. %0.80;0.90%
+<(\,neutralization,acid,_) --> base>. %0.80;0.90%
+
+//
+
+<(\,neutralization,acid,_) --> base>. %0.8%
+--------------------
+<(\,neutralization,_,base) --> acid>. %0.80;0.90%
+<neutralization --> (*,acid,base)>. %0.80;0.90%
+
+// composition on both sides of a statement
+
+<bird --> animal>. %0.9%
+<(*, bird, plant) --> #>.
+--------------------
+<(*,bird,plant) --> (*,animal,plant)>. %0.90;0.81%
+
+//
+
+<neutralization --> reaction>. %0.9%
+<(/,neutralization,acid,_) --> #>.
+--------------------
+<(/,neutralization,acid,_) --> (/,reaction,acid,_)>. %0.90;0.81%
+
+//
+
+<soda --> base>. %0.9%
+<(/,neutralization,_,base) --> #>.
+--------------------
+<(/,neutralization,_,base) --> (/,neutralization,_,soda)>. %0.90;0.81%
+
+// decomposition on both sides of a statement
+
+<(*, plant, bird) --> (*, plant, animal)>. %0.9%
+--------------------
+<bird --> animal>. %0.90;0.47%
+
+//
+
+<(/,neutralization,acid,_) --> (/,reaction,acid,_)>. %0.9%
+--------------------
+<neutralization --> reaction>. %0.90;0.47%
+
+//
+
+<(/,neutralization,_,soda) --> (/,neutralization,_,base)>. %0.9%
+--------------------
+<base --> soda>. %0.90;0.47%
+
+}}}
+
+== NAL-5 ==
+
+{{{
+
+// revision
+
+<<robin --> flyer> ==> <robin --> bird>>.
+<<robin --> flyer> ==> <robin --> bird>>. %0; 0.6%
+--------------------
+<<robin --> flyer> ==> <robin --> bird>>. %0.85;0.91%
+
+// deduction
+
+<<robin --> bird> ==> <robin --> animal>>.
+<<robin --> flyer> ==> <robin --> bird>>.
+--------------------
+<<robin --> flyer> ==> <robin --> animal>>. %1.00;0.81%
+
+//
+
+<<robin --> bird> ==> <robin --> animal>>.
+<robin --> bird>.
+--------------------
+<robin --> animal>. %1.00;0.81%
+
+// exemplification
+
+<<robin --> flyer> ==> <robin --> bird>>.
+<<robin --> bird> ==> <robin --> animal>>.
+--------------------
+<<robin --> animal> ==> <robin --> flyer>>. %1.00;0.44%
+
+// induction
+
+<<robin --> bird> ==> <robin --> animal>>. 
+<<robin --> bird> ==> <robin --> flyer>>. %0.8%
+--------------------
+<<robin --> flyer> ==> <robin --> animal>>. %1.00;0.39%
+<<robin --> animal> ==> <robin --> flyer>>. %0.80;0.44%
+
+// abduction
+
+<<robin --> bird> ==> <robin --> animal>>. %0.7%
+<<robin --> flyer> ==> <robin --> animal>>.
+--------------------
+<<robin --> bird> ==> <robin --> flyer>>. %0.70;0.44%
+<<robin --> flyer> ==> <robin --> bird>>. %1.00;0.36%
+
+//
+
+<<robin --> bird> ==> <robin --> animal>>. %0.7%
+<robin --> animal>.
+--------------------
+<robin --> bird>. %1.00;0.36%
+
+// comparison
+
+<<robin --> bird> ==> <robin --> animal>>. 
+<<robin --> bird> ==> <robin --> flyer>>. %0.8%
+--------------------
+<<robin --> animal> <=> <robin --> flyer>>. %0.80;0.44%
+
+//
+
+<<robin --> bird> ==> <robin --> animal>>. %0.7%
+<<robin --> flyer> ==> <robin --> animal>>.
+--------------------
+<<robin --> bird> <=> <robin --> flyer>>. %0.70;0.44%
+
+// analogy
+
+<<robin --> bird> ==> <robin --> animal>>. 
+<<robin --> bird> <=> <robin --> flyer>>. %0.8%
+--------------------
+<<robin --> flyer> ==> <robin --> animal>>. %0.80;0.46%
+
+//
+
+<robin --> bird>. 
+<<robin --> bird> <=> <robin --> flyer>>. %0.8%
+--------------------
+<robin --> flyer>. %0.80;0.46%
+
+// resemblance
+
+<<robin --> bird> <=> <robin --> animal>>.
+<<robin --> flyer> <=> <robin --> bird>>. %0.8%
+--------------------
+<<robin --> animal> <=> <robin --> flyer>>. %0.80;0.81%
+
+// conversions between Implication and Equivalence
+
+<<robin --> flyer> ==> <robin --> bird>>. %0.9%
+<<robin --> bird> ==> <robin --> flyer>>. %0.9%
+--------------------
+<<robin --> bird> <=> <robin --> flyer>>. %0.81;0.82%
+
+// compound composition, two premises
+
+<<robin --> bird> ==> <robin --> animal>>. %0.9%
+<<robin --> bird> ==> <robin --> flyer>>. %0.7%
+--------------------
+<<robin --> bird> ==> (||,<robin --> animal>,<robin --> flyer>)>.%0.97;0.95%
+<<robin --> bird> ==> (&&,<robin --> animal>,<robin --> flyer>)>.%0.63;0.84%
+<<robin --> bird> ==> (&&,(--,<robin --> flyer>),<robin --> animal>)>.%0.27;0.88%
+<<robin --> bird> ==> (&&,(--,<robin --> animal>),<robin --> flyer>)>.%0.07;0.91%
+
+// compound decomposition, two premises
+
+<<robin --> bird> ==> (&&,<robin --> animal>,<robin --> flyer>)>. %0%
+<<robin --> bird> ==> <robin --> flyer>>.
+--------------------
+<<robin --> bird> ==> <robin --> animal>>.%0.00;0.81%
+
+//
+
+(&&, A, B). %0%
+B.
+----------
+A. %0.00;0.81%
+
+//
+
+(||,A,B).
+B. %0%
+----------
+A. %1.00;0.81%
+
+// compound composition, one premises
+
+A. %0.9%
+(&&,A,B)?
+----------
+(&&,A,B). %0.90;0.47%
+
+//
+
+A. %0.9%
+(||,A,B)?
+----------
+(||,A,B). %0.90;0.81%
+
+// compound decomposition, one premises
+
+(&&,A,B). %0.9%
+----------
+A. %0.90;0.81%
+
+//
+
+(||,A,B). %0.9%
+----------
+A. %0.90;0.47%
+
+// negation
+
+(--,<robin --> flyer>). %0.1%
+--------------------
+<robin --> flyer>. %0.90;0.90%
+
+//
+
+<robin --> flyer>. %0.9%
+<(--,<robin --> flyer>) ==> #>.
+--------------------
+(--,<robin --> flyer>). %0.10;0.90%
+
+// contraposition
+
+<(--,<robin --> bird>) ==> <robin --> flyer>>. %0.1%
+--------------------
+<(--,<robin --> flyer>) ==> <robin --> bird>>. %0.00;0.44%
+
+// conditional deduction
+
+<(&&, a, b) ==> c>.
+a.
+--------------------
+<b ==> c>. %1.00;0.81%
+
+//
+
+<(&&, a, b, c) ==> d>.
+a.
+--------------------
+<(&&, b, c) ==> d>. %1.00;0.81%
+
+//
+
+<(&&, a, b) ==> c>.
+<d ==> a>.
+--------------------
+<(&&,b,d) ==> c>. %1.00;0.81%
+
+// conditional abduction
+
+<b ==> c>.
+<(&&, a, b) ==> c>. %0.4%
+--------------------
+a. %1.00;0.24%
+
+//
+
+<(&&, b, c) ==> d>. %0.4%
+<(&&, a, b, c) ==> d>.
+--------------------
+a. %0.40;0.44%
+
+//
+
+<(&&, d, b) ==> c>. %0.4%
+<(&&, a, b) ==> c>.
+--------------------
+<a ==> d>. %1.00;0.24%
+<d ==> a>. %0.40;0.44%
+
+// conditional induction
+
+<(&&, a, b) ==> c>. 
+<a ==> d>. %0.7%
+----------------------
+<(&&,b,d) ==> c>. %1.00;0.36%
+
+}}}
+
+== NAL-6 ==
+
+{{{
+
+// variable unification
+
+<<#x --> bird> ==> <#x --> flyer>>.
+<<#y --> bird> ==> <#y --> flyer>>. %0; 0.7%
+--------------------
+<<#1 --> bird> ==> <#1 --> flyer>>. %0.79;0.91%
+
+//
+
+(&&, <#w() --> bird>, <#w() --> flyer>).
+(&&, <#x() --> bird>, <#x() --> flyer>). %0.1; 0.7%
+--------------------
+[NO REVISION]
+
+//
+
+<<#x --> bird> ==> <#x --> animal>>.
+<<#y --> robin> ==> <#y --> bird>>.
+--------------------
+<<#1 --> robin> ==> <#1 --> animal>>. %1.00;0.81%
+<<#1 --> animal> ==> <#1 --> robin>>. %1.00;0.44%
+
+//
+
+<<bird --> #y> ==> <robin --> #y>>.
+<<swimmer --> #w> ==> <robin --> #w>>. %0.7%
+--------------------
+<<swimmer --> #1> ==> <bird --> #1>>. %0.70;0.44%
+<<bird --> #1> ==> <swimmer --> #1>>. %1.00;0.36%
+<<bird --> #1> <=> <swimmer --> #1>>. %0.70;0.44%
+
+//
+
+<(&&, A, <#x --> b>) ==> <#x --> c>>.
+<<#y --> d> ==> <#y --> b>>.
+--------------------
+<(&&,<#1 --> d>,A) ==> <#1 --> c>>. %1.00;0.81%
+
+//
+
+<(&&, A, <#x --> b>, E) ==> <#x --> c>>.
+<(&&,<#y --> d>,A) ==> <#y --> c>>. %0.8%
+--------------------
+<<#1 --> d> ==> (&&,<#1 --> b>,E)>. %0.80;0.44%
+<(&&,<#1 --> b>,E) ==> <#1 --> d>>. %1.00;0.39%
+
+//
+
+<(&&, B, <#x --> a>) ==> <#x --> c>>. %0.7%
+<<#y --> a> ==> <#y --> d>>.
+----------------------
+<(&&,<#1 --> d>,B) ==> <#1 --> c>>. %0.70;0.44%
+
+// variable elimination
+
+<<#x --> bird> ==> <#x --> animal>>.
+<robin --> bird>.
+--------------------
+<robin --> animal>. %1.00;0.81%
+
+//
+
+<<#x --> bird> ==> <#x --> animal>>.
+<robin --> animal>.
+--------------------
+<robin --> bird>. %1.00;0.44%
+
+//
+
+<<#x --> bird> <=> <#x --> animal>>.
+<robin --> bird>.
+--------------------
+<robin --> animal>. %1.00;0.72%
+
+//
+
+(&&,<#x() --> bird>,<#x() --> swimmer>).
+<swan --> bird>. %0.9%
+--------------------
+<swan --> swimmer>. %1.00;0.42%
+
+//
+
+<(&&, <#x --> a>, B) ==> <#x --> c>>.
+<e --> a>.
+--------------------
+<B ==> <e --> c>>. %1.00;0.81%
+
+//
+
+<(&&, A, <#x --> b>, C) ==> <#x --> d>>.
+<e --> b>.
+--------------------
+<(&&,A,C) ==> <e --> d>>. %1.00;0.81%
+
+//
+
+<(&&,<#x --> key>,<#y --> lock>) ==> <#y --> (/,open,#x,_)>>.
+<lock1 {-- lock>.
+--------------------
+<<#1 --> key> ==> <{lock1} --> (/,open,#1,_)>>. %1.00;0.81%
+
+//
+
+<<#x --> lock> ==> (&&,<#x --> (/,open,#y(#x),_)>,<#y(#x) --> key>)>.
+<lock1 {-- lock>.
+--------------------
+(&&,<{lock1} --> (/,open,#1(),_)>,<#1() --> key>). %1.00;0.81%
+
+//
+
+(&&,<#x() --> lock>,<<#y --> key> ==> <#x() --> (/,open,#y,_)>>). 
+<lock1 {-- lock>. %0.9%
+-----------------------------------------------------------
+<<#1 --> key> ==> <{lock1} --> (/,open,#1,_)>>. %1.00;0.42%
+
+//
+
+(&&,<#x() --> lock>,<#y() --> key>,<#x() --> (/,open,#y(),_)>).
+<lock1 {-- lock>. %0.9%
+-----------------------------------------------------------
+(&&,<#1() --> key>,<{lock1} --> (/,open,#1(),_)>). %1.00;0.42%
+
+// variable introduction
+
+<swan --> bird>. 
+<swan --> swimmer>. %0.8%
+--------------------
+<<#1 --> swimmer> ==> <#1 --> bird>>. %1.00;0.39%
+<<#1 --> bird> ==> <#1 --> swimmer>>. %0.80;0.44%
+<<#1 --> bird> <=> <#1 --> swimmer>>. %0.80;0.44%
+
+//
+
+<gull --> swimmer>. 
+<swan --> swimmer>. %0.8%
+--------------------
+<<swan --> #1> ==> <gull --> #1>>. %1.00;0.39%
+<<gull --> #1> ==> <swan --> #1>>. %0.80;0.44%
+<<gull --> #1> <=> <swan --> #1>>. %0.80;0.44%
+
+//
+
+<swan --> bird>.
+<swan --> swimmer>.
+--------------------
+(&&,<#1() --> bird>,<#1() --> swimmer>). %1.00;0.81%
+
+// multiple variables introduction
+
+<key1 --> key>.
+<key1 --> (/, open, _, lock1)>.
+--------------------
+<<#1 --> key> ==> <#1 --> (/,open,_,lock1)>>. %1.00;0.44%
+(&&,<#1() --> (/,open,_,lock1)>,<#1() --> key>). %1.00;0.81%
+
+//
+
+<<#1 --> key> ==> <#1 --> (/,open,_,lock1)>>.
+--------------------
+<<#1 --> key> ==> <(*,#1,lock1) --> open>>. %1.00;0.90%
+<<#1 --> key> ==> <lock1 --> (/,open,#1,_)>>. %1.00;0.90%
+
+//
+
+(&&,<#1() --> (/,open,_,lock1)>,<#1() --> key>).
+--------------------
+(&&,<#1() --> key>,<(*,#1(),lock1) --> open>). %1.00;0.90%
+(&&,<#1() --> key>,<lock1 --> (/,open,#1(),_)>). %1.00;0.90%
+
+//
+
+<<#x --> key> ==> <lock1 --> (/,open,#x,_)>>. %0.8%
+<lock1 --> lock>.
+--------------------
+<(&&,<#1 --> key>,<#2 --> lock>) ==> <#2 --> (/,open,#1,_)>>. %1.00;0.39%
+<<#1 --> key> ==> (&&,<#2(#1) --> (/,open,#1,_)>,<#2(#1) --> lock>)>. %0.80;0.82%
+
+//
+
+(&&,<lock1 --> (/,open,#x(),_)>,<#x() --> key>). %0.8%
+<lock1 --> lock>.
+--------------------
+(&&,<#1() --> key>,<<#2 --> lock> ==> <#2 --> (/,open,#1(),_)>>). %1.00;0.39%
+(&&,<#1() --> (/,open,#2(),_)>,<#2() --> key>,<#1() --> lock>). %0.80;0.82%
+
+}}}
+
+== NAL-7 ==
+
+{{{
+
+// temporal inference
+
+<<(*, #x, room_101) --> enter> =\> <(*, #x, door_101) --> open>>. %0.9%
+<<(*, #y, door_101) --> open> =\> <(*, #y, key_101) --> hold>>. %0.8%
+--------------------
+<<(*,#1,room_101) --> enter> =\> <(*,#1,key_101) --> hold>>. %0.72;0.58%
+<<(*,#1,key_101) --> hold> =/> <(*,#1,room_101) --> enter>>. %1.00;0.36%
+
+//
+
+<<(*, #x, door_101) --> open> =/> <(*, #x, room_101) --> enter>>. %0.9% 
+<<(*, #y, door_101) --> open> =\> <(*, #y, key_101) --> hold>>. %0.8%
+--------------------
+<<(*,#1,room_101) --> enter> =\> <(*,#1,key_101) --> hold>>. %0.80;0.42%
+<<(*,#1,key_101) --> hold> =/> <(*,#1,room_101) --> enter>>. %0.90;0.39%
+<<(*,#1,key_101) --> hold> </> <(*,#1,room_101) --> enter>>. %0.73;0.44%
+
+//
+
+<<(*, #x, door_101) --> open> =/> <(*, #x, room_101) --> enter>>. %0.95%
+<<(*, #x, room_101) --> enter> <=> <(*, #x, corridor_100) --> leave>>. %1%
+--------------------
+<<(*,#1,door_101) --> open> =/> <(*,#1,corridor_100) --> leave>>. %0.95;0.72%
+
+// inference on tense
+
+<<(*, #x, key_101) --> hold> =/> <(*, #x, room_101) --> enter>>.
+(/>, <(*, John, key_101) --> hold>).
+--------------------
+(/>,<(*,John,room_101) --> enter>). %1.00;0.81%
+
+//
+
+<<(*, #x, key_101) --> hold> =/> <(*, #x, room_101) --> enter>>.
+(|>, <(*, John, room_101) --> enter>).
+--------------------
+(\>,<(*,John,key_101) --> hold>). %1.00;0.44%
+
+//
+
+<<(*, John, key_101) --> hold> =/> <(*, John, room_101) --> enter>>.
+(|>, <(*, John, key_101) --> hold>).
+--------------------
+(/>,<(*,John,room_101) --> enter>). %1.00;0.81% 
+
+//
+
+<<(*, John, key_101) --> hold> =/> <(*, John, room_101) --> enter>>.
+(\>, <(*, John, room_101) --> enter>).
+--------------------
+(\>,<(*,John,key_101) --> hold>). %1.00;0.44%
+
+}}}
+
+== NAL-8 ===
+{{{
+[to see all the results, set "Parameter/Report Silence Level" to 0]
+
+// goal revision
+
+<John --> (/,inside,_,room_101)>!
+<John --> (/,inside,_,room_101)>! %0; 0.60%
+---------------------------------
+<John --> (/,inside,_,room_101)>! %0.85;0.91%
+
+// goal derivation
+
+<John --> (/,inside,_,room_101)>!
+<<#x --> (/,inside,_,room_101)> ==> <#x --> (/,inside,_,building_a)>>.
+----------------
+<John --> (/,inside,_,building_a)>! %1.00;0.44%
+
+}}}
