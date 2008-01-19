@@ -14,7 +14,7 @@ In a task, all the space characters are optional, and will be ignored by the sys
            <sentence> ::= <statement>"." [<truth-value>]     // judgment to be remembered
                         | <statement>"?"                     // question to be answered
                         | <statement>"!" [<truth-value>]     // goal to be realized
-           <statement> ::= "<"<term> <relation> <term>">"    // two terms related to each other
+          <statement> ::= "<"<term> <relation> <term>">"     // two terms related to each other
                         | <term>                             // a term can name a statement
            <relation> ::= "-->"                              // inheritance
                         | "<->"                              // similarity
