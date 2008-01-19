@@ -53,7 +53,7 @@ In a task, all the space characters are optional, and will be ignored by the sys
                         | "#"<word> "(" {"#"<word>} ")"      // dependent variable
                         | "#"                                // anonymous term as place holder
                         | "?"<word>                          // query variable for term to be find
-        <truth-value> ::= "%"<frequency>[";"<confidence>"%"] // two numbers in [0,1]x(0,1)
-       <budget-value> ::= "%"<priority>[";"<durability>"%"]  // two numbers in [0,1]x(0,1)
+        <truth-value> ::= "%"<frequency>[";"<confidence>]"%" // two numbers in [0,1]x(0,1)
+       <budget-value> ::= "%"<priority>[";"<durability>]"%"  // two numbers in [0,1]x(0,1)
                <word> : string in an alphabet
 }}}
