@@ -1,0 +1,59 @@
+#summary The input/output format of the system.
+#labels Phase-Design
+
+= I/O Format =
+
+Each line in the system's input and output is either a _task_ (as defined in the grammar, in BNF notation), or an integer, indicating the number of inference steps between tasks.
+
+In a task, all the space characters are optional, and will be ignored by the system in processing. 
+
+= Narsese Grammer =
+{{{
+                        GRAMMAR RULE                          BRIEF EXPLANATION
+               <task> ::= [<budget-value>] <sentence>        // task to be processed
+           <sentence> ::= <statement>"." [<truth-value>]     // judgment to be remembered
+                        | <statement>"?"                     // question to be answered
+                        | <statement>"!" [<truth-value>]     // goal to be realized
+           <statement> ::= "<"<term> <relation> <term>">"    // two terms related to each other
+                        | <term>                             // a term can name a statement
+           <relation> ::= "-->"                              // inheritance
+                        | "<->"                              // similarity
+                        | "{--"                              // instance
+                        | "--]"                              // property
+                        | "{-]"                              // instance-property
+                        | "==>"                              // implication
+                        | "<=>"                              // equivalence
+                        | "=/>"                              // predictive implication
+                        | "=|>"                              // concurrent implication
+                        | "=\>"                              // retrospective implication
+                        | "</>"                              // predictive equivalence
+                        | "<|>"                              // concurrent equivalence
+               <term> ::= <word>                             // an atomic constant term
+                        | <variable>                         // an atomic variable term
+                        | <compound-term>                    // a term with internal structure
+                        | <statement>                        // a statement can serve as a term
+      <compound-term> ::= "{" <term> {","<term>} "}"         // extensional set
+                        | "[" <term> {","<term>} "]"         // intensional set
+                        | "(&," <term> {","<term>} ")"       // extensional intersection
+                        | "(|," <term> {","<term>} ")"       // intensional intersection
+                        | "(-," <term> "," <term> ")"        // extensional difference
+                        | "(~," <term> "," <term> ")"        // intensional difference
+                        | "(*," <term> {","<term>} ")"       // product
+                        | "(/," <term> {","<term>} ")"       // extensional image
+                        | "(\," <term> {","<term>} ")"       // intensional image
+                        | "(--," <term> ")"                  // negation
+                        | "(||," <term> {","<term>} ")"      // disjunction
+                        | "(&&," <term> {","<term>} ")"      // conjunction
+                        | "(&/," <term> {","<term>} ")"      // sequential events
+                        | "(&|," <term> {","<term>} ")"      // parallel events
+                        | "(/>," <term> ")"                  // future event
+                        | "(|>," <term> ")"                  // present event
+                        | "(\>," <term> ")"                  // past event
+           <variable> ::= "#"<word>                          // independent variable
+                        | "#"<word> "(" {"#"<word>} ")"      // dependent variable
+                        | "#"                                // anonymous term as place holder
+                        | "?"<word>                          // query variable for term to be find
+        <truth-value> ::= "%"<frequency>[";"<confidence>"%"] // two numbers in [0,1]x(0,1)
+       <budget-value> ::= "%"<priority>[";"<durability>"%"]  // two numbers in [0,1]x(0,1)
+               <word> : string in an alphabet
+}}}
