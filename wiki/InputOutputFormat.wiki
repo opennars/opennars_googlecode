@@ -1,9 +1,9 @@
-#summary The input/output format of the system.
+#summary The input/output format of the system
 #labels Phase-Design
 
 = I/O Format =
 
-Each line in the system's input and output is either a _task_ (as defined in the grammar, in BNF notation), or an integer, indicating the number of inference steps between tasks.
+Each line in the system's input and output is either a _task_ (as defined in the following grammar, in BNF notation), or an integer, indicating the number of inference steps between tasks.
 
 In a task, all the space characters are optional, and will be ignored by the system in processing. 
 
