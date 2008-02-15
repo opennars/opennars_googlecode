@@ -3,12 +3,41 @@
 
 = Introduction =
 
-The current version of open-nars implements most of NAL-1 to NAL-6, and part of NAL-7 and NAL-8, as specified in the book "Rigid Flexibility: The Logic of Intelligence".
+Open-NARS is the open-source version of NARS, a general-purpose AI system, designed in the framework of a reasoning system.
 
-The overall architecture of NARS is very simple. Conceptually speaking, the system consists of a memory, an inference engine, a control mechanism, and a memory buffer. Their relations and the basic working cycle of the system is illustrated in the architecture.pdf file under Downloads.
+NARS works by processing tasks imposed by its environment (human users or other computer systems). Tasks can arrive at any time, and there is no restriction on their content, as far as they can be expressed in Narsese, the I/O language of NARS (see http://code.google.com/p/open-nars/wiki/InputOutputFormat for the Grammar of Narsese).
 
-The memory hold a collection of concept; a concept is named by a term, and holds a collection of links to tasks and beliefs related to the term.
+There are three types of tasks:
+  * Judgment. To process it means to accept it as the system's belief, as well as to derive new beliefs and to revise old beliefs accordingly.
+  * Question.  To process it means to find the best answer to it according to current beliefs.
+  * Goal. To process it means to carry out some system operations to realize it.
 
-More detailed documentations will be added gradually. For now, useful documents include:
-  * The javadoc files under Downloads
-  * The NARS publications and demonstration files at http://nars.wang.googlepages.com/
+As a reasoning system, the overall architecture of NARS consists of a memory, an inference engine, and a control mechanism. 
+
+The memory contains a collection of concepts, a list of operators, and a buffer for new tasks. Each concept is identified by a term, and contains tasks and beliefs directly on the term, as well as links to related tasks and terms.
+
+The inference engine carries out various type of inference, according to a set of built-in rules.
+
+Roughly speaking, the control mechanism repeatedly carries out the _working cycle_ of the system, consisting of the following steps:
+  # Select tasks in the buffer to insert into the corresponding concepts, which may include the creation of new concepts and beliefs, as well as direct processing on the tasks.
+  # Select a concept from the memory, then select a task and a belief from the concept.
+  # Feed the task and the belief to the inference engine to produce derived tasks.
+  # Add the derived tasks into the task buffer, and send report to the environment if a task provides a best-so-far answer to an input question, or indicates the realization of an input goal.
+  # Return the processed belief, task, and concept back to memory with feedback.
+
+All the _selections_ in steps 1 and 2 are _probabilistic_, in the sense that all the items (tasks, beliefs, or concepts) within the scope of the selection have priority values attached, and the probability for each of them to be selected at the current moment is proportional to its priority value. When an new item is produced, its priority value is determined according to its parent items, as well as the type of mechanism that produces it. At step 5, the priority values of all the involved items are adjusted, according to the immediate feedback of the current cycle.
+
+The architecture and working cycle are illustrated in http://open-nars.googlecode.com/files/architecture.pdf
+
+At the current time, the most comprehensive description of NARS is the book "Rigid Flexibility: The Logic of Intelligence" (http://www.springer.com/west/home/computer/artificial?SGWID=4-147-22-173659733-0). The current code implements most of NAL-1 to NAL-6, and part of NAL-7 and NAL-8, as specified in the book.
+
+Beginners can start with the following on-line materials:
+  *. The basic ideas behind the project: http://nars.wang.googlepages.com/wang.logic_intelligence.pdf
+  *. The high-level engineering plan: http://nars.wang.googlepages.com/wang.roadmap.pdf
+  *. The core logic: http://www.cogsci.indiana.edu/pub/wang.inheritance_nal.ps
+  *. The semantics: http://nars.wang.googlepages.com/wang.semantics.pdf
+  *. The memory and control: http://nars.wang.googlepages.com/wang.computation.pdf
+
+Additional materials:
+  * The javadoc files at http://open-nars.googlecode.com/files/javadoc.zip
+  * The NARS publications and demonstration files at http://nars.wang.googlepages.com/ 
