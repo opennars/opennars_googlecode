@@ -48,19 +48,19 @@ end of this note.
 OpenNARS will consist of five main types of component, which will form the top
 level packages for the system. These are:
 
-* Language (com.googlecode.opennars.language)
-* Inference rules (com.googlecode.opennars.rules)
-* Control strategies (com.googlecode.opennars.strategies)
-* Communication channels (com.googlecode.opennars.channels)
-* Core reasoner (com.googlecode.opennars.core)
+  * Language ({{{com.googlecode.opennars.language}}})
+  * Inference rules ({{{com.googlecode.opennars.rules}}})
+  * Control strategies ({{{com.googlecode.opennars.strategies}}})
+  * Communication channels ({{{com.googlecode.opennars.channels}}})
+  * Core reasoner ({{{com.googlecode.opennars.core}}})
 
 The language components are further divided into logical parts of the language
-(in com.googlecode.opennars.language.logic) and command and control parts (in
-com.googlecode.opennars.language.command). The top level language package
+(in {{{com.googlecode.opennars.language.logic}}}) and command and control parts (in
+{{{com.googlecode.opennars.language.command}}}). The top level language package
 will contain the core components of a language (with abstract classes for
 terms, atoms, compounds, commands, etc.) which may then be extended by specific
 sub-packages. It is expected that each level of NAL will gain its own
-sub-package (com.googlecode.opennars.language.logic.nal1, say.) The language
+sub-package ({{{com.googlecode.opennars.language.logic.nal1}}}, say.) The language
 classes will make heavy use of the visitor design pattern, to completely
 separate the structural from the algorithmic. No inferencing or other reasoning
 details will be included in the language classes; these will be handled by the
