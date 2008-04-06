@@ -1,4 +1,4 @@
-#summary an introduction to LOAN for the Narsese user (being written)
+#summary an introduction to LOAN for the Narsese user
 #labels Serialisations-LOAN
 
 = Introduction =
