@@ -67,7 +67,7 @@ question is the same, but lacking a truth-value and including a question mark
 to replace the full-stop. Variables are indicated with the same syntaxes as in
 Narsese. 
 
-= The Basic Domain =
+= The Wine Domain =
 
 Imagine yourself sitting in a field in France, having taken early retirement to
 live out your dream of being a wine maker. Your vines are planted, and the
@@ -93,10 +93,11 @@ We now define some of our basic terms; particularly red wines and white wines:
 || {{{<redwine --> wine>.}}} || {{{:RedWine --> wn:Wine.}}} ||
 || {{{<whitewine --> wine>.}}} || {{{:WhiteWine --> wn:Wine.}}} ||
 
-We can now describe what it means to be red or white:
+We can now describe what it means to be a red or a white wine in terms of
+having the property of being red or white, respectively:
 
 || *Narsese*  || *LOAN* ||
-|| {{{<redwine --> [red].}}} || {{{:RedWine --> [wn:Red].}}} ||
+|| {{{<redwine --> [red]>.}}} || {{{:RedWine --> [wn:Red].}}} ||
 || {{{<whitewine --[ white>.}}} || {{{:WhiteWine --[ wn:Wine.}}} ||
 
 You have a large number of friends, and being known as a wine lover they gifted
@@ -104,13 +105,96 @@ you with many bottles of wine before you moved to France. We can describe these
 instances as follows:
 
 || *Narsese*  || *LOAN* ||
-|| {{{<{bottle-from-james} --> redwine.}}} || {{{{</bottle-from-james>} --> :RedWine.}}} ||
+|| {{{<{bottle-from-james} --> redwine>.}}} || {{{{</bottle-from-james>} --> :RedWine.}}} ||
 || {{{<bottle-from-sally }-> whitewine>.}}} || {{{</bottle-from-sally> }-> :WhiteWine.}}} ||
 
 The bottle we got given by Peter is medium dry:
 
 || *Narsese*  || *LOAN* ||
-|| {{{<bottle-from-peter }-[ dry. %0.5%}}} || {{{</bottle-from-peter> }-[ wn:Dry %0.5%.}}} ||
+|| {{{<bottle-from-peter }-[ dry>. %0.5%}}} || {{{</bottle-from-peter> }-[ wn:Dry %0.5%.}}} ||
+
+Now, a wine which is red isn't a wine which is white. We indicate this using a
+similarity statement with a frequency of 0, knowing that NARS will handle the
+inconsistency:
+
+|| *Narsese* || *LOAN* ||
+|| {{{<redwine <-> whitewine>. %0%}}} || {{{:RedWine <-> :WhiteWine %0.0%.}}} ||
+
+But we want to say that we're fairly sure that rosé is a bit like both red and white wine so
+we use a full form truth value with a frequency of 0.4 and a confidence of 0.7:
+
+|| *Narsese* || *LOAN* ||
+|| {{{ <rosewine <-> redwine>. %0.4;0.7% }}} || {{{:RoseWine <-> :RedWine %0.4;0.7%.}}} ||
+|| {{{ <rosewine <-> whitewine>. %0.4;0.7% }}} || {{{:RoseWine <-> :WhiteWine %0.4;0.7%.}}} ||
+
+In spite of this, and in spite of NARS being able to infer it, we want to
+explicitly describe what rosé wine is, it is something which is both a wine
+and which has the property of being pink:
+
+|| *Narsese* || *LOAN* ||
+|| {{{ <rosewine --> (&,wine,[pink])>. }}} || {{{:RoseWine --> wn:Wine & [wn:Pink].}}} ||
+
+We now get on to describing the vineyard you have taken over. One of our grapes
+is a bit like a cross between Shiraz and Cabernet and any grape of that sort has properties
+from the intersection of those varieties:
+
+|| *Narsese* || *LOAN* ||
+|| {{{ <(|,shiraz,cabernet) --> grape1>. }}} || {{{ :Shiraz | :Cabernet --> :Grape1. }}} ||
+
+We also should describe what it means to be 'bad soil'; a bad soil is any instance of soil
+which isn't an instance of the property of being good:
+
+|| *Narsese* || *LOAN* ||
+|| {{{ <badsoil --> (-,soil,[good])>. }}} || {{{ :BadSoil --> wn:Soil - [wn:Good]. }}} ||
+
+We also take a moment to detail what you believe about grapes; that grapes which aren't
+red, cannot be good:
+
+|| *Narsese* || *LOAN* ||
+|| {{{ <(~,grape,redgrape) --> [good]>. %0% }}} || {{{ wn:Grape ~ :RedGrape --> [wn:Good] %0.0%. }}} ||
+
+Now, knowledge is also relational and a particular important relation for you
+is that between a grape variety and the soil it grows best in. We declare
+such a relation as follows:
+
+|| *Narsese* || *LOAN* ||
+|| {{{ <growingsoil --> (*,grape,soil)>. }}} || {{{ :growingSoil --> (wn:Grape, wn:Soil). }}} ||
+
+Our first variety of grape grows well in coarse soil, so we describe that relationship:
+
+|| *Narsese* || *LOAN* ||
+|| {{{ <(*,grape1,(&,[coarse],soil)) --> growingsoil>. }}} || {{{ (:Grape1, [wn:Course] & wn:Soil) --> :growingSoil. }}} ||
+
+With LOAN however, we have a second choice for indicating relationships directly;
+the operator shorthand:
+
+|| *Narsese* || *LOAN* ||
+|| {{{ <(*,grape2,(&,[moist,alkaline],soil)) --> growingsoil>. }}} || {{{ :growingSoil(:Grape2, [wn:Moist, wn:Alkaline] & wn:Soil). }}} ||
+
+We can say that riesling grapes inherit from those things which like slatey
+soil by using the extensional image syntax. In LOAN such images resemble
+the operator shorthand except with the list of arguments separated into two
+parts using a {{{/}}} or {{{\}}} (for extensional and intensional image,
+respectively). The wildcard is at the position of the slash.
+
+|| *Narsese* || *LOAN* ||
+|| {{{ <riesling --> (/, growingsoil, _, slatey)>. }}} || {{{ :Riesling --> :growingSoil(/ [:Slatey]). }}} ||
+
+We can also join together extensional and intensional images in a single term:
+
+|| *Narsese* || *LOAN* ||
+|| {{{ <(\,region,_,porto) --> (/,growingsoil,_,[bitumeny])>. }}} || {{{ :region(\ :Porto) --> :growingSoil(/ [:Bitumeny]). }}} ||
+
+Finally we can describe some metadata for our ontology. This information
+uses full URIs to refer to resources, both this document and other
+resources like homepages and email addresses:
+
+|| *Narsese* || *LOAN* ||
+|| {{{ }}} || {{{ dc:creator(<http://www.example.com/wine/ontology#>, :JohnSmith). }}} ||
+|| {{{ <johnsmith --> person>. }}} || {{{ :JohnSmith --> foaf:Person. }}} ||
+|| {{{ }}} || {{{ foaf:mbox(:JohnSmith, <mailto:jsmith@example.com>). }}} ||
+|| {{{ }}} || {{{ foaf:homepage(:JohnSmith, <http://www.example.com/blog/>). }}} ||
+|| {{{ }}} || {{{ "Exemplar Wines" }-> foaf:title(<http://www.example.com/blog/> /). }}} || 
 
 = The LOAN Example in Full =
 
@@ -162,8 +246,8 @@ The bottle we got given by Peter is medium dry:
   --- Any grape has an appropriate sort of soil
   :growingSoil --> (wn:Grape, wn:Soil).
   
-  --- Our first grape variety grows well in course soil
-  (:Grape1, [wn:Course] & wn:Soil) --> :growingSoil.
+  --- Our first grape variety grows well in coarse soil
+  (:Grape1, [wn:Coarse] & wn:Soil) --> :growingSoil.
   
   --- Our second in moist, alkaline soil
   :growingSoil(:Grape2, [wn:Moist, wn:Alkaline] & wn:Soil).
@@ -175,7 +259,7 @@ The bottle we got given by Peter is medium dry:
   :region(\ :Porto) --> :growingSoil(/ [:Bitumeny]).
   
   --- Some information about the ontology
-  <http://www.example.com/wine/ontology#> dc:creator :JohnSmith.
+  dc:creator(<http://www.example.com/wine/ontology#>, :JohnSmith).
   :JohnSmith --> foaf:Person.
   foaf:mbox(:JohnSmith, <mailto:jsmith@example.com>).
   foaf:homepage(:JohnSmith, <http://www.example.com/blog/>).
