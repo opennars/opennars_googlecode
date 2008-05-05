@@ -22,9 +22,9 @@ In the current implementation, adding an operator into the system means
   * to define a class in nars.operation that extends Operator, with an "execute" method to invoke external "sensorimotor" mechanism that carries out the operation on the given arguments. 
 In the current code, there are 3 dummy classes in nars.operation for testing purpose.
 
-In this way, in the future NARS can serves as the mind or a robot, or a software agent that uses various software and hardware as tools. Ideally, only the nars.operation package needs to be changed when NARS is equipped with different sensorimotor mechanism. Please note that in NARS, sensation/perception will be carried out by certain actions, so the nars.operation package handles both input and output through sensorimotor.
+In this way, in the future NARS can serves as the mind of a robot, or a software agent that uses various software and hardware as tools. Ideally, only the nars.operation package needs to be changed when NARS is equipped with different sensorimotor mechanism. Please note that in NARS, sensation/perception will be carried out by certain actions, so the nars.operation package handles both input and output through sensorimotor.
 
-As the other terms, the meaning of (the content of) beliefs, goals, and actions are revealed by their relations with other terms, except that for actions it also include their relations with sensorimotor, which can not be fully expressed in Narsese. Especially, the meaning each truth-bearing term is mainly revealed by its sufficient conditions and necessary conditions, some of them have temporal attribute. For each action, its preconditions and consequences are represented mainly by implication and equivalence statements about the action (see [1], page 140).
+To the system, the meaning of (the content of) beliefs, goals, and actions are revealed by their relations with other terms, except that for actions it also include their relations with sensorimotor, which can not be fully expressed in Narsese. Especially, the meaning each truth-bearing term is mainly revealed by its sufficient conditions and necessary conditions, some of them have temporal attribute. For each action, its preconditions and consequences are represented mainly by implication and equivalence statements about the action (see [1], page 140).
 
 To make compound actions from component actions, the two major term operators are "sequential conjunction" (",") and "parallel conjunction" (";") (see [1], page 136). When applied to actions, they mean "sequential execution" and "parallel execution", respectively. Combined with sufficient conditions and necessary conditions, they can form all kinds of "programs" from the "instructions" provided by the operators.
 
@@ -51,7 +51,12 @@ The inference rules work on goals and operations in the same ways as they works 
 
 = Remaining Issues =
 
-[_to be added_]
+  * The updating/revising distinction: After _event_ is introduced into the system, when the inference engine is given two conflicting judgments (i.e., with the same content but different truth-value), there are two possible interpretations: (1) to treat it as evidence pooling as before, by using the revision rule to merge the two truth-values into that of the conclusion, and (2) to treat it as updating, by "pushing" the old one "into past tense" and keep the new one as current belief. However, to distinguish these two situations in general is difficult.
+
+  * Default time interval between events: The _before_ relation between two events has two possible interpretation: (1) immediately before, and (2) before by an unspecified period. Each interpretation has its advantages and disadvantages, but a choice must be made.
+
+  * Temporal induction: When event E1 is observed as followed by event E2, the induction rule and comparison rule can derive <E1 /=> E2>, <E2 \=> E1> and <E1 </> E2> under the assumption that both E1 and E2 are supported by the same observation (see [1], pages 120 and 136). The effect of this type of inference will be very similar to Pavlovian conditioning and Hebbian learning. Though the rules are easy to code, the premise selection is difficult, because the system should not try all possible combinations.
+
 
 == Reference ==
 
