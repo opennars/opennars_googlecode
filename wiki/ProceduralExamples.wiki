@@ -1,0 +1,231 @@
+#summary working examples of reasoning on goals and actions.
+#labels Phase-Design
+
+= Introduction =
+
+The following examples show how NARS works step-by-step to achieve goals by executing operations. Since the current focus is the logic, all control-related issues will be omitted. 
+
+Each step starts with "`*.`", followed by the index number of input and output sentences in square bracket, premise(s), number of cycles, and conclusion of the step. To run each step, initialize the memory, then copy/paste the premise(s) and the number of cycles into the Input Window, then click OK. The last line of output in the Main Window should match the expected conclusion of the step.
+
+The examples are not about the best way to solve the given problems, but about how NARS will do inference on procedural knowledge in general, and how to handle various types of goals in various situations. The initial examples will be simple, and more variations and complexity will be added gradually.
+
+= Example #1 =
+
+This example only shows the basic mechanism of procedural inference in NARS. It temporally ignores the following factors:
+  * tense
+  * other goals
+  * feedback
+  * learning
+  * context
+  * accurate value of truth (of beliefs) and desire (of goals)
+  * detailed differences in Narsese structures
+and these factors will be addressed in the following examples.
+
+== Input ==
+
+The input include one goal
+  * `[10] <door --> opened>!` ("Have the door opened!")
+and five beliefs
+  * `[20] <(&/, <(*, Self, key) --> hold>, <(*, Self, door) --> at>, (^open, door)) ==> <door --> opened>>.` ("If I have the key in hand, is at the door, and do the operation `open` to the door, the door will be opened.")
+  * `[30] <(&/, <(*, Self, key) --> reachable>, (^pick, key)) ==> <(*, Self, key) --> hold>>.` ("If the key can be reached, and I do the operation `pick-up` to the key, I'll have the key in hand.")
+  * `[40] <(&&, <(*, key, #x()) --> on>, <(*, Self, #x()) --> at>) ==> <(*,Self,key) --> reachable>>.` ("Wherever the key is, if I'm at the same place, then I can reach it.")
+  * `[50] <(*, key, desk) --> on>.` ("The key is on the desk.")
+  * `[60] <(^go-to, #1) ==> <(*, Self, #1) --> at>>.` ("If I do the do the operation `go-to` to somewhere, I will be there.")
+
+== Steps ==
+{{{
+*. [10 + 20 -> 22]: 
+<door --> opened>!
+<(&/, <(*, Self, key) --> hold>, <(*, Self, door) --> at>, (^open, door)) ==> <door --> opened>>.
+13
+--------------------
+(&/,<(*,Self,key) --> hold>,<(*,Self,door) --> at>,<(*,door) --> ^open>)! %1.00;0.81%
+
+*. [22 -> 26]:
+(&/,<(*,Self,key) --> hold>,<(*,Self,door) --> at>,<(*,door) --> ^open>)!
+1
+--------------------
+<(*,Self,key) --> hold>! %1.00;0.47%
+
+*. [26 + 30 -> 32]:
+<(*,Self,key) --> hold>!
+<(&/, <(*, Self, key) --> reachable>, (^pick, key)) ==> <(*, Self, key) --> hold>>.
+1
+--------------------
+(&/,<(*,Self,key) --> reachable>,<(*,key) --> ^pick>)! %1.00;0.81%
+
+*. [32 -> 36]:
+(&/,<(*,Self,key) --> reachable>,<(*,key) --> ^pick>)!
+2
+--------------------
+<(*,Self,key) --> reachable>! 
+
+*. [36 + 40 -> 45]:
+<(*,Self,key) --> reachable>!
+<(&&, <(*, key, #x()) --> on>, <(*, Self, #x()) --> at>) ==> <(*,Self,key) --> reachable>>.
+1
+--------------------
+(&&,<(*,Self,#1()) --> at>,<(*,key,#1()) --> on>)! %1.00;0.81%
+
+*. [45 + 50 -> 55]:
+(&&,<(*,Self,#1()) --> at>,<(*,key,#1()) --> on>)!
+<(*, key, desk) --> on>.
+9
+--------------------
+<(*,Self,desk) --> at>! %1.00;0.81% 
+
+*. [55 + 60 -> 62]:
+<(*,Self,desk) --> at>!
+<(^go-to, #1) ==> <(*, Self, #1) --> at>>.
+6
+--------------------
+<(*,desk) --> ^go-to>! %1.00;0.81%
+
+*. [62 -> 64]
+<(*,desk) --> ^go-to>!
+1
+--------------------
+ [EXECUTE in ^go-to <(*,desk) --> ^go-to>!]
+<(*,desk) --> ^go-to>. %1.00;0.90%
+
+*. [64 + 60 -> 66]
+<(*,desk) --> ^go-to>.
+<(^go-to, #1) ==> <(*, Self, #1) --> at>>.
+1
+--------------------
+<(*,Self,desk) --> at>. %1.00;0.81%
+
+*. [66 + 50 -> 68]
+<(*,Self,desk) --> at>.
+<(*, key, desk) --> on>.
+495
+--------------------
+(&&,<#1() --> (/,at,Self,_)>,<#1() --> (/,on,key,_)>).
+
+*. [68 -> 72]
+(&&,<#1() --> (/,at,Self,_)>,<#1() --> (/,on,key,_)>).
+20
+--------------------
+(&&,<#1() --> (/,on,key,_)>,<(*,Self,#1()) --> at>). %1.00;0.90%
+
+*. [72 -> 74]
+(&&,<#1() --> (/,on,key,_)>,<(*,Self,#1()) --> at>).
+4
+--------------------
+(&&,<(*,Self,#1()) --> at>,<(*,key,#1()) --> on>).
+
+*. [74 + 40 -> 76]
+(&&,<(*,Self,#1()) --> at>,<(*,key,#1()) --> on>).
+<(&&, <(*, key, #x()) --> on>, <(*, Self, #x()) --> at>) ==> <(*,Self,key) --> reachable>>.
+7
+--------------------
+<(*,Self,key) --> reachable>. %1.00;0.81%
+
+*. [76 + 32 -> 78]
+<(*,Self,key) --> reachable>.
+(&/,<(*,Self,key) --> reachable>,<(*,key) --> ^pick>)!
+5
+--------------------
+<(*,key) --> ^pick>! %1.00;0.81%
+
+*. [78 -> 82]
+<(*,key) --> ^pick>!
+1
+--------------------
+ [EXECUTE in ^pick <(*,key) --> ^pick>!]
+<(*,key) --> ^pick>. %1.00;0.90%
+
+*. [76 + 30 -> 84]
+<(*,Self,key) --> reachable>.
+<(&/, <(*, Self, key) --> reachable>, (^pick, key)) ==> <(*, Self, key) --> hold>>.
+13
+--------------------
+<<(*,key) --> ^pick> ==> <(*,Self,key) --> hold>>. %1.00;0.81%
+
+*. [82 + 84 -> 86]
+<(*,key) --> ^pick>.
+<<(*,key) --> ^pick> ==> <(*,Self,key) --> hold>>.
+3
+--------------------
+<(*,Self,key) --> hold>. %1.00;0.81%
+
+*. [86 + 22 -> 88]
+<(*,Self,key) --> hold>.
+(&/,<(*,Self,key) --> hold>,<(*,Self,door) --> at>,<(*,door) --> ^open>)!
+1
+--------------------
+(&/,<(*,Self,door) --> at>,<(*,door) --> ^open>)! %1.00;0.81%
+
+*. [86 + 20 -> 92]
+<(*,Self,key) --> hold>.
+<(&/, <(*, Self, key) --> hold>, <(*, Self, door) --> at>, (^open, door)) ==> <door --> opened>>.
+9
+--------------------
+<(&/,<(*,Self,door) --> at>,<(*,door) --> ^open>) ==> <door --> opened>>. %1.00;0.81%
+
+*. [88 -> 94]
+(&/,<(*,Self,door) --> at>,<(*,door) --> ^open>)!
+2
+--------------------
+<(*,Self,door) --> at>! %1.00;0.47%
+
+*. [94 + 60 -> 96]
+<(*,Self,door) --> at>!
+<(^go-to, #1) ==> <(*, Self, #1) --> at>>.
+6
+--------------------
+<(*,door) --> ^go-to>! %1.00;0.81%
+
+*. [96 -> 98]
+<(*,door) --> ^go-to>!
+1
+--------------------
+ [EXECUTE in ^go-to <(*,door) --> ^go-to>!]
+<(*,door) --> ^go-to>. %1.00;0.90%
+
+*. [98 + 60 -> 102]
+<(*,door) --> ^go-to>.
+<(^go-to, #1) ==> <(*, Self, #1) --> at>>.
+1
+--------------------
+<(*,Self,door) --> at>. %1.00;0.81%
+
+*. [102 + 92 -> 104]
+<(*,Self,door) --> at>.
+<(&/,<(*,Self,door) --> at>,<(*,door) --> ^open>) ==> <door --> opened>>.
+13
+--------------------
+<<(*,door) --> ^open> ==> <door --> opened>>. %1.00;0.81%
+
+*. [102 + 88 -> 106]
+<(*,Self,door) --> at>.
+(&/,<(*,Self,door) --> at>,<(*,door) --> ^open>)!
+5
+--------------------
+<(*,door) --> ^open>! %1.00;0.81%
+
+*. [106 -> 108]
+<(*,door) --> ^open>!
+1
+--------------------
+ [EXECUTE in ^open <(*,door) --> ^open>!]
+<(*,door) --> ^open>. %1.00;0.90%
+
+*. [108 + 104 -> 112]
+<(*,door) --> ^open>.
+<<(*,door) --> ^open> ==> <door --> opened>>.
+7
+--------------------
+<door --> opened>. %1.00;0.81%
+
+}}}
+
+== Output ==
+
+The following operation sequence will appear in System.out when the above steps are following one by one:
+  # `EXECUTE in ^go-to <(*,desk) --> ^go-to>!`
+  # `EXECUTE in ^pick <(*,key) --> ^pick>!`
+  # `EXECUTE in ^go-to <(*,door) --> ^go-to>!`
+  # `EXECUTE in ^open <(*,door) --> ^open>!`
+
+----
