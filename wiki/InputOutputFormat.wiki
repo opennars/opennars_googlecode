@@ -10,10 +10,10 @@ In a task, all the space characters are optional, and will be ignored by the sys
 = Narsese Grammer =
 {{{
                         GRAMMAR RULE                          BRIEF EXPLANATION
-               <task> ::= [<budget-value>] <sentence>        // task to be processed
-           <sentence> ::= <statement>"." [<truth-value>]     // judgment to be remembered
-                        | <statement>"?"                     // question to be answered
-                        | <statement>"!" [<truth-value>]     // goal to be realized
+               <task> ::= [<budget>] <sentence>              // task to be processed
+           <sentence> ::= <statement>"." [<tense>][<truth>]  // judgment to be remembered
+                        | <statement>"?" [<tense>]           // question to be answered
+                        | <statement>"!" [<truth>]           // goal to be realized
           <statement> ::= "<"<term> <relation> <term>">"     // two terms related to each other
                         | <term>                             // a term can name a statement
            <relation> ::= "-->"                              // inheritance
@@ -22,10 +22,10 @@ In a task, all the space characters are optional, and will be ignored by the sys
                         | "--]"                              // property
                         | "{-]"                              // instance-property
                         | "==>"                              // implication
-                        | "<=>"                              // equivalence
                         | "=/>"                              // predictive implication
                         | "=|>"                              // concurrent implication
                         | "=\>"                              // retrospective implication
+                        | "<=>"                              // equivalence
                         | "</>"                              // predictive equivalence
                         | "<|>"                              // concurrent equivalence
                <term> ::= <word>                             // an atomic constant term
@@ -46,14 +46,14 @@ In a task, all the space characters are optional, and will be ignored by the sys
                         | "(&&," <term> {","<term>} ")"      // conjunction
                         | "(&/," <term> {","<term>} ")"      // sequential events
                         | "(&|," <term> {","<term>} ")"      // parallel events
-                        | "(/>," <term> ")"                  // future event
-                        | "(|>," <term> ")"                  // present event
-                        | "(\>," <term> ")"                  // past event
            <variable> ::= "#"<word>                          // independent variable
                         | "#"<word> "(" {"#"<word>} ")"      // dependent variable
                         | "#"                                // anonymous term as place holder
                         | "?"<word>                          // query variable for term to be find
-        <truth-value> ::= "%"<frequency>[";"<confidence>]"%" // two numbers in [0,1]x(0,1)
-       <budget-value> ::= "%"<priority>[";"<durability>]"%"  // two numbers in [0,1]x(0,1)
+              <tense> ::= ":/:"                              // future event
+                        | ":|:"                              // present event
+                        | ":\:"                              // past event
+              <truth> ::= "%"<frequency>[";"<confidence>]"%" // two numbers in [0,1]x(0,1)
+             <budget> ::= "%"<priority>[";"<durability>]"%"  // two numbers in [0,1]x(0,1)
                <word> : string in an alphabet
 }}}

@@ -53,10 +53,15 @@ The inference rules work on goals and operations in the same ways as they works 
 
   * The updating/revising distinction: After _event_ is introduced into the system, when the inference engine is given two conflicting judgments (i.e., with the same content but different truth-value), there are two possible interpretations: (1) to treat it as evidence pooling as before, by using the revision rule to merge the two truth-values into that of the conclusion, and (2) to treat it as updating, by "pushing" the old one "into past tense" and keep the new one as current belief. However, to distinguish these two situations in general is difficult.
 
+Current Solution: _revision_ is the default operation for conflicting judgments, while _update_ is used when all the following conditions are satisfied: (1) the existing belief is an event in _present_ tense; (2) the new judgment is experienced after the existing belief; (3) the two judgments are significantly different in truth value.
+
   * Default time interval between events: The _before_ relation between two events has two possible interpretation: (1) immediately before, and (2) before by an unspecified period. Each interpretation has its advantages and disadvantages, but a choice must be made.
 
-  * Temporal induction: When event E1 is observed as followed by event E2, the induction rule and comparison rule can derive <E1 /=> E2>, <E2 \=> E1> and <E1 </> E2> under the assumption that both E1 and E2 are supported by the same observation (see [1], pages 120 and 136). The effect of this type of inference will be very similar to Pavlovian conditioning and Hebbian learning. Though the rules are easy to code, the premise selection is difficult, because the system should not try all possible combinations.
+Current Solution: before by a negligible period.
 
+  * Temporal induction: When event E1 is observed as followed by event E2, the induction rule and comparison rule can derive <E1 =/> E2>, <E2 =\> E1> and <E1 </> E2> under the assumption that both E1 and E2 are supported by the same observation (see [1], pages 120 and 136). The effect of this type of inference will be very similar to Pavlovian conditioning and Hebbian learning. Though the rules are easy to code, the premise selection is difficult, because the system should not try all possible combinations.
+
+Current Solution: implemented in variable introduction rules, so only applied when two premises have shared term.
 
 == Reference ==
 
