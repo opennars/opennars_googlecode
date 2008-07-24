@@ -3,693 +3,78 @@
 
 = Introduction =
 
-The following examples show how NARS works step-by-step to achieve goals by executing operations. Since the current focus is the logic, all control-related issues will be omitted. 
+The general ideas about procedure inference in NARS are explained in http://code.google.com/p/open-nars/wiki/ProceduralInference ; and the general guideline for how to use the examples is described in http://code.google.com/p/open-nars/wiki/SingleStepTestingCases .
 
-Each step starts with "`*.`", followed by the index number of input and output sentences in square bracket, premise(s), number of cycles, and conclusion of the step. To run each step, initialize the memory, then copy/paste the premise(s) and the number of cycles into the Input Window, then click OK. The last line of output in the Main Window should match the expected conclusion of the step.
+This group of examples (Example-NAL8-... in http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars-dist/Examples ) show how NARS works step-by-step to achieve goals by executing operations. Since the current focus is the logic, all control-related issues will be omitted. Most of the input tasks use default truth value, except those where the results are sensitive to the accurate truth values.
 
-The examples are not about the best way to solve the given problems, but about how NARS will do inference on procedural knowledge in general, and how to handle various types of goals in various situations. The initial examples will be simple, and more variations and complexity will be added gradually.
+== Example-NAL8-1 ==
 
-----
+The first example shows how the system (as a robot) uses procedural inference to achieve the goal of openning a door.
 
-= Example #1 =
+It starts with 9 input sentences, and they are roughly translated into English in the following.
 
-This example only shows the basic mechanism of procedural inference in NARS. It temporally ignores the following factors:
-  * tense
-  * other goals
-  * feedback
-  * learning
-  * context
-  * accurate value of truth (of beliefs) and desire (of goals)
-  * detailed differences in Narsese structures
-and these factors will be addressed in the following examples.
+{{{*** [01] <{t001} --> [opened]>!}}}
 
-== Input ==
+"To make t001 opened!"
 
-The input include one goal
-  * `[10] <door --> opened>!` ("Have the door opened!")
-and five beliefs
-  * `[20] <(&/, <(*, Self, key) --> hold>, <(*, Self, door) --> at>, (^open, door)) ==> <door --> opened>>.` ("If I have the key in hand, is at the door, and do the operation `open` to the door, the door will be opened.")
-  * `[30] <(&/, <(*, Self, key) --> reachable>, (^pick, key)) ==> <(*, Self, key) --> hold>>.` ("If the key can be reached, and I do the operation `pick-up` to the key, I'll have the key in hand.")
-  * `[40] <(&&, <(*, key, #x()) --> on>, <(*, Self, #x()) --> at>) ==> <(*,Self,key) --> reachable>>.` ("Wherever the key is, if I'm at the same place, then I can reach it.")
-  * `[50] <(*, key, desk) --> on>.` ("The key is on the desk.")
-  * `[60] <(^go-to, #1) ==> <(*, Self, #1) --> at>>.` ("If I do the do the operation `go-to` to somewhere, I will be there.")
+{{{*** [02] <{t001} --> door>.}}}
 
-== Steps ==
+"t001 is a door."
+
+{{{*** [03] <(&/, <(*, Self, {t002}) --> hold>, <(*, Self, {t001}) --> at>, (^open, {t001})) =/> <{t001} --> [opened]>>.}}}
+
+"If I hold t002, arrive at t001, and execute the operation 'open' at t001, then t001 will be opened."
+
+{{{*** [04] <(*, {t002}, {t001}) --> key-of>.}}}
+
+"t002 is the key of t001."
+
+{{{*** [05] <(&/, <(*, Self, {t002}) --> reachable>, (^pick, {t002})) =/> <(*, Self, {t002}) --> hold>>.}}}
+
+"If I can reach t002, and execute the operation 'pick' at t002, then I will hold t002."
+
+{{{*** [06] <(&|, <(*, #x, #y(#x)) --> on>, <(*, Self, #y(#x)) --> at>) =|> <(*, Self, #x) --> reachable>>.}}}
+
+"If an onject is on something, which is located at the same place as me, I can reach that object."
+
+{{{*** [07] <(*, {t002}, {t003}) --> on>. :|:}}}
+
+"t002 is on t003."
+
+{{{*** [08] <{t003} --> desk>.}}}
+
+"t003 is a desk."
+
+{{{*** [09] <(^go-to, #x) =/> <(*, Self, #x) --> at>>.}}}
+
+"If I execute the 'go to' openration aimed at a place, I'll arrive at that place."
+
+The step-by-step process shows that the system uses backwork inference to reduce the given goal into derived goals that can be directly achieved by the execution of operations, and uses forward inference to change the description about the situation, according to the expectations on what each operation will achieve, until the initial is achieved.
+
+In this process, the following operation sequence is displayed in Java console, which is what the system actually does:
 {{{
-*. [10 + 20 -> 22]: 
-<door --> opened>!
-<(&/, <(*, Self, key) --> hold>, <(*, Self, door) --> at>, (^open, door)) ==> <door --> opened>>.
-13
---------------------
-(&/,<(*,Self,key) --> hold>,<(*,Self,door) --> at>,<(*,door) --> ^open>)! %1.00;0.81%
-
-*. [22 -> 26]:
-(&/,<(*,Self,key) --> hold>,<(*,Self,door) --> at>,<(*,door) --> ^open>)!
-1
---------------------
-<(*,Self,key) --> hold>! %1.00;0.47%
-
-*. [26 + 30 -> 32]:
-<(*,Self,key) --> hold>!
-<(&/, <(*, Self, key) --> reachable>, (^pick, key)) ==> <(*, Self, key) --> hold>>.
-1
---------------------
-(&/,<(*,Self,key) --> reachable>,<(*,key) --> ^pick>)! %1.00;0.81%
-
-*. [32 -> 36]:
-(&/,<(*,Self,key) --> reachable>,<(*,key) --> ^pick>)!
-2
---------------------
-<(*,Self,key) --> reachable>! %1.00;0.90%
-
-*. [36 + 40 -> 45]:
-<(*,Self,key) --> reachable>!
-<(&&, <(*, key, #x()) --> on>, <(*, Self, #x()) --> at>) ==> <(*,Self,key) --> reachable>>.
-1
---------------------
-(&&,<(*,Self,#1()) --> at>,<(*,key,#1()) --> on>)! %1.00;0.81%
-
-*. [45 + 50 -> 55]:
-(&&,<(*,Self,#1()) --> at>,<(*,key,#1()) --> on>)!
-<(*, key, desk) --> on>.
-9
---------------------
-<(*,Self,desk) --> at>! %1.00;0.81% 
-
-*. [55 + 60 -> 62]:
-<(*,Self,desk) --> at>!
-<(^go-to, #1) ==> <(*, Self, #1) --> at>>.
-6
---------------------
-<(*,desk) --> ^go-to>! %1.00;0.81%
-
-*. [62 -> 64]
-<(*,desk) --> ^go-to>!
-1
---------------------
- [EXECUTE in ^go-to <(*,desk) --> ^go-to>!]
-<(*,desk) --> ^go-to>. %1.00;0.90%
-
-*. [64 + 60 -> 66]
-<(*,desk) --> ^go-to>.
-<(^go-to, #1) ==> <(*, Self, #1) --> at>>.
-1
---------------------
-<(*,Self,desk) --> at>. %1.00;0.81%
-
-*. [66 + 50 -> 68]
-<(*,Self,desk) --> at>.
-<(*, key, desk) --> on>.
-495
---------------------
-(&&,<#1() --> (/,at,Self,_)>,<#1() --> (/,on,key,_)>). %1.00;0.81%
-
-*. [68 -> 72]
-(&&,<#1() --> (/,at,Self,_)>,<#1() --> (/,on,key,_)>).
-20
---------------------
-(&&,<#1() --> (/,on,key,_)>,<(*,Self,#1()) --> at>). %1.00;0.90%
-
-*. [72 -> 74]
-(&&,<#1() --> (/,on,key,_)>,<(*,Self,#1()) --> at>).
-4
---------------------
-(&&,<(*,Self,#1()) --> at>,<(*,key,#1()) --> on>). %1.00;0.81%
-
-*. [74 + 40 -> 76]
-(&&,<(*,Self,#1()) --> at>,<(*,key,#1()) --> on>).
-<(&&, <(*, key, #x()) --> on>, <(*, Self, #x()) --> at>) ==> <(*,Self,key) --> reachable>>.
-7
---------------------
-<(*,Self,key) --> reachable>. %1.00;0.81%
-
-*. [76 + 32 -> 78]
-<(*,Self,key) --> reachable>.
-(&/,<(*,Self,key) --> reachable>,<(*,key) --> ^pick>)!
-5
---------------------
-<(*,key) --> ^pick>! %1.00;0.81%
-
-*. [78 -> 82]
-<(*,key) --> ^pick>!
-1
---------------------
- [EXECUTE in ^pick <(*,key) --> ^pick>!]
-<(*,key) --> ^pick>. %1.00;0.90%
-
-*. [76 + 30 -> 84]
-<(*,Self,key) --> reachable>.
-<(&/, <(*, Self, key) --> reachable>, (^pick, key)) ==> <(*, Self, key) --> hold>>.
-13
---------------------
-<<(*,key) --> ^pick> ==> <(*,Self,key) --> hold>>. %1.00;0.81%
-
-*. [82 + 84 -> 86]
-<(*,key) --> ^pick>.
-<<(*,key) --> ^pick> ==> <(*,Self,key) --> hold>>.
-3
---------------------
-<(*,Self,key) --> hold>. %1.00;0.81%
-
-*. [86 + 22 -> 88]
-<(*,Self,key) --> hold>.
-(&/,<(*,Self,key) --> hold>,<(*,Self,door) --> at>,<(*,door) --> ^open>)!
-1
---------------------
-(&/,<(*,Self,door) --> at>,<(*,door) --> ^open>)! %1.00;0.81%
-
-*. [86 + 20 -> 92]
-<(*,Self,key) --> hold>.
-<(&/, <(*, Self, key) --> hold>, <(*, Self, door) --> at>, (^open, door)) ==> <door --> opened>>.
-9
---------------------
-<(&/,<(*,Self,door) --> at>,<(*,door) --> ^open>) ==> <door --> opened>>. %1.00;0.81%
-
-*. [88 -> 94]
-(&/,<(*,Self,door) --> at>,<(*,door) --> ^open>)!
-2
---------------------
-<(*,Self,door) --> at>! %1.00;0.47%
-
-*. [94 + 60 -> 96]
-<(*,Self,door) --> at>!
-<(^go-to, #1) ==> <(*, Self, #1) --> at>>.
-6
---------------------
-<(*,door) --> ^go-to>! %1.00;0.81%
-
-*. [96 -> 98]
-<(*,door) --> ^go-to>!
-1
---------------------
- [EXECUTE in ^go-to <(*,door) --> ^go-to>!]
-<(*,door) --> ^go-to>. %1.00;0.90%
-
-*. [98 + 60 -> 102]
-<(*,door) --> ^go-to>.
-<(^go-to, #1) ==> <(*, Self, #1) --> at>>.
-1
---------------------
-<(*,Self,door) --> at>. %1.00;0.81%
-
-*. [102 + 92 -> 104]
-<(*,Self,door) --> at>.
-<(&/,<(*,Self,door) --> at>,<(*,door) --> ^open>) ==> <door --> opened>>.
-13
---------------------
-<<(*,door) --> ^open> ==> <door --> opened>>. %1.00;0.81%
-
-*. [102 + 88 -> 106]
-<(*,Self,door) --> at>.
-(&/,<(*,Self,door) --> at>,<(*,door) --> ^open>)!
-5
---------------------
-<(*,door) --> ^open>! %1.00;0.81%
-
-*. [106 -> 108]
-<(*,door) --> ^open>!
-1
---------------------
- [EXECUTE in ^open <(*,door) --> ^open>!]
-<(*,door) --> ^open>. %1.00;0.90%
-
-*. [108 + 104 -> 112]
-<(*,door) --> ^open>.
-<<(*,door) --> ^open> ==> <door --> opened>>.
-7
---------------------
-<door --> opened>. %1.00;0.81%
-
+EXECUTE: ^go-to({t003})
+EXECUTE: ^pick({t002})
+EXECUTE: ^go-to({t001})
+EXECUTE: ^open({t001})
 }}}
 
-== Output ==
+== Example-NAL8-2 ==
 
-The following operation sequence will appear in System.out when the above steps are following one by one:
-  # `EXECUTE in ^go-to <(*,desk) --> ^go-to>!`
-  # `EXECUTE in ^pick <(*,key) --> ^pick>!`
-  # `EXECUTE in ^go-to <(*,door) --> ^go-to>!`
-  # `EXECUTE in ^open <(*,door) --> ^open>!`
+This example is a variant of the previous one. Here the goal is not achieveb by "hinking on the way", but by the forming of a complete plan, which can be executed later when the goal actually appears.
 
-----
+When a plan is derived, it also comes with a truth value, indicating its estimated chance of success, according to the experience of the system.
 
-= Example #2 =
+== Example-NAL8-3 ==
 
-In Example #1, terms 'door', 'key', and 'desk' are used as if they are proper names. In Example #2, the corresponding terms are identified using internal names, and are marked as individual instances of the related general terms, respectively.
+This example shows the decision-making process of the system when facing multiple goals, as well as multiple paths to achieve the same goal.
 
-== Input ==
+When the system find that it can simply go to the door and break it, this path will be preferred for is simplicity (therefore higher confidence, everything else being equal). However, when the system realize that in that way the door will be broken (which violate another goal), then it won't take the action, unless it have a sufficiently high motivation (for some other reason) to do that.
 
-Revised input tasks:
-{{{
-[10] <{t001} --> [opened]>!
-[11] <{t001} --> door>.
+== Example-NAL8-4 ==
 
-[20] <(&/, <(*, Self, {t002}) --> hold>, <(*, Self, {t001}) --> at>, (^open, {t001})) ==> <{t001} --> [opened]>>. 
-[21] <(*, {t002}, {t001}) --> key-of>.
+Though in principle all the inference in the previous examples can all be seen as (various types of) learning, this example shows several more typical types of "learning by reasoning" in NARS.
 
-[30] <(&/, <(*, Self, {t002}) --> reachable>, (^pick, {t002})) ==> <(*, Self, {t002}) --> hold>>.
+When a belief conflict is judged to be _update_, the involved beliefs are not revised. Instead, the old belief is added a past tense, and the system's current opinion is completely determined by the new belief.
 
-[40] <(&&, <(*, {t002}, #x()) --> on>, <(*, Self, #x()) --> at>) ==> <(*, Self, {t002}) --> reachable>>.
-
-[50] <(*, {t002}, {t003}) --> on>.
-[51] <{t003} --> desk>.
-
-[60] <(^go-to, #x) ==> <(*, Self, #x) --> at>>.
-}}}
-== Steps ==
-{{{
-
-*. [10 + 20 -> 22]: 
-<{t001} --> [opened]>!
-<(&/, <(*, Self, {t002}) --> hold>, <(*, Self, {t001}) --> at>, (^open, {t001})) ==> <{t001} --> [opened]>>. 
-23
---------------------
-(&/,<(*,Self,{t002}) --> hold>,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>)! %1.00;0.81%
-
-*. [22 -> 26]:
-(&/,<(*,Self,{t002}) --> hold>,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>)! %1.00;0.81%
-1
---------------------
-<(*,Self,{t002}) --> hold>! %1.00;0.44%
-
-*. [26 + 30 -> 32]:
-<(*,Self,{t002}) --> hold>!
-<(&/, <(*, Self, {t002}) --> reachable>, (^pick, {t002})) ==> <(*, Self, {t002}) --> hold>>.
-1
---------------------
-(&/,<(*,Self,{t002}) --> reachable>,<(*,{t002}) --> ^pick>)! %1.00;0.81%
-
-*. [32 -> 36]:
-(&/,<(*,Self,{t002}) --> reachable>,<(*,{t002}) --> ^pick>)!
-3
---------------------
-<(*,Self,{t002}) --> reachable>! %1.00;0.47%
-
-*. [36 + 40 -> 45]:
-<(*,Self,{t002}) --> reachable>!
-<(&&, <(*, {t002}, #x()) --> on>, <(*, Self, #x()) --> at>) ==> <(*, Self, {t002}) --> reachable>>.
-1
---------------------
-(&&,<(*,{t002},#1()) --> on>,<(*,Self,#1()) --> at>)! %1.00;0.81%
-
-*. [45 + 50 -> 55]:
-(&&,<(*,{t002},#1()) --> on>,<(*,Self,#1()) --> at>)!
-<(*, {t002}, {t003}) --> on>.
-105
---------------------
-<(*,Self,{t003}) --> at>! %1.00;0.81%
-
-*. [55 + 60 -> 62]:
-<(*,Self,{t003}) --> at>!
-<(^go-to, #x) ==> <(*, Self, #x) --> at>>.
-54
---------------------
-<(*,{t003}) --> ^go-to>! %1.00;0.81%
-
-*. [62 -> 64]
-<(*,{t003}) --> ^go-to>!
-1
---------------------
- [EXECUTE in ^go-to <(*,{t003}) --> ^go-to>!]
-<(*,{t003}) --> ^go-to>. %1.00;0.90%
-
-*. [64 + 60 -> 66]
-<(*,{t003}) --> ^go-to>.
-<(^go-to, #x) ==> <(*, Self, #x) --> at>>.
-51
---------------------
-<(*,Self,{t003}) --> at>. %1.00;0.81%
-
-*. [66 + 50 -> 68]
-<(*,Self,{t003}) --> at>.
-<(*, {t002}, {t003}) --> on>.
-111
---------------------
-(&&,<#1() --> (/,on,{t002},_)>,<#1() --> (/,at,Self,_)>). %1.00;0.81%
-
-*. [68 -> 72]
-(&&,<#1() --> (/,on,{t002},_)>,<#1() --> (/,at,Self,_)>).
-18
---------------------
-(&&,<#1() --> (/,on,{t002},_)>,<(*,Self,#1()) --> at>). %1.00;0.90%
-
-*. [72 -> 74]
-(&&,<#1() --> (/,on,{t002},_)>,<(*,Self,#1()) --> at>).
-1
---------------------
-(&&,<(*,{t002},#1()) --> on>,<(*,Self,#1()) --> at>). %1.00;0.90%
-
-*. [74 + 40 -> 76]
-(&&,<(*,{t002},#1()) --> on>,<(*,Self,#1()) --> at>).
-<(&&, <(*, {t002}, #x()) --> on>, <(*, Self, #x()) --> at>) ==> <(*, Self, {t002}) --> reachable>>.
-8
---------------------
-<(*,Self,{t002}) --> reachable>. %1.00;0.81%
-
-*. [76 + 32 -> 78]
-<(*,Self,{t002}) --> reachable>.
-(&/,<(*,Self,{t002}) --> reachable>,<(*,{t002}) --> ^pick>)!
-7
---------------------
-<(*,{t002}) --> ^pick>! %1.00;0.81%
-
-*. [78 -> 82]
-<(*,{t002}) --> ^pick>!
-1
---------------------
- [EXECUTE in ^pick <(*,{t002}) --> ^pick>!]
-<(*,{t002}) --> ^pick>. %1.00;0.90%
-
-*. [76 + 30 -> 84]
-<(*,Self,{t002}) --> reachable>.
-<(&/, <(*, Self, {t002}) --> reachable>, (^pick, {t002})) ==> <(*, Self, {t002}) --> hold>>.
-14
---------------------
-<<(*,{t002}) --> ^pick> ==> <(*,Self,{t002}) --> hold>>. %1.00;0.81%
-
-*. [82 + 84 -> 86]
-<(*,{t002}) --> ^pick>.
-<<(*,{t002}) --> ^pick> ==> <(*,Self,{t002}) --> hold>>.
-2
---------------------
-<(*,Self,{t002}) --> hold>. %1.00;0.81%
-
-*. [86 + 22 -> 88]
-<(*,Self,{t002}) --> hold>.
-(&/,<(*,Self,{t002}) --> hold>,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>)!
-3
---------------------
-(&/,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>)! %1.00;0.81%
-
-*. [86 + 20 -> 92]
-<(*,Self,{t002}) --> hold>.
-<(&/, <(*, Self, {t002}) --> hold>, <(*, Self, {t001}) --> at>, (^open, {t001})) ==> <{t001} --> [opened]>>. 
-9
---------------------
-<(&/,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>) ==> <{t001} --> [opened]>>. %1.00;0.81%
-
-*. [88 -> 94]
-(&/,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>)!
-3
---------------------
-<(*,Self,{t001}) --> at>! %1.00;0.47%
-
-*. [94 + 60 -> 96]
-<(*,Self,{t001}) --> at>!
-<(^go-to, #x) ==> <(*, Self, #x) --> at>>.
-54
---------------------
-<(*,{t001}) --> ^go-to>! %1.00;0.81%
-
-*. [96 -> 98]
-<(*,{t001}) --> ^go-to>!
-1
---------------------
- [EXECUTE in ^go-to <(*,{t001}) --> ^go-to>!]
-<(*,{t001}) --> ^go-to>. %1.00;0.90%
-
-*. [98 + 60 -> 102]
-<(*,{t001}) --> ^go-to>.
-<(^go-to, #x) ==> <(*, Self, #x) --> at>>.
-51
---------------------
-<(*,Self,{t001}) --> at>. %1.00;0.81%
-
-*. [102 + 92 -> 104]
-<(*,Self,{t001}) --> at>.
-<(&/,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>) ==> <{t001} --> [opened]>>.
-16
---------------------
-<<(*,{t001}) --> ^open> ==> <{t001} --> [opened]>>. %1.00;0.81%
-
-*. [102 + 88 -> 106]
-<(*,Self,{t001}) --> at>.
-(&/,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>)!
-7
---------------------
-<(*,{t001}) --> ^open>! %1.00;0.81%
-
-*. [106 -> 108]
-<(*,{t001}) --> ^open>!
-1
---------------------
- [EXECUTE in ^open <(*,{t001}) --> ^open>!]
-<(*,{t001}) --> ^open>. %1.00;0.90%
-
-*. [108 + 104 -> 112]
-<(*,{t001}) --> ^open>.
-<<(*,{t001}) --> ^open> ==> <{t001} --> [opened]>>.
-4
---------------------
-<{t001} --> [opened]>. %1.00;0.81%
-}}}
-
-== Output ==
-
-  # `EXECUTE in ^go-to <(*,{t003}) --> ^go-to>!`
-  # `EXECUTE in <(*,{t002}) --> ^pick>!`
-  # `EXECUTE in ^go-to <(*,{t001}) --> ^go-to>!`
-  # `EXECUTE in ^open <(*,{t001}) --> ^open>!`
-
-----
-
-= Example #3 =
-
-Add and process temporal information.
-
-== Input ==
-
-Revised input tasks:
-{{{
-
-[10] <{t001} --> [opened]>!
-[11] <{t001} --> door>.
-[12] <{t001} --> [opened]>. :|: %0%
-
-[20] <(&/, <(*, Self, {t002}) --> hold>, <(*, Self, {t001}) --> at>, (^open, {t001})) =/> <{t001} --> [opened]>>. 
-[21] <(*, {t002}, {t001}) --> key-of>.
-[23] <(*, Self, {t002}) --> hold>. :|: %0%
-[25] <(*, Self, {t001}) --> at>. :|: %0%
-
-[30] <(&/, <(*, Self, {t002}) --> reachable>, (^pick, {t002})) =/> <(*, Self, {t002}) --> hold>>.
-
-[40] <(&|, <(*, {t002}, #x()) --> on>, <(*, Self, #x()) --> at>) =|> <(*, Self, {t002}) --> reachable>>.
-
-[50] <(*, {t002}, {t003}) --> on>. :|: 
-[51] <{t003} --> desk>.
-[53] <(*, Self, {t003}) --> at>. :|: %0%
-
-[60] <(^go-to, #x) =/> <(*, Self, #x) --> at>>.
-}}}
-== Steps ==
-{{{
-
-*. [10 + 20 -> 22]: 
-<{t001} --> [opened]>!
-<(&/, <(*, Self, {t002}) --> hold>, <(*, Self, {t001}) --> at>, (^open, {t001})) =/> <{t001} --> [opened]>>. 
-23
---------------------
-(&/,<(*,Self,{t002}) --> hold>,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>)! %1.00;0.81%
-
-*. [22 -> 26]:
-(&/,<(*,Self,{t002}) --> hold>,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>)! %1.00;0.81%
-1
---------------------
-<(*,Self,{t002}) --> hold>! %1.00;0.44%
-
-*. [26 + 30 -> 32]:
-<(*,Self,{t002}) --> hold>!
-<(&/, <(*, Self, {t002}) --> reachable>, (^pick, {t002})) =/> <(*, Self, {t002}) --> hold>>.
-1
---------------------
-(&/,<(*,Self,{t002}) --> reachable>,<(*,{t002}) --> ^pick>)! %1.00;0.81%
-
-*. [32 -> 36]:
-(&/,<(*,Self,{t002}) --> reachable>,<(*,{t002}) --> ^pick>)!
-3
---------------------
-<(*,Self,{t002}) --> reachable>! %1.00;0.47%
-
-*. [36 + 40 -> 45]:
-<(*,Self,{t002}) --> reachable>!
-<(&|, <(*, {t002}, #x()) --> on>, <(*, Self, #x()) --> at>) =|> <(*, Self, {t002}) --> reachable>>.
-1
---------------------
-(&|,<(*,{t002},#1()) --> on>,<(*,Self,#1()) --> at>)! %1.00;0.81%
-
-*. [45 + 50 -> 55]:
-(&|,<(*,{t002},#1()) --> on>,<(*,Self,#1()) --> at>)!
-<(*, {t002}, {t003}) --> on>.
-105
---------------------
-<(*,Self,{t003}) --> at>! %1.00;0.81%
-
-*. [55 + 60 -> 62]:
-<(*,Self,{t003}) --> at>!
-<(^go-to, #x) =/> <(*, Self, #x) --> at>>.
-54
---------------------
-<(*,{t003}) --> ^go-to>! %1.00;0.81%
-
-*. [62 -> 64]
-<(*,{t003}) --> ^go-to>!
-1
---------------------
- [EXECUTE in ^go-to <(*,{t003}) --> ^go-to>!]
-<(*,{t003}) --> ^go-to>. :\: %1.00;0.90%
-
-*. [64 + 60 -> 66]
-<(*,{t003}) --> ^go-to>. :\:
-<(^go-to, #x) =/> <(*, Self, #x) --> at>>.
-51
---------------------
-<(*,Self,{t003}) --> at>. :|: %1.00;0.81%
-
-*. [53 + 66 -> 67]
-<(*, Self, {t003}) --> at>. :|: %0%
-1
-<(*, Self, {t003}) --> at>. :|:
-1
---------------------
-<(*,Self,{t003}) --> at>. :\: %0.00;0.90%
-
-*. [66 + 50 -> 68]
-<(*, Self, {t003}) --> at>. :|:
-<(*, {t002}, {t003}) --> on>. :|: 
-111
---------------------
-(&|,<#1() --> (/,on,{t002},_)>,<#1() --> (/,at,Self,_)>). :|: %1.00;0.81%
-
-*. [68 -> 72]
-(&|,<#1() --> (/,on,{t002},_)>,<#1() --> (/,at,Self,_)>). :|:
-18
---------------------
-(&|,<#1() --> (/,on,{t002},_)>,<(*,Self,#1()) --> at>). :|: %1.00;0.90%
-
-*. [72 -> 74]
-(&|,<#1() --> (/,on,{t002},_)>,<(*,Self,#1()) --> at>). :|:
-1
---------------------
-(&|,<(*,{t002},#1()) --> on>,<(*,Self,#1()) --> at>). :|: %1.00;0.90%
-
-*. [74 + 40 -> 76]
-(&|,<(*,{t002},#1()) --> on>,<(*,Self,#1()) --> at>). :|:
-<(&|, <(*, {t002}, #x()) --> on>, <(*, Self, #x()) --> at>) =|> <(*, Self, {t002}) --> reachable>>.
-8
---------------------
-<(*,Self,{t002}) --> reachable>. :|: %1.00;0.81%
-
-*. [76 + 32 -> 78]
-<(*,Self,{t002}) --> reachable>. :|:
-(&/,<(*,Self,{t002}) --> reachable>,<(*,{t002}) --> ^pick>)!
-7
---------------------
-<(*,{t002}) --> ^pick>! %1.00;0.81%
-
-*. [78 -> 82]
-<(*,{t002}) --> ^pick>!
-1
---------------------
- [EXECUTE in ^pick <(*,{t002}) --> ^pick>!]
-<(*,{t002}) --> ^pick>. :\: %1.00;0.90%
-
-*. [76 + 30 -> 84]
-<(*,Self,{t002}) --> reachable>. :|:
-<(&/, <(*, Self, {t002}) --> reachable>, (^pick, {t002})) =/> <(*, Self, {t002}) --> hold>>.
-14
---------------------
-<<(*,{t002}) --> ^pick> =/> <(*,Self,{t002}) --> hold>>. %1.00;0.81%
-
-*. [82 + 84 -> 86]
-<(*,{t002}) --> ^pick>. :\:
-<<(*,{t002}) --> ^pick> =/> <(*,Self,{t002}) --> hold>>.
-2
---------------------
-<(*,Self,{t002}) --> hold>. :|: %1.00;0.81%
-
-*. [86 + 22 -> 88]
-<(*,Self,{t002}) --> hold>. :|:
-(&/,<(*,Self,{t002}) --> hold>,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>)!
-3
---------------------
-(&/,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>)! %1.00;0.81%
-
-*. [86 + 20 -> 92]
-<(&/, <(*, Self, {t002}) --> hold>, <(*, Self, {t001}) --> at>, (^open, {t001})) =/> <{t001} --> [opened]>>. 
-<(*,Self,{t002}) --> hold>. :|:
-4
---------------------
-<(&/,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>) =/> <{t001} --> [opened]>>. %1.00;0.81%
-
-*. [88 -> 94]
-(&/,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>)!
-3
---------------------
-<(*,Self,{t001}) --> at>! %1.00;0.47%
-
-*. [94 + 60 -> 96]
-<(*,Self,{t001}) --> at>!
-<(^go-to, #x) =/> <(*, Self, #x) --> at>>.
-54
---------------------
-<(*,{t001}) --> ^go-to>! %1.00;0.81%
-
-*. [96 -> 98]
-<(*,{t001}) --> ^go-to>!
-1
---------------------
- [EXECUTE in ^go-to <(*,{t001}) --> ^go-to>!]
-<(*,{t001}) --> ^go-to>. :\: %1.00;0.90%
-
-*. [98 + 60 -> 102]
-<(*,{t001}) --> ^go-to>. :\:
-<(^go-to, #x) =/> <(*, Self, #x) --> at>>.
-51
---------------------
-<(*,Self,{t001}) --> at>. :|: %1.00;0.81%
-
-*. [102 + 92 -> 104]
-<(*,Self,{t001}) --> at>. :|:
-<(&/,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>) =/> <{t001} --> [opened]>>.
-16
---------------------
-<<(*,{t001}) --> ^open> =/> <{t001} --> [opened]>>. %1.00;0.81%
-
-*. [102 + 88 -> 106]
-<(*,Self,{t001}) --> at>. :|:
-(&/,<(*,Self,{t001}) --> at>,<(*,{t001}) --> ^open>)!
-7
---------------------
-<(*,{t001}) --> ^open>! %1.00;0.81%
-
-*. [106 -> 108]
-<(*,{t001}) --> ^open>!
-1
---------------------
- [EXECUTE in ^open <(*,{t001}) --> ^open>!]
-<(*,{t001}) --> ^open>. :\: %1.00;0.90%
-
-*. [108 + 104 -> 112]
-<(*,{t001}) --> ^open>. :\:
-<<(*,{t001}) --> ^open> =/> <{t001} --> [opened]>>.
-4
---------------------
-<{t001} --> [opened]>. :|: %1.00;0.81%
-
-*. [12 + 112 -> 114]
-<{t001} --> [opened]>. :|: %0%
-1
-<{t001} --> [opened]>. :|:
-1
-<{t001} --> [opened]>? :|:
-1
---------------------
-<{t001} --> [opened]>. :\: %0.00;0.90%
-<{t001} --> [opened]>. :|: %1.00;0.90%
-}}}
-
-== Output ==
-
-  # `EXECUTE in ^go-to <(*,{t003}) --> ^go-to>!`
-  # `EXECUTE in <(*,{t002}) --> ^pick>!`
-  # `EXECUTE in ^go-to <(*,{t001}) --> ^go-to>!`
-  # `EXECUTE in ^open <(*,{t001}) --> ^open>!`
+When a sequence of events are observed, the system will tentatively build hypothesis about their relationship, using a special version of induction (and comparison). In this way, the system can gradually acquire skills and causal knowledge from its experience.
