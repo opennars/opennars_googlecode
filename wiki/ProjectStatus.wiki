@@ -37,7 +37,7 @@ With the logic part mostly finished, the control part will be refined, along the
 When the conceptual design of both the logic part and the control part are mature enough, it may become necessary to completely design and implement the system from scratch, since the current design is the result of a long evolution process, so is not optimal according to the new understanding about how the system should work. Beside following the guideline of software engineering more closely, the new implementation should also address the following requirements not covered in the current design:
   * Using NARS as a library by other systems;
   * Following a more _declarative_ format when coding the grammar rules of Narsese and the inference rules of NAL;
-  * Allowing NARS to directly invoke various types of hardware and software as its "sensorimotor" mechanism, using the existing mechanism in http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars/operation;
+  * Allowing NARS to directly invoke various types of hardware and software as its "sensorimotor" mechanism, using the existing mechanism in http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars/operation ;
   * Loading (and saving) the memory from (and to) permanent storage in file or database;
   * Communicating with human user with an enhanced GUI.
 
