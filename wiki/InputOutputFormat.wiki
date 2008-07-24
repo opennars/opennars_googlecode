@@ -54,6 +54,6 @@ In a task, all the space characters are optional, and will be ignored by the sys
                         | ":|:"                              // present event
                         | ":\:"                              // past event
               <truth> ::= "%"<frequency>[";"<confidence>]"%" // two numbers in [0,1]x(0,1)
-             <budget> ::= "%"<priority>[";"<durability>]"%"  // two numbers in [0,1]x(0,1)
+             <budget> ::= "$"<priority>[";"<durability>]"$"  // two numbers in [0,1]x(0,1)
                <word> : string in an alphabet
 }}}
