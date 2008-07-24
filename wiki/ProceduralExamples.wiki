@@ -1,5 +1,5 @@
 #summary working examples of reasoning on goals and actions.
-#labels Phase-Design
+#labels Phase-QA
 
 = Introduction =
 
