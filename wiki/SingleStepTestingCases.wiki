@@ -12,7 +12,7 @@ Each file contains a sequence of examples. An example looks like the following:
  OUT: <bird --> swimmer>. %0.87;0.91% {2: 2;1} 
 }}}
 
-A line starting with '{{{*}}}' indicates the beginning of a new example, and will initialize the system when feed into the demo as input. A line starting with an optional "IN:" is an input task to the system, and a line starting with "OUT:" is output from the system. A line containing a single number indicates the number of inference cycles between in/out lines. Spaces, tabs, and blank lines are ignored.
+A line starting with '{{{*}}}' indicates the beginning of a new example, and will initialize the system when feed into the demo as input. A line starting with '{{{/}}}' is a comment. A line starting with an optional "IN:" is an input task to the system, and a line starting with "OUT:" is output from the system. A line containing a single number indicates the number of inference cycles between in/out lines. Spaces, tabs, and blank lines are ignored.
 
 String like "{{{<bird --> swimmer>. %0.87;0.91%}}}" is a Narsese sentence, and the grammar is specified in InputOutputFormat. The following "{2: 2;1}" is a 'stamp' automatically attached by the system, to indicate the _source_ of that line.
 
