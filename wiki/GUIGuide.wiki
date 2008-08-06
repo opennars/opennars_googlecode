@@ -1,0 +1,139 @@
+#labels Phase-QA
+# User's Guide of the GUI of NARS.
+
+The GUI of NARS consists of several windows. In the following, they are described one by one.
+
+== Main Window ==
+http://nars.wang.googlepages.com/NARS-MainWindow.jpg
+
+This window contains a menu bar, a text area, a clock field, and four command buttons.
+
+The following menu items are available in the current version of NARS:
+  * File/[Load Experience]: use an existing file as the system's input experience.
+  * File/[Save Experience]: open/close a file to store the system's input/output experience.
+  * File/[Record Inference]: open/close a file to store the system's inference steps.
+  * Memory/[Initialize]: vacate the memory.
+  * View/[Concepts]: open a Bag Window to display all concepts.
+  * View/[Task Buffer]: open a Bag Window to display the new tasks to be processed.
+  * View/[Inference Log]: show the Inference Log Window.
+  * View/[Concept Content]: show the Term Window.
+  * View/[Input Window]: show the Input Window.
+  * Parameter/[Task Forgetting Rate]: control how fast the priority values of tasks decay, in a Parameter Window.
+  * Parameter/[Belief Forgetting Rate]: control how fast the priority values of beliefs decay, in a Parameter Window.
+  * Parameter/[Concept Forgetting Rate]: control how fast the priority values of concepts decay, in a Parameter Window.
+  * Parameter/[Report Silence Level]: indicate the resource-budget threshold for derived tasks to be reported to the user, in a Parameter Window.
+  * Help/[Related Information]: display pointers to NARS related information in a Message Window.
+  * Help/[About NARS]: display version and date of NARS in a Message Window.
+
+The text area displays the conversation between the user and the system.
+  * Lines preceded by "IN:" are input provided by the user.
+  * Lines preceded by "OUT:" are output provided by the system.
+  * Lines consist of single integers record the number of inference steps between input/output events.
+
+The Clock field is a counter of inference steps after the last input/output event.
+
+The command buttons correspond to basic operations:
+  * "Run": start the inference engine.
+  * "Walk": let the inference engine work for one cycle.
+  * "Stop": stop the inference engine.
+  * "Exit": exit NARS.
+
+
+== Input Window ==
+http://nars.wang.googlepages.com/NARS-InputWindow.jpg
+
+This window contains a text area and four command buttons.
+
+The text area allows the user to type or paste input lines, each of which may be
+  * an input task,
+  * a number indicating the inference steps between input tasks,
+  * a line starting with '{{{*}}}' that resets the memory.
+
+The command buttons correspond to basic operations:
+  * "OK": feed the current lines into the system.
+  * "Hold": stop feeding the lines.
+  * "Clear": clear the text field.
+  * "Hide": hide the window.
+
+
+== Inference Log Window ==
+http://nars.wang.googlepages.com/NARS-InferenceWindow.jpg
+
+This window contains a text area and three command buttons.
+
+The text area displays information in each inference step, including
+  * a step serial number.
+  * the concept selected in the step.
+  * the task link selected in the step, if any.
+  * the term link selected in the step, if any.
+  * the belief selected in the step, if any.
+  * the new task(s) derived in the step, if any.
+
+The command buttons correspond to basic operations:
+  * "Play": display the information..
+  * "Stop": stop displaying.
+  * "Hide": hide the window.
+
+
+== Bag Window ==
+http://nars.wang.googlepages.com/NARS-BagWindow.jpg
+
+This window contains a text area, a slider, and three command buttons.
+
+The text area displays the items in the bag, according to their priority levels.
+
+The slider indicates and adjusts the priority threshold for items to be displayed.
+
+The command buttons carry out the following operations:
+  * "Play": display the information.
+  * "Stop": stop displaying.
+  * "Close": close the window.
+
+
+== Term Window ==
+http://nars.wang.googlepages.com/NARS-TermWindow.jpg
+
+This window contains a text field and two command buttons.
+
+The text field accepts the name of an existing concept.
+
+The command buttons carry out the following operations:
+  * "Show": for the given concept, open three windows to show (1) its direct tasks, (2) its task links, and (3) its term links, respectively.
+  * "Hide": hide the window.
+
+
+== Parameter Window ==
+http://nars.wang.googlepages.com/NARS-ParameterWindow.jpg
+
+This window contains a slider and three command buttons.
+
+The slider indicates and adjusts the current parameter value.
+
+The command buttons carry out the following operations:
+  * "Undo": reset the parameter to its previously saved value.
+  * "Default": reset the parameter to its default value.
+  * "Hide": save the current value and hide the window.
+
+
+== Message Window ==
+http://nars.wang.googlepages.com/NARS-MessageWindow.jpg
+
+This window contains a text area and a bottom.
+
+The text area displays a message to the user.
+
+The "OK" button closes the window.
+
+
+== Color Usage ==
+
+The following color convention is used in the GUI:
+
+Window color:
+  * blue for the main window.
+  * purple for a window that has only one instance in the system.
+  * green for a window that may have more than one instance in the system.
+
+Text background color:
+  * white means can be edited.
+  * light-cyan means display only.
