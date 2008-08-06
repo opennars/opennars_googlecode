@@ -1,5 +1,5 @@
+#summary User's Guide of the GUI of NARS.
 #labels Phase-QA
-#User's Guide of the GUI of NARS.
 
 The GUI of NARS consists of several windows. In the following, they are described one by one.
 
