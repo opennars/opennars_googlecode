@@ -1,5 +1,5 @@
 #labels Phase-QA
-# User's Guide of the GUI of NARS.
+#User's Guide of the GUI of NARS.
 
 The GUI of NARS consists of several windows. In the following, they are described one by one.
 
@@ -9,21 +9,21 @@ http://nars.wang.googlepages.com/NARS-MainWindow.jpg
 This window contains a menu bar, a text area, a clock field, and four command buttons.
 
 The following menu items are available in the current version of NARS:
-  * File/[Load Experience]: use an existing file as the system's input experience.
-  * File/[Save Experience]: open/close a file to store the system's input/output experience.
-  * File/[Record Inference]: open/close a file to store the system's inference steps.
-  * Memory/[Initialize]: vacate the memory.
-  * View/[Concepts]: open a Bag Window to display all concepts.
-  * View/[Task Buffer]: open a Bag Window to display the new tasks to be processed.
-  * View/[Inference Log]: show the Inference Log Window.
-  * View/[Concept Content]: show the Term Window.
-  * View/[Input Window]: show the Input Window.
-  * Parameter/[Task Forgetting Rate]: control how fast the priority values of tasks decay, in a Parameter Window.
-  * Parameter/[Belief Forgetting Rate]: control how fast the priority values of beliefs decay, in a Parameter Window.
-  * Parameter/[Concept Forgetting Rate]: control how fast the priority values of concepts decay, in a Parameter Window.
-  * Parameter/[Report Silence Level]: indicate the resource-budget threshold for derived tasks to be reported to the user, in a Parameter Window.
-  * Help/[Related Information]: display pointers to NARS related information in a Message Window.
-  * Help/[About NARS]: display version and date of NARS in a Message Window.
+  * File/Load Experience: use an existing file as the system's input experience.
+  * File/Save Experience: open/close a file to store the system's input/output experience.
+  * File/Record Inference: open/close a file to store the system's inference steps.
+  * Memory/Initialize: vacate the memory.
+  * View/Concepts: open a Bag Window to display all concepts.
+  * View/Task Buffer: open a Bag Window to display the new tasks to be processed.
+  * View/Inference Log: show the Inference Log Window.
+  * View/Concept Content: show the Term Window.
+  * View/Input Window: show the Input Window.
+  * Parameter/Task Forgetting Rate: control how fast the priority values of tasks decay, in a Parameter Window.
+  * Parameter/Belief Forgetting Rate: control how fast the priority values of beliefs decay, in a Parameter Window.
+  * Parameter/Concept Forgetting Rate: control how fast the priority values of concepts decay, in a Parameter Window.
+  * Parameter/Report Silence Level: indicate the resource-budget threshold for derived tasks to be reported to the user, in a Parameter Window.
+  * Help/Related Information: display pointers to NARS related information in a Message Window.
+  * Help/About NARS: display version and date of NARS in a Message Window.
 
 The text area displays the conversation between the user and the system.
   * Lines preceded by "IN:" are input provided by the user.
