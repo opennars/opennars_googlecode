@@ -1,14 +1,11 @@
 #summary Inference Examples
 
-This file contains a group of multi-step inference examples, which shows the
+This file contains a group of multi-step inference examples, which show the
 expressive and inferential capability of NARS.
 
-Each example starts at a line with a {{{*}}} to empty the memory of the system. 
-To run an example, copy/paste that line and the following lines into the input 
-window of the NARS applet. For instance, in the 
-first example, it includes the first 6 lines. What is listed after the input 
-lines are the lines displayed in the main window of NARS, followed by a brief 
-explanation of the example.
+Each example starts at a line with a "{{{*}}}" to empty the memory of the system. 
+To run an example, copy/paste the input lines into the input window of the NARS. 
+Listed after the input lines are the lines displayed in the main window of NARS during the processing of the input, followed by a brief explanation of the example.
 
 ----
 ===Choice===
@@ -40,8 +37,10 @@ and therefore may report more than one answer to a given question. In this examp
 the system will settle down at the last answer even if it is given longer time.
 
 ----
+===Contradiction===
+Input:
 {{{
-*** Contradiction ***
+*
 <coffee --> beverage>.
 <Java --> coffee>.
 (--,<Java --> coffee>).
@@ -50,6 +49,7 @@ the system will settle down at the last answer even if it is given longer time.
 <coffee --> beverage>?
 1
 }}}
+Display:
 {{{
   IN: <coffee --> beverage>. %1.00;0.90% {1: 1} 
   IN: <Java --> coffee>. %1.00;0.90% {1: 2} 
@@ -66,8 +66,10 @@ not make the system to derive an arbitrary conclusion on other questions, as in
 propositional logic.
 
 ----
+===Confidence and revision===
+Input:
 {{{
-*** Confidence and revision ***
+*
 <Willy {-- swimmer>.
 <fish --> swimmer>.
 <Willy {-- fish>?
@@ -80,6 +82,7 @@ propositional logic.
 <Willy {-- fish>. %0%
 10
 }}}
+Display:
 {{{
   IN: <{Willy} --> swimmer>. %1.00;0.90% {1: 1} 
   IN: <fish --> swimmer>. %1.00;0.90% {1: 2} 
@@ -107,8 +110,10 @@ produce conclusions with difference confidence, which have different sensitivity
 facing the same amount of new evidence.
 
 ----
+===Deduction chain===
+Input:
 {{{
-*** Deduction chain ***
+*
 <Tweety {-- robin>.
 <robin --> bird>.
 <bird --> animal>.
@@ -117,8 +122,9 @@ facing the same amount of new evidence.
 10
 <Tweety {-- animal>?
 10
-{{{
 }}}
+Display:
+{{{
   IN: <{Tweety} --> robin>. %1.00;0.90% {1: 1} 
   IN: <robin --> bird>. %1.00;0.90% {1: 2} 
   IN: <bird --> animal>. %1.00;0.90% {1: 3} 
@@ -136,14 +142,17 @@ In the example, though both answers are positive (with frequency 1), their
 confidence is getting lower as the deduction chain gets longer.
 
 ----
+===Resemblance Chain===
+Input:
 {{{
-*** Resemblance Chain ***
+*
 <dog <-> cat>. %0.9%
 <cat <-> tiger>. %0.9%
 <tiger <-> lion>. %0.9%
 <dog <-> lion>?
 10
 }}}
+Display:
 {{{
   IN: <cat <-> dog>. %0.90;0.90% {1: 1} 
   IN: <cat <-> tiger>. %0.90;0.90% {1: 2} 
@@ -156,8 +165,10 @@ Given incomplete similarity, both frequency and the confidence decrease
 alone an inference chain.
 
 ----
+===Induction and revision===
+Input:
 {{{
-*** Induction and revision ***
+*
 <bird --> swimmer>?
 <swimmer --> bird>? 
 1
@@ -171,6 +182,7 @@ alone an inference chain.
 (--, <crow --> swimmer>).
 30
 }}}
+Display:
 {{{
   IN: <bird --> swimmer>?  {1: 1} 
   IN: <swimmer --> bird>?  {1: 2} 
@@ -202,8 +214,10 @@ answers are reported;
 negative evidence does not.
 
 ----
+===Mixed Inference===
+Input:
 {{{
-*** Mixed Inference ***
+*
 <swan --> bird>.
 <swan --> swimmer>.
 10
@@ -216,6 +230,7 @@ negative evidence does not.
 <robin --> swimmer>?
 400
 }}}
+Display:
 {{{
   IN: <swan --> bird>. %1.00;0.90% {1: 1} 
   IN: <swan --> swimmer>. %1.00;0.90% {1: 2} 
@@ -239,8 +254,10 @@ The selection of inference rule is data driven, not specified explicitly in the
 input. There is no guarantee that all relevant evidence will be taken into consideration.
 
 ----
+===Compositionality===
+Input:
 {{{
-*** Compositionality ***
+*
 <light --> traffic_signal>. %0.1% 
 <[red] --> traffic_signal>. %0.1% 
 10
@@ -253,6 +270,7 @@ input. There is no guarantee that all relevant evidence will be taken into consi
 <light_2 {-- traffic_signal>.
 20
 }}}
+Display:
 {{{
   IN: <light --> traffic_signal>. %0.10;0.90% {1: 1} 
   IN: <[red] --> traffic_signal>. %0.10;0.90% {1: 2} 
@@ -277,8 +295,10 @@ when the system gets experience about the compound that cannot be reduced to its
 components.
 
 ----
+===Fuzzy Concept===
+Input:
 {{{
-*** Fuzzy Concept ***
+*
 <John {-- boy>.
 <John {-- (/, taller_than, {Tom}, _)>.
 20
@@ -291,6 +311,7 @@ components.
 <Karl {-- (/, taller_than, {Tom}, _)>. 
 100
 }}}
+Display:
 {{{
   IN: <{John} --> boy>. %1.00;0.90% {1: 1} 
   IN: <{John} --> (/,taller_than,{Tom},_)>. %1.00;0.90% {1: 2} 
