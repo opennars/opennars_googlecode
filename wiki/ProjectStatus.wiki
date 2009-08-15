@@ -3,7 +3,7 @@
 
 = Current situation =
 
-The main Open-NARS project (under http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars) has been updated to version 1.2.0 on August 15, 2008. This version has implemented most contents of the design as described in [http://www.springer.com/computer/artificial/book/978-1-4020-5044-2 Rigid Flexibility: The Logic of Intelligence], with the logic part updated as specified in [http://nars.wang.googlepages.com/wang.NAL.pdf Non-Axiomatic Logic (NAL) Specification].
+The main Open-NARS project (under http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars) has been updated to version 1.2.0 on August 15, 2009. This version has implemented most contents of the design as described in [http://www.springer.com/computer/artificial/book/978-1-4020-5044-2 Rigid Flexibility: The Logic of Intelligence], with the logic part updated as specified in [http://nars.wang.googlepages.com/wang.NAL.pdf Non-Axiomatic Logic (NAL) Specification].
 
 = Future tasks =
 
