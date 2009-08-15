@@ -3,12 +3,7 @@
 
 = Current situation =
 
-The main Open-NARS project (under http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars) has been updated to version 1.1.0 on July 24, 2008. This version has implemented most contents of the design as described in [http://www.springer.com/computer/artificial/book/978-1-4020-5044-2 Rigid Flexibility: The Logic of Intelligence], though there are still a number of remaining issues to be solved, both in conceptual design and in implementation.
-
-Other NARS-based projects include:
-  * [LOANForNarseseUsers Using NARS in Semantic Web]
-  * [http://www.squeakside.com/seaside/pier/OpenNARS Porting NARS into Squeak]
-  * [http://code.google.com/p/pynars/ Porting NARS into Python]
+The main Open-NARS project (under http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars) has been updated to version 1.2.0 on August 15, 2008. This version has implemented most contents of the design as described in [http://www.springer.com/computer/artificial/book/978-1-4020-5044-2 Rigid Flexibility: The Logic of Intelligence], with the logic part updated as specified in [http://nars.wang.googlepages.com/wang.NAL.pdf Non-Axiomatic Logic (NAL) Specification].
 
 = Future tasks =
 
@@ -16,7 +11,7 @@ As far as the main project is concerned, there are several major tasks in the ne
 
 == A. The Logic Part ==
 
-The _logic part_ of the system includes the Narsese language, the semantic theory, and the inference rules. Generally speaking, the task here is to provide reasonable solutions with insufficient knowledge. The current design is mostly described in [http://www.springer.com/computer/artificial/book/978-1-4020-5044-2 Rigid Flexibility: The Logic of Intelligence], and implemented in Open-NARS 1.1.0.
+The _logic part_ of the system includes the Narsese language, the semantic theory, and the inference rules. Generally speaking, the task here is to provide reasonable solutions with insufficient knowledge. The current design is mostly described in [http://nars.wang.googlepages.com/wang.NAL.pdf Non-Axiomatic Logic (NAL) Specification], and implemented in Open-NARS 1.2.0.
 
 What remaining to be done for this part include:
   # To solve the remaining issues in design and implementation
@@ -46,7 +41,7 @@ Some considerations in this direction can be found in AbstractDesignProposal and
 == D. Knowledge Acquisition ==
 
 Even after both the logic and control parts of the system are completed, the system still won't have practical application until it is given proper knowledge to start with. As discussed in [http://nars.wang.googlepages.com/wang.roadmap.pdf From NARS to a Thinking Machine], several channels will be explored in coordination:
-  * Getting knowledge from existing knowledge-base or other sources, wherever approximate mapping from other knowledge format into Narsese is possible.
+  * Getting knowledge from existing knowledge-base or other sources (such as semantic web), wherever approximate mapping from other knowledge format into Narsese is possible.
   * Teaching NARS _natural languages_, so that it can get knowledge encoded in those languages. The system will learn linguistic knowledge in the same way as it learn other types of knowledge, more or less as suggested by cognitive linguistics.
   * Directly get knowledge from its _environment_, as defined by the sensorimotor mechanism of the system.
 

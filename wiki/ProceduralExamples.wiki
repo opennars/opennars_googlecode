@@ -9,7 +9,7 @@ This group of examples (Example-NAL8-... in http://code.google.com/p/open-nars/s
 
 == Example-NAL8-1 ==
 
-The first example shows how the system (as a robot) uses procedural inference to achieve the goal of openning a door.
+The first example shows how the system (as a robot) uses procedural inference to achieve the goal of opening a door.
 
 It starts with 9 input sentences, and they are roughly translated into English in the following.
 
@@ -35,7 +35,7 @@ It starts with 9 input sentences, and they are roughly translated into English i
 
 {{{*** [06] <(&|, <(*, #x, #y(#x)) --> on>, <(*, Self, #y(#x)) --> at>) =|> <(*, Self, #x) --> reachable>>.}}}
 
-"If an onject is on something, which is located at the same place as me, I can reach that object."
+"If an object is on something, which is located at the same place as me, I can reach that object."
 
 {{{*** [07] <(*, {t002}, {t003}) --> on>. :|:}}}
 
@@ -47,9 +47,9 @@ It starts with 9 input sentences, and they are roughly translated into English i
 
 {{{*** [09] <(^go-to, #x) =/> <(*, Self, #x) --> at>>.}}}
 
-"If I execute the 'go to' openration aimed at a place, I'll arrive at that place."
+"If I execute the 'go to' operation aimed at a place, I'll arrive at that place."
 
-The step-by-step process shows that the system uses backwork inference to reduce the given goal into derived goals that can be directly achieved by the execution of operations, and uses forward inference to change the description about the situation, according to the expectations on what each operation will achieve, until the initial is achieved.
+The step-by-step process shows that the system uses backward inference to reduce the given goal into derived goals that can be directly achieved by the execution of operations, and uses forward inference to change the description about the situation, according to the expectations on what each operation will achieve, until the initial is achieved.
 
 In this process, the following operation sequence is displayed in Java console, which is what the system actually does:
 {{{
@@ -61,7 +61,8 @@ EXECUTE: ^open({t001})
 
 == Example-NAL8-2 ==
 
-This example is a variant of the previous one. Here the goal is not achieveb by "hinking on the way", but by the forming of a complete plan, which can be executed later when the goal actually appears.
+
+This example is a variant of the previous one. Here the goal is not achieved by "hiking on the way", but by the forming of a complete plan, which can be executed later when the goal actually appears.
 
 When a plan is derived, it also comes with a truth value, indicating its estimated chance of success, according to the experience of the system.
 
@@ -78,3 +79,9 @@ Though in principle all the inference in the previous examples can all be seen a
 When a belief conflict is judged to be _update_, the involved beliefs are not revised. Instead, the old belief is added a past tense, and the system's current opinion is completely determined by the new belief.
 
 When a sequence of events are observed, the system will tentatively build hypothesis about their relationship, using a special version of induction (and comparison). In this way, the system can gradually acquire skills and causal knowledge from its experience.
+
+== Example-NAL8-5 ==
+
+The task in this example is basically the same as in Example-NAL8-4, though the temporal inference process is carried out in real time. Consequently, the tense of a sentence is not a fixed property, but may change over time.
+
+
