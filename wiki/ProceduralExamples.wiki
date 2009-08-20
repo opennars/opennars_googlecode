@@ -1,7 +1,7 @@
 #summary working examples of reasoning on goals and actions.
 #labels Phase-QA
 
-= Introduction =
+== Introduction ==
 
 The general ideas about procedure inference in NARS are explained in ProceduralInference; and the general guideline for how to use the examples is described in SingleStepTestingCases.
 

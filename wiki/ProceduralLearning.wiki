@@ -43,6 +43,8 @@ Since this example focuses on the logic of the system rather than the control me
  OUT: <<(*,key001) --> ^pick> =/> <(*,Self,key001) --> hold>>. :|: %1.00;0.81%
 }}}
 The first step simplifies the precondition of the operation by removing the conditions that is already realized. Given the uncertainty introduced by this deduction, the conclusion has a lower confidence value. Furthermore, while judgment `[03]` is tense-free, judgment `[05]` is true at the current moment, since the condition `[04]` is not always true.
+
+In `[03]`, operation `(^pick, key001)` becomes `<(*,key001) --> ^pick>` when loaded into the system, though the former version remains its standard form in Narsese. In the latter version, the subject can be a product with a single argument, because in all operations there is an implicit argument, the system itself.
 {{{
 ********** [05 + 01 -> 06]:
   IN: <<(*,key001) --> ^pick> =/> <(*,Self,key001) --> hold>>. :|: %1.00;0.81%

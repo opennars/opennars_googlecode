@@ -27,14 +27,14 @@ All the _selections_ in steps 1 and 2 are _probabilistic_, in the sense that all
 
 The architecture and working cycle are illustrated in http://open-nars.googlecode.com/files/architecture.pdf
 
-At the current time, the most comprehensive description of NARS is the book  [http://www.springer.com/west/home/computer/artificial?SGWID=4-147-22-173659733-0 Rigid Flexibility: The Logic of Intelligence]. The up to date description of the logic part of the system is in[http://nars.wang.googlepages.com/wang.NAL.pdf Non-Axiomatic Logic (NAL) Specification]. The current code implements most of NAL-1 to NAL-8.
+At the current time, the most comprehensive description of NARS is the book  [http://www.springer.com/west/home/computer/artificial?SGWID=4-147-22-173659733-0 Rigid Flexibility: The Logic of Intelligence]. The up to date description of the logic part of the system is in [http://www.cis.temple.edu/~pwang/Writing/NAL-Specification.pdf Non-Axiomatic Logic (NAL) Specification]. The current code implements most of NAL-1 to NAL-8.
 
 Beginners can start at the following on-line materials:
-  *. The basic ideas behind the project: http://nars.wang.googlepages.com/wang.logic_intelligence.pdf
-  *. The high-level engineering plan: http://nars.wang.googlepages.com/wang.roadmap.pdf
-  *. The core logic: http://www.cogsci.indiana.edu/pub/wang.inheritance_nal.ps
-  *. The semantics: http://nars.wang.googlepages.com/wang.semantics.pdf
-  *. The memory and control: http://nars.wang.googlepages.com/wang.computation.pdf
+  *. The basic ideas behind the project: http://www.cis.temple.edu/~pwang/Publication/logic_intelligence.pdf
+  *. The high-level engineering plan: http://www.cis.temple.edu/~pwang/Publication/roadmap.pdf
+  *. The core logic: http://www.cis.temple.edu/~pwang/Publication/inheritance_nal.pdf
+  *. The semantics: http://www.cis.temple.edu/~pwang/Publication/semantics.pdf
+  *. The memory and control: http://www.cis.temple.edu/~pwang/Writing/computation.pdf
 
 Additional materials:
   * The Java application/applet demonstration at http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars-dist
