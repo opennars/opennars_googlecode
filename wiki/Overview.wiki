@@ -38,5 +38,5 @@ Beginners can start at the following on-line materials:
 
 Additional materials:
   * The Java application/applet demonstration at http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars-dist
-  * The javadoc files at http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars-dist/javadoc
+  * The javadoc files at http://www.cis.temple.edu/~pwang/Implementation/nars-dist/javadoc/index.html
   * The example files at http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars-dist/Examples
