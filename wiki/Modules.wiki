@@ -1,4 +1,5 @@
 #summary The Modular Structure of NARS
+#labels Phase-Requirements
 
 = Introduction =
 
