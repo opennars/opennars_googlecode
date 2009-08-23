@@ -1,5 +1,5 @@
 #summary an introduction to LOAN for the Narsese user
-#labels Serialisations-LOAN
+#labels Serialisations-LOAN,Phase-Design
 
 = Introduction =
 
@@ -120,7 +120,7 @@ inconsistency:
 || *Narsese* || *LOAN* ||
 || {{{<redwine <-> whitewine>. %0%}}} || {{{:RedWine <-> :WhiteWine %0.0%.}}} ||
 
-But we want to say that we're fairly sure that rosŽ is a bit like both red and white wine so
+But we want to say that we're fairly sure that rosï¿½ is a bit like both red and white wine so
 we use a full form truth value with a frequency of 0.4 and a confidence of 0.7:
 
 || *Narsese* || *LOAN* ||
@@ -128,7 +128,7 @@ we use a full form truth value with a frequency of 0.4 and a confidence of 0.7:
 || {{{ <rosewine <-> whitewine>. %0.4;0.7% }}} || {{{:RoseWine <-> :WhiteWine %0.4;0.7%.}}} ||
 
 In spite of this, and in spite of NARS being able to infer it, we want to
-explicitly describe what rosŽ wine is, it is something which is both a wine
+explicitly describe what rosï¿½ wine is, it is something which is both a wine
 and which has the property of being pink:
 
 || *Narsese* || *LOAN* ||
@@ -227,7 +227,7 @@ resources like homepages and email addresses:
   --- RedWine and WhiteWine are totally distinct
   :RedWine <-> :WhiteWine %0.0%.
   
-  --- But we're quite sure that RosŽ is a bit like Red and a bit like White
+  --- But we're quite sure that Rosï¿½ is a bit like Red and a bit like White
   :RoseWine <-> :RedWine %0.4;0.7%.
   :RoseWine <-> :WhiteWine %0.4;0.7%.
   
