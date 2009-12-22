@@ -4,7 +4,7 @@
 The GUI of NARS consists of several windows. In the following, they are described one by one.
 
 == Main Window ==
-http://sites.google.com/site/narswang/implementations/NARS-MainWindow.jpg
+http://sites.google.com/site/narswang/implementations/NARS-MainWindow.JPG
 
 This window contains a menu bar, a text area, a clock field, and four command buttons.
 
@@ -40,7 +40,7 @@ The command buttons correspond to basic operations:
 
 
 == Input Window ==
-http://sites.google.com/site/narswang/implementations/NARS-InputWindow.jpg
+http://sites.google.com/site/narswang/implementations/NARS-InputWindow.JPG
 
 This window contains a text area and four command buttons.
 
@@ -57,7 +57,7 @@ The command buttons correspond to basic operations:
 
 
 == Inference Log Window ==
-http://sites.google.com/site/narswang/implementations/NARS-InferenceWindow.jpg
+http://sites.google.com/site/narswang/implementations/NARS-InferenceWindow.JPG
 
 This window contains a text area and three command buttons.
 
@@ -76,7 +76,7 @@ The command buttons correspond to basic operations:
 
 
 == Bag Window ==
-http://sites.google.com/site/narswang/implementations/NARS-BagWindow.jpg
+http://sites.google.com/site/narswang/implementations/NARS-BagWindow.JPG
 
 This window contains a text area, a slider, and three command buttons.
 
@@ -91,7 +91,7 @@ The command buttons carry out the following operations:
 
 
 == Term Window ==
-http://sites.google.com/site/narswang/implementations/NARS-TermWindow.jpg
+http://sites.google.com/site/narswang/implementations/NARS-TermWindow.JPG
 
 This window contains a text field and two command buttons.
 
@@ -103,7 +103,7 @@ The command buttons carry out the following operations:
 
 
 == Parameter Window ==
-http://sites.google.com/site/narswang/implementations/NARS-ParameterWindow.jpg
+http://sites.google.com/site/narswang/implementations/NARS-ParameterWindow.JPG
 
 This window contains a slider and three command buttons.
 
@@ -116,7 +116,7 @@ The command buttons carry out the following operations:
 
 
 == Message Window ==
-http://sites.google.com/site/narswang/implementations/NARS-MessageWindow.jpg
+http://sites.google.com/site/narswang/implementations/NARS-MessageWindow.JPG
 
 This window contains a text area and a bottom.
 
