@@ -82,6 +82,4 @@ When a sequence of events are observed, the system will tentatively build hypoth
 
 == Example-NAL8-5 ==
 
-The task in this example is basically the same as in Example-NAL8-4, though the temporal inference process is carried out in real time. Consequently, the tense of a sentence is not a fixed property, but may change over time.
-
-
+This example is discussed in detail in ProceduralLearning.
