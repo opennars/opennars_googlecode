@@ -1,0 +1,33 @@
+#summary New functions of Open-NARS version 1.4.x.
+
+= Introduction =
+
+Open-NARS 1.4 add the last group of major functions into the system, including
+  # real-time procedural inference
+  # emotion and global indicators
+  # self-monitor and self-control
+
+In version 1.4.0, each of the above functions is implemented in its basic form. Until the functions are fully tested, the on-line demonstration will still be the previous stable version, 1.3.3, though the source code of 1.4.x will be uploaded from time to time.
+
+
+= Real-time procedural inference =
+
+Now the system takes the time interval between events into consideration, in terms of internal clock cycles. For example,
+{{{
+  IN: a. :|: %1.00;0.90% {0 : 0 : 1} 
+5
+  IN: b. :|: %1.00;0.90% {5 : 5 : 2} 
+1
+ OUT: <b =\> (&/,a,(^wait,5))>. %1.00;0.45% {6 : 1;2} 
+ OUT: <(&/,a,(^wait,5)) =/> b>. %1.00;0.45% {6 : 1;2} 
+ OUT: <(&/,a,(^wait,5)) </> b>. %1.00;0.45% {6 : 1;2} 
+}}}
+Here "^wait" is an operation that let the system anticipate a future event, after a given number of clock cycles. Such an anticipation will produce a (positive or negative) feedback, which will revise the belief about events implying each other.
+{{{
+<(&/,a,(^wait,5)) =/> b>.
+a.
+}}}
+
+= Emotion and global indicators =
+
+= Self-monitor and self-control =
