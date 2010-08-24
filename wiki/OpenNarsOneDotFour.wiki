@@ -8,7 +8,7 @@ Open-NARS 1.4 introduces the following major functions into the system:
   # emotion and global indicators
   # self-monitor and self-control
 
-In version 1.4.0, each of the above functions is implemented in its primary form. Until the functions are fully tested, the on-line demonstration will still be the previous stable version, 1.3.3, though the source code of 1.4.x will be uploaded from time to time.
+In version 1.4.0, each of the above functions is implemented in its preliminary form. Until the functions are fully tested, the on-line demonstration will still be the previous stable version, 1.3.3, though the source code of 1.4.x will be uploaded from time to time.
 
 
 = Real-time procedural inference =
