@@ -11,12 +11,12 @@ In a task, all the space characters are optional, and will be ignored by the sys
 {{{
                         GRAMMAR RULE                          BRIEF EXPLANATION
                <task> ::= [<budget>] <sentence>              // task to be processed
-           <sentence> ::= <statement>"." [<tense>][<truth>]  // judgment to be remembered
-                        | <statement>"?" [<tense>]           // question to be answered
+           <sentence> ::= [<tense>] <statement>"." [<truth>] // judgment to be remembered
+                        | [<tense>] <statement>"?"           // question to be answered
                         | <statement>"!" [<truth>]           // goal to be realized
-          <statement> ::= "<"<term> <relation> <term>">"     // two terms related to each other
+          <statement> ::= "<"<term> <copula> <term>">"       // two terms related to each other
                         | <term>                             // a term can name a statement
-           <relation> ::= "-->"                              // inheritance
+             <copula> ::= "-->"                              // inheritance
                         | "<->"                              // similarity
                         | "{--"                              // instance
                         | "--]"                              // property
@@ -46,10 +46,9 @@ In a task, all the space characters are optional, and will be ignored by the sys
                         | "(&&," <term> {","<term>} ")"      // conjunction
                         | "(&/," <term> {","<term>} ")"      // sequential events
                         | "(&|," <term> {","<term>} ")"      // parallel events
-           <variable> ::= "#"<word>                          // independent variable
-                        | "#"<word> "(" {"#"<word>} ")"      // dependent variable
-                        | "#"                                // anonymous term as place holder
-                        | "?"<word>                          // query variable for term to be find
+           <variable> ::= "$"<word>                          // independent variable
+                        | "#"[<word>]                        // dependent variable
+                        | "?"[<word>]                        // query variable in question
               <tense> ::= ":/:"                              // future event
                         | ":|:"                              // present event
                         | ":\:"                              // past event
