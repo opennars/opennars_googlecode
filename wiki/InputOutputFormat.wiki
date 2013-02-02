@@ -7,7 +7,9 @@ Each line in the system's input and output is either a _task_ (as defined in the
 
 In a task, all the space characters are optional, and will be ignored by the system in processing. 
 
-= Narsese Grammer =
+NOTE: all the constructs are not implemented in current NARS 1.5, for instance the ! punctuation.
+
+= Narsese Grammar =
 {{{
                         GRAMMAR RULE                          BRIEF EXPLANATION
                <task> ::= [<budget>] <sentence>              // task to be processed
