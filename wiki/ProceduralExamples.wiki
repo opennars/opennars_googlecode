@@ -1,7 +1,7 @@
 #summary working examples of reasoning on goals and actions.
 #labels Phase-QA
 
-[This document describes NARS 1.3.3 and the corresponding examples.]
+*This document describes NARS 1.3.3 and the corresponding examples.*
 
 == Introduction ==
 
