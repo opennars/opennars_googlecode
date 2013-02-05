@@ -1,8 +1,7 @@
 #summary Inference Examples
 #labels Phase-QA
 
-This file contains a group of multi-step inference examples, which show the
-expressive and inferential capability of NARS.
+This file contains a group of multi-step inference examples, which show the expressive and inferential capability of NARS, as implemented in version 1.3.3.
 
 Each example starts at a line with a "{{{*}}}" to empty the memory of the system. 
 To run an example, copy/paste the input lines into the input window of the NARS. 
