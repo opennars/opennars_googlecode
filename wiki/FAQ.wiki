@@ -1,0 +1,26 @@
+#summary Theory & Software FAQ
+
+= Theory FAQ ==
+
+ * How relevant is Pei Wang’s thesis to today’s theory? As of 2013, are there some revisions of ideas, or ”just” deepening of analysis?
+ * What is the diffference between NARS reasoning and OpenCog’s PLN (Probabilitic Logic Network)?
+ * What are the tasks and kind of applications most suited for NARS ?
+
+= Software FAQ =
+
+ * What importers are there from other data or knowledge formats?
+None at the moment, but work is under way in EulerGUI project for a translation from RDF/N3 (Semantic Web standards) into Narsese.
+ * Which API is available for embedding NARS in an application?
+There is the Reasoner class, but it has currently dependencies to classes MainWindow and InputWindow
+ * Are there code examples of embedding NARS in an application?
+NO
+ * How to call Java code from NARS?
+ * Are there concrete examples of reasoning with NARS, larger and closer to useful things than wiki examples?
+NO
+ * Is it possible to use fancy atomic term syntax like URI’s?
+Not at the moment, but work is under way to accept URI’s or abridged URI’s in N3/Turtle style.
+ * Is it possible, or even necessary to declare terms and relations like in done in RDF Schema, OWL, UML, or are terms and relations implicitly declared like in Prolog?
+NO
+ * Is there some special syntax for literals ( numbers, strings, ...) ?
+NO
+ * Is some ”convergence” reached when continuing steps after last input?
