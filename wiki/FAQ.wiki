@@ -5,6 +5,7 @@
  * How relevant is Pei Wang’s thesis to today’s theory? As of 2013, are there some revisions of ideas, or ”just” deepening of analysis?
  * What is the diffference between NARS reasoning and OpenCog’s PLN (Probabilitic Logic Network)?
  * What are the tasks and kind of applications most suited for NARS ?
+ * Is the NARS inference parallelisable?
 
 = Software FAQ =
 
@@ -24,3 +25,6 @@ NO
  * Is there some special syntax for literals ( numbers, strings, ...) ?
 NO
  * Is some ”convergence” reached when continuing steps after last input?
+ * Does NARS index strings and identifiers, like Prolog implementations do ?
+ * Are there some stress tests for NARS?
+ * Are there some examples for supervised machine learning with NARS ?
