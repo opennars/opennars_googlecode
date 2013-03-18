@@ -22,24 +22,29 @@ This issue is addressed briefly in a footnote of Wang (2013): "This `[`probabili
 
 Conceptually, NARS can be implemented as a paralleled or distributed system, since its concepts serves as storage and processing units that are independent of each other. However, the current software is not designed to support parallel inference.
 
+ * Is some ”convergence” reached when continuing steps after last input?
+
 = Software FAQ =
+
+ * What support is available for using NARS ?
+The mailing list : https://groups.google.com/forum/?fromgroups=#!forum/open-nars
+and the IRC chat channel #nars at irc.freenode.net.
 
  * What importers are there from other data or knowledge formats?
 None at the moment, but work is under way in EulerGUI project for a translation from RDF/N3 (Semantic Web standards) into Narsese.
  * Which API is available for embedding NARS in an application?
-There is the Reasoner class, but it has currently dependencies to classes MainWindow and InputWindow
+There is the ReasonerBatch class, which has no dependencies to AWT or Swing classes.
  * Are there code examples of embedding NARS in an application?
-NO
+Not really, but you can have a look at tests in https://open-nars.googlecode.com/svn/trunk/nars_core/src/main/java and https://open-nars.googlecode.com/svn/trunk/nars_core/src/main/scala
+ * Are there some examples for supervised machine learning with NARS ?
  * How to call Java code from NARS?
  * Are there concrete examples of reasoning with NARS, larger and closer to useful things than wiki examples?
-NO
+There are descriptions of demos for NARS (dbPedia, health, video games, pattern matching, etc) here: http://www.cis.temple.edu/~pwang/demos.html
  * Is it possible to use fancy atomic term syntax like URI’s?
 Not at the moment, but work is under way to accept URI’s or abridged URI’s in N3/Turtle style.
  * Is it possible, or even necessary to declare terms and relations like in done in RDF Schema, OWL, UML, or are terms and relations implicitly declared like in Prolog?
 NO
  * Is there some special syntax for literals ( numbers, strings, ...) ?
 NO
- * Is some ”convergence” reached when continuing steps after last input?
  * Does NARS index strings and identifiers, like Prolog implementations do ?
  * Are there some stress tests for NARS?
- * Are there some examples for supervised machine learning with NARS ?
