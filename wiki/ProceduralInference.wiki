@@ -53,5 +53,5 @@ The inference rules work on goals and operations in the same ways as they works 
 
 *1* Pei Wang, Rigid Flexibility: The Logic of Intelligence, Springer, 2006. http://www.springer.com/west/home/computer/artificial?SGWID=4-147-22-173659733-0 
 
-*2* Pei Wang, Non-Axiomatic Logic (NAL) Specification, 2009.
-http://www.cis.temple.edu/~pwang/Writing/NAL-Specification.pdf
+*2* Pei Wang, Non-Axiomatic Logic: A Model of Intelligent Reasoning, 2013.
+http://www.worldscientific.com/worldscibooks/10.1142/8665
