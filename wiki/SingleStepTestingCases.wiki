@@ -1,7 +1,7 @@
 #summary Expected results of inference rules
 #labels Phase-QA
 
-There are example files in http://code.google.com/p/open-nars/source/browse/trunk/nars-dist/Examples/, showing conclusions of single-step inference, as implemented in open-nars 1.5.1.
+There are example files in http://code.google.com/p/open-nars/source/browse/trunk/nars-dist/Examples/, showing conclusions of single-step inference, as implemented in open-nars 1.5.4.
 
 Each file contains a sequence of examples. An example looks like the following:
 {{{
