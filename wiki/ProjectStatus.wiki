@@ -3,7 +3,7 @@
 
 = Current situation =
 
-The main Open-NARS project (under http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars) has been updated to version 1.5.1 in February 2013. This version has implemented NAL-1 to NAL-6 as described in [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning]. This version is a major refactoring of the previous version, and it realizes some ideas suggested by Joe Geldart and Jeff Thompson.
+The main Open-NARS project (under http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars_core_java and http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars_gui) has been updated to version 1.5.4 in July 2013. This version has implemented NAL-1 to NAL-6 as described in [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning]. This version is a major refactoring of the previous version, and it realizes some ideas suggested by Joe Geldart and Jeff Thompson.
 
 = Future tasks =
 
@@ -11,11 +11,11 @@ As far as the main project is concerned, there are several major tasks in the ne
 
 == A. Natural language processing ==
 
-Beside refactoring, a major motivation of this new version is to test some ideas about natural language comprehension and production. It will be explained in future writings, probably around March 2013.
+Beside refactoring, a major motivation of this new version is to test some ideas about natural language comprehension and production. The basic idea is explained in http://www.cis.temple.edu/~pwang/Publication/NLP.pdf.
 
 == B. Further redesign ==
 
-What is left for a future time is the idea of implementing the inference rules in a declarative manner. The current approach, mainly shown in nars.inference.RuleTables, lacks clarity and elegance, and is also hard to maintain. 
+What is left for a future time is the idea of implementing the inference rules in a declarative manner, similar to the Prolog version in http://www.cis.temple.edu/~pwang/Implementation/NAL/nal.pl . The current approach, mainly shown in nars.inference.RuleTables, lacks clarity and elegance, and is also hard to maintain. 
 
 Other modular modifications may happen in GUI and input/output channels. Especially, to relate NARS and Semantic Web has be under consideration for a while.
 
@@ -25,4 +25,4 @@ The resource allocation strategies of NARS need a more detailed conceptual desig
 
 == D. Upper layers ==
 
-NAL-7, NAL-8, and NAL-9 will be re-implemented in version 1.5, probably in a form that is different from how they were implemented in versions 1.3.x and 1.4.0. In particular, the implementation of NAL-9 may require further refactoring of the control mechanism. This step will not be taken before May 2013.
+NAL-7, NAL-8, and NAL-9 will be re-implemented in version 1.5, probably in a form that is different from how they were implemented in versions 1.3.x and 1.4.0. In particular, the implementation of NAL-9 may require further refactoring of the control mechanism. 
