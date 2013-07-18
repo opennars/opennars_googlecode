@@ -17,28 +17,29 @@ Input:
 <robin --> bird>.
 10
 <swan --> bird>. %1.00;0.80%
-10
-<penguin --> bird>. %0.80%
-10
+<penguin --> bird>. %0.80;0.95%
+5
 <?1 --> bird>?
-60
+800
 }}}
 Display:
 {{{
   IN: <robin --> bird>. %1.00;0.90% {0 : 1} 
 10
   IN: <swan --> bird>. %1.00;0.80% {10 : 2} 
-10
-  IN: <penguin --> bird>. %0.80;0.90% {20 : 3} 
-10
-  IN: <?1 --> bird>?  {30 : 4} 
-18
+  IN: <penguin --> bird>. %0.80;0.95% {10 : 3} 
+5
+  IN: <?1 --> bird>?  {15 : 4} 
+448
+ OUT: <(|,robin,(&,penguin,swan)) --> bird>. %1.00;0.68% {338 : 3;1;2} 
+ OUT: <penguin --> bird>. %0.80;0.95% {10 : 3} 
+291
  OUT: <swan --> bird>. %1.00;0.80% {10 : 2} 
-42
+46
  OUT: <robin --> bird>. %1.00;0.90% {0 : 1} 
 }}}
 When a question has more than one candidate answers, their order of evaluation 
-is highly context-sensative. The system reports the best it has found so far, 
+is highly context-sensative. The system reports the best answer it has found so far, 
 and therefore may report more than one answer to a given question. In this example,
 the system will settle down at the last answer even if it is given longer time.
 
