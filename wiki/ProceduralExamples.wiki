@@ -7,7 +7,7 @@
 
 The general ideas about procedure inference in NARS are explained in ProceduralInference; and the general guideline for how to use the examples is described in SingleStepTestingCases.
 
-This group of examples (http://code.google.com/p/open-nars/source/browse/trunk/nars-dist/Examples-1.3.3/Example-NAL8-...) show how NARS works step-by-step to achieve goals by executing operations. Since the current focus is the logic, all control-related issues will be omitted. Most of the input tasks use default truth value, except those where the results are sensitive to the accurate truth values.
+This group of examples (http://code.google.com/p/open-nars/source/browse/trunk/nars-dist/Examples-1.3.3 , file names Example-NAL8-...) show how NARS works step-by-step to achieve goals by executing operations. Since the current focus is the logic, all control-related issues will be omitted. Most of the input tasks use default truth value, except those where the results are sensitive to the accurate truth values.
 
 == Example-NAL8-1 ==
 
