@@ -67,13 +67,13 @@ Display:
 10
   IN: <Java --> coffee>?  {10 : 4} 
 1
- OUT: <Java --> coffee>. %0.50;0.95% {8 : 2;3} 
+ OUT: <Java --> coffee>. %0.50;0.95% {5 : 2;3} 
 9
   IN: <tea --> beverage>?  {20 : 5} 
 10
   IN: <coffee --> beverage>?  {30 : 6} 
 1
- OUT: <coffee --> beverage>. %1.00;0.90% {0 : 1}
+ OUT: <coffee --> beverage>. %1.00;0.90% {0 : 1} 
 }}}
 A contradiction makes the system unsure on directly related questions, but will
 not make the system to derive an arbitrary conclusion on other questions, as in 
@@ -84,17 +84,17 @@ propositional logic.
 Input:
 {{{
 *
-<Willy {-- swimmer>.
+<{Willy} --> swimmer>.
 <fish --> swimmer>.
-<Willy {-- fish>?
-10
-<Willy {-- whale>.
-<whale --] black>.
-<Willy {-] black>?
-20  
-<Willy {-] black>. %0%
-<Willy {-- fish>. %0%
-10
+<{Willy} --> fish>?
+20
+<{Willy} --> whale>.
+<whale --> [black]>. 
+<{Willy} --> [black]>? 
+31
+<{Willy} --> [black]>. %0% 
+<{Willy} --> fish>. %0% 
+2
 }}}
 Display:
 {{{
@@ -103,21 +103,21 @@ Display:
   IN: <{Willy} --> fish>?  {0 : 3} 
 2
  OUT: <{Willy} --> fish>. %1.00;0.45% {1 : 2;1} 
-8
-  IN: <{Willy} --> whale>. %1.00;0.90% {10 : 4} 
-  IN: <whale --> [black]>. %1.00;0.90% {10 : 5} 
-  IN: <{Willy} --> [black]>?  {10 : 6} 
-12
- OUT: <{Willy} --> [black]>. %1.00;0.81% {21 : 5;4} 
-8
-  IN: <{Willy} --> [black]>. %0.00;0.90% {30 : 7} 
-  IN: <{Willy} --> fish>. %0.00;0.90% {30 : 8} 
+18
+  IN: <{Willy} --> whale>. %1.00;0.90% {20 : 4} 
+  IN: <whale --> [black]>. %1.00;0.90% {20 : 5} 
+  IN: <{Willy} --> [black]>?  {20 : 6} 
+26
+ OUT: <{Willy} --> [black]>. %1.00;0.81% {45 : 5;4} 
+5
+  IN: <{Willy} --> [black]>. %0.00;0.90% {51 : 7} 
+  IN: <{Willy} --> fish>. %0.00;0.90% {51 : 8} 
 1
- OUT: <{Willy} --> [black]>. %0.00;0.90% {30 : 7} 
- OUT: <{Willy} --> fish>. %0.00;0.90% {30 : 8} 
+ OUT: <{Willy} --> [black]>. %0.00;0.90% {51 : 7} 
+ OUT: <{Willy} --> fish>. %0.00;0.90% {51 : 8} 
 1
- OUT: <{Willy} --> [black]>. %0.32;0.93% {31 : 5;7;4} 
- OUT: <{Willy} --> fish>. %0.08;0.91% {31 : 2;8;1} 
+ OUT: <{Willy} --> [black]>. %0.32;0.93% {52 : 5;7;4} 
+ OUT: <{Willy} --> fish>. %0.08;0.91% {52 : 2;8;1} 
 }}}
 Even when all the input judgments using the default confidence value, different rules
 produce conclusions with difference confidence, which have different sensitivity when
@@ -135,7 +135,7 @@ Input:
 <Tweety {-- bird>?
 10
 <Tweety {-- animal>?
-10
+1
 }}}
 Display:
 {{{
@@ -149,7 +149,7 @@ Display:
 9
   IN: <{Tweety} --> animal>?  {40 : 5} 
 1
- OUT: <{Tweety} --> animal>. %1.00;0.73% {19 : 2;3;1}
+ OUT: <{Tweety} --> animal>. %1.00;0.73% {20 : 3;1;2} 
 }}}
 The conclusion of a previous step may be used as a premise in a following step.
 In the example, though both answers are positive (with frequency 1), their
@@ -164,7 +164,7 @@ Input:
 <cat <-> tiger>. %0.9%
 <tiger <-> lion>. %0.9%
 <dog <-> lion>?
-40
+30
 }}}
 Display:
 {{{
@@ -172,8 +172,8 @@ Display:
   IN: <cat <-> tiger>. %0.90;0.90% {0 : 2} 
   IN: <lion <-> tiger>. %0.90;0.90% {0 : 3} 
   IN: <dog <-> lion>?  {0 : 4} 
-33
- OUT: <dog <-> lion>. %0.73;0.71% {32 : 2;3;1} 
+26
+ OUT: <dog <-> lion>. %0.73;0.71% {25 : 3;1;2} 
 }}}
 Given incomplete similarity, both frequency and the confidence decrease 
 alone an inference chain.
@@ -183,17 +183,17 @@ alone an inference chain.
 Input:
 {{{
 *
-<bird --> swimmer>?
+<bird --> swimmer>?  
 <swimmer --> bird>? 
 10
 <swan --> bird>.
 <swan --> swimmer>.
-10 
+10
 <gull --> bird>.
 <gull --> swimmer>.
-20
+40
 <crow --> bird>.
-(--, <crow --> swimmer>).
+(--,<crow --> swimmer>).
 50
 }}}
 Display:
@@ -203,20 +203,20 @@ Display:
 10
   IN: <swan --> bird>. %1.00;0.90% {10 : 3} 
   IN: <swan --> swimmer>. %1.00;0.90% {10 : 4} 
-6
- OUT: <swimmer --> bird>. %1.00;0.45% {15 : 4;3} 
- OUT: <bird --> swimmer>. %1.00;0.45% {15 : 4;3} 
-4
+8
+ OUT: <swimmer --> bird>. %1.00;0.45% {17 : 4;3} 
+ OUT: <bird --> swimmer>. %1.00;0.45% {17 : 4;3} 
+2
   IN: <gull --> bird>. %1.00;0.90% {20 : 5} 
   IN: <gull --> swimmer>. %1.00;0.90% {20 : 6} 
-12
- OUT: <swimmer --> bird>. %1.00;0.62% {31 : 4;6;3;5} 
- OUT: <bird --> swimmer>. %1.00;0.62% {31 : 4;6;3;5} 
-8
-  IN: <crow --> bird>. %1.00;0.90% {40 : 7} 
-  IN: (--,<crow --> swimmer>). %1.00;0.90% {40 : 8} 
-46
- OUT: <bird --> swimmer>. %0.67;0.71% {85 : 4;8;6;7;3;5} 
+34
+ OUT: <swimmer --> bird>. %1.00;0.62% {53 : 4;6;3;5} 
+ OUT: <bird --> swimmer>. %1.00;0.62% {53 : 4;6;3;5} 
+6
+  IN: <crow --> bird>. %1.00;0.90% {60 : 7} 
+  IN: (--,<crow --> swimmer>). %1.00;0.90% {60 : 8} 
+45
+ OUT: <bird --> swimmer>. %0.67;0.71% {104 : 4;8;6;7;3;5} 
 }}}
 (1) Question may still be remembered before available knowledge arrives, or after 
 answers are reported;
@@ -231,38 +231,44 @@ Input:
 *
 <swan --> bird>.
 <swan --> swimmer>.
+5
+<bird --> swimmer>?
+8
 <gull --> bird>.
 <gull --> swimmer>.
-<bird --> swimmer>?
-30
-<robin --> [feathered]>. 
+31
 <bird --> [feathered]>.
+<robin --> [feathered]>.
+20
 <robin --> bird>?
-30
+11
 <robin --> swimmer>?
-50
+200
 }}}
 Display:
 {{{
   IN: <swan --> bird>. %1.00;0.90% {0 : 1} 
   IN: <swan --> swimmer>. %1.00;0.90% {0 : 2} 
-  IN: <gull --> bird>. %1.00;0.90% {0 : 3} 
-  IN: <gull --> swimmer>. %1.00;0.90% {0 : 4} 
-  IN: <bird --> swimmer>?  {0 : 5} 
+5
+  IN: <bird --> swimmer>?  {5 : 3} 
+7
+ OUT: <bird --> swimmer>. %1.00;0.45% {5 : 2;1} 
+1
+  IN: <gull --> bird>. %1.00;0.90% {13 : 4} 
+  IN: <gull --> swimmer>. %1.00;0.90% {13 : 5} 
+11
+ OUT: <bird --> swimmer>. %1.00;0.62% {23 : 2;5;1;4} 
 20
- OUT: <bird --> swimmer>. %1.00;0.45% {19 : 4;3} 
-5
- OUT: <bird --> swimmer>. %1.00;0.62% {24 : 4;2;3;1} 
-5
-  IN: <robin --> [feathered]>. %1.00;0.90% {30 : 6} 
-  IN: <bird --> [feathered]>. %1.00;0.90% {30 : 7} 
-  IN: <robin --> bird>?  {30 : 8} 
+  IN: <bird --> [feathered]>. %1.00;0.90% {44 : 6} 
+  IN: <robin --> [feathered]>. %1.00;0.90% {44 : 7} 
+20
+  IN: <robin --> bird>?  {64 : 8} 
 10
- OUT: <robin --> bird>. %1.00;0.45% {39 : 7;6} 
-20
-  IN: <robin --> swimmer>?  {60 : 9} 
-46
- OUT: <robin --> swimmer>. %1.00;0.28% {105 : 4;7;2;6;3;1} 
+ OUT: <robin --> bird>. %1.00;0.45% {73 : 7;6} 
+1
+  IN: <robin --> swimmer>?  {75 : 9} 
+154
+ OUT: <robin --> swimmer>. %1.00;0.28% {228 : 2;7;5;6;1;4} 
 }}}
 The final conclusion is produced using induction, abduction, deduction, and revision.
 The selection of inference rule is data driven, not specified explicitly in the
@@ -273,46 +279,40 @@ input. There is no guarantee that all relevant evidence will be taken into consi
 Input:
 {{{
 *
-<light --> traffic_signal>. %0.1% 
-<[red] --> traffic_signal>. %0.1% 
-10
-<(&, [red], light) --> traffic_signal>?
-10 
-<light_1 {-- (&, [red], light)>.
-<light_1 {-- traffic_signal>.
-10
-<light_2 {-- (&, [red], light)>.
-<light_2 {-- traffic_signal>.
-10
+<(&,light,[red]) --> traffic_signal>? 
+5
+<light --> traffic_signal>. %0.1%  
+<[red] --> traffic_signal>. %0.1%
+196
+<{light_1} --> (&,light,[red])>. 
+<{light_1} --> traffic_signal>.
+50
+<{light_2} --> (&,light,[red])>. 
+<{light_2} --> traffic_signal>. 
+30
 }}}
 Display:
 {{{
-  IN: <light --> traffic_signal>. %0.10;0.90% {0 : 1} 
-  IN: <[red] --> traffic_signal>. %0.10;0.90% {0 : 2} 
-10
-  IN: <(&,[red],light) --> traffic_signal>?  {10 : 3} 
-8
- OUT: <(&,[red],light) --> traffic_signal>. %0.19;0.81% 
-
-{17 : 2;1} 
-2
-  IN: <{light_1} --> (&,[red],light)>. %1.00;0.90% {20 : 
-
-4} 
-  IN: <{light_1} --> traffic_signal>. %1.00;0.90% {20 : 5} 
-10
-  IN: <{light_2} --> (&,[red],light)>. %1.00;0.90% {30 : 
-
-6} 
-  IN: <{light_2} --> traffic_signal>. %1.00;0.90% {30 : 7} 
+  IN: <(&,light,[red]) --> traffic_signal>?  {0 : 1} 
+5
+  IN: <light --> traffic_signal>. %0.10;0.90% {5 : 2} 
+  IN: <[red] --> traffic_signal>. %0.10;0.90% {5 : 3} 
 4
- OUT: <(&,[red],light) --> traffic_signal>. %0.32;0.84% 
-
-{33 : 2;4;1;5} 
-3
- OUT: <(&,[red],light) --> traffic_signal>. %0.41;0.85% 
-
-{36 : 2;6;4;7;1;5} 
+ OUT: <(&,light,[red]) --> traffic_signal>. %0.10;0.08% {8 : 3} 
+7
+ OUT: <(&,light,[red]) --> traffic_signal>. %0.10;0.15% {15 : 3;2} 
+154
+ OUT: <(&,light,[red]) --> traffic_signal>. %0.19;0.81% {169 : 3;2} 
+31
+  IN: <{light_1} --> (&,light,[red])>. %1.00;0.90% {201 : 4} 
+  IN: <{light_1} --> traffic_signal>. %1.00;0.90% {201 : 5} 
+27
+ OUT: <(&,light,[red]) --> traffic_signal>. %0.32;0.84% {227 : 3;4;2;5} 
+23
+  IN: <{light_2} --> (&,light,[red])>. %1.00;0.90% {251 : 6} 
+  IN: <{light_2} --> traffic_signal>. %1.00;0.90% {251 : 7} 
+30
+ OUT: <(&,light,[red]) --> traffic_signal>. %0.41;0.85% {280 : 3;6;4;7;2;5} 
 }}}
 Initially, the meaning of compound term "(&,[red],light)" is determined by the
 meaning of its components "red" and "light", but it will no longer be the case
@@ -324,36 +324,36 @@ components.
 Input:
 {{{
 *
-<John {-- boy>.
-<John {-- (/, taller_than, {Tom}, _)>.
-10
-<Tom {-- (/, taller_than, _, boy)>?
-10
-<David {-- boy>.
-(--, <David {-- (/, taller_than, {Tom}, _)>).
-200
-<Karl {-- boy>.
-<Karl {-- (/, taller_than, {Tom}, _)>. 
-100
+<{John} --> boy>.
+<{John} --> (/,taller_than,{Tom},_)>.
+5
+<{Tom} --> (/,taller_than,_,boy)>? 
+251
+<{David} --> boy>. 
+(--,<{David} --> (/,taller_than,{Tom},_)>).
+135
+<{Karl} --> boy>. 
+<{Karl} --> (/,taller_than,{Tom},_)>.
+141
 }}}
 Display:
 {{{
   IN: <{John} --> boy>. %1.00;0.90% {0 : 1} 
   IN: <{John} --> (/,taller_than,{Tom},_)>. %1.00;0.90% {0 : 2} 
-10
-  IN: <{Tom} --> (/,taller_than,_,boy)>?  {10 : 3} 
-2
- OUT: <{Tom} --> (/,taller_than,_,boy)>. %1.00;0.45% {11 : 2;1} 
-8
-  IN: <{David} --> boy>. %1.00;0.90% {20 : 4} 
-  IN: (--,<{David} --> (/,taller_than,{Tom},_)>). %1.00;0.90% {20 : 5} 
-169
- OUT: <{Tom} --> (/,taller_than,_,boy)>. %0.50;0.62% {188 : 2;5;1;4} 
-31
-  IN: <{Karl} --> boy>. %1.00;0.90% {220 : 6} 
-  IN: <{Karl} --> (/,taller_than,{Tom},_)>. %1.00;0.90% {220 : 7} 
-62
- OUT: <{Tom} --> (/,taller_than,_,boy)>. %0.67;0.71% {281 : 2;7;5;6;1;4}  
+5
+  IN: <{Tom} --> (/,taller_than,_,boy)>?  {5 : 3} 
+246
+ OUT: <{Tom} --> (/,taller_than,_,boy)>. %1.00;0.45% {250 : 2;1} 
+5
+  IN: <{David} --> boy>. %1.00;0.90% {256 : 4} 
+  IN: (--,<{David} --> (/,taller_than,{Tom},_)>). %1.00;0.90% {256 : 5} 
+113
+ OUT: <{Tom} --> (/,taller_than,_,boy)>. %0.50;0.62% {368 : 2;5;1;4} 
+22
+  IN: <{Karl} --> boy>. %1.00;0.90% {391 : 6} 
+  IN: <{Karl} --> (/,taller_than,{Tom},_)>. %1.00;0.90% {391 : 7} 
+141
+ OUT: <{Tom} --> (/,taller_than,_,boy)>. %0.67;0.71% {531 : 2;7;5;6;1;4} 
 }}}
 John's degree of membership to fuzzy concept "tall boy" depends on the extent 
 to which he is taller than the other boys, determined according to available
