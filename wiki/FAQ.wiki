@@ -4,7 +4,7 @@
 
  * How relevant is Pei Wang’s thesis to today’s theory? As of 2013, are there some revisions of ideas, or ”just” deepening of analysis?
 
-Most of the basic ideas in Pei Wang’s thesis (1995) and first book (2006) remain in today's NARS, though some details (grammar rules, inference rules, implementation, etc.) have be revised. The most comprehensive and up-to-date description of the Non-Axiomatic Logic (i.e., the grammar rules and inference rules implemented in NARS) will be Pei Wang's second book (in press, to appear in May 2003).
+Most of the basic ideas in Pei Wang’s thesis (1995) and first book (2006) remain in today's NARS, though some details (grammar rules, inference rules, implementation, etc.) have be revised. The most comprehensive and up-to-date description of the Non-Axiomatic Logic (i.e., the grammar rules and inference rules implemented in NARS) is Pei Wang's second book (2003).
 
  * What is the difference between NARS reasoning and OpenCog’s PLN (Probabilistic Logic Network)?
 
@@ -47,4 +47,6 @@ NO
  * Is there some special syntax for literals ( numbers, strings, ...) ?
 NO
  * Does NARS index strings and identifiers, like Prolog implementations do ?
+Yes, in the sense that in NARS all sentences involving a term are referred in a concept named by the term.
  * Are there some stress tests for NARS?
+NO
