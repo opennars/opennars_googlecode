@@ -1,7 +1,7 @@
 #summary Inference Examples
 #labels Phase-QA
 
-This file contains a group of multi-step inference examples, which show the expressive and inferential capability of NARS, as implemented in Open-NARS version 1.5.5. The basic format and usage is the same as explained in [SingleStepExamples]. At the current stage, Open-NARS is not ready to handle complicated inference processes consisting many steps.
+This file contains a group of multi-step inference examples, which show the expressive and inferential capability of NARS, as implemented in Open-NARS version 1.5.5. The basic format and usage is the same as explained in SingleStepTestingCases. At the current stage, Open-NARS is not ready to handle complicated inference processes consisting many steps.
 
 In the following, each example starts at a line with a "{{{*}}}" to empty the memory of the system. 
 To run an example, copy/paste the input lines into the input window of the NARS. 
