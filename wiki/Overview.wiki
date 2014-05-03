@@ -5,10 +5,10 @@ Open-NARS is the open-source version of NARS, a general-purpose AI system, desig
 
 NARS works by processing tasks imposed by its environment (human users or other computer systems). Tasks can arrive at any time, and there is no restriction on their contents, as far as they can be expressed in Narsese, the I/O language of NARS (see InputOutputFormat for the Grammar of Narsese).
 
-There are three types of tasks:
+There are several types of tasks:
   * Judgment. To process it means to accept it as the system's belief, as well as to derive new beliefs and to revise old beliefs accordingly.
   * Question.  To process it means to find the best answer to it according to current beliefs.
-  * Goal. To process it means to carry out some system operations to realize it.
+  * Goal. To process it means to carry out some system operations to realize it. _This type of task is not implemented in the current version, 1.5.5, though it was tested before in 1.3.3 and 1.4.0._
 
 As a reasoning system, the architecture of NARS consists of a memory, an inference engine, and a control mechanism. 
 
@@ -27,16 +27,15 @@ All the _selections_ in steps 1 and 2 are _probabilistic_, in the sense that all
 
 The architecture and working cycle are illustrated in http://open-nars.googlecode.com/files/architecture.pdf
 
-At the current time, the most comprehensive description of NARS are the books  [http://www.springer.com/west/home/computer/artificial?SGWID=4-147-22-173659733-0 Rigid Flexibility: The Logic of Intelligence] and [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning]. Various aspects of the system are introduced and discussed in many papers, most of which are available online.
+At the current time, the most comprehensive description of NARS are the books [http://www.springer.com/west/home/computer/artificial?SGWID=4-147-22-173659733-0 Rigid Flexibility: The Logic of Intelligence] and [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning]. Various aspects of the system are introduced and discussed in many papers, most of which are available  [http://www.cis.temple.edu/~pwang/papers.html here].
 
-Beginners can start at the following on-line materials:
+Beginners can start at the following online materials:
   *. The basic ideas behind the project: http://sites.google.com/site/narswang/publications/wang.logic_intelligence.pdf
   *. The high-level engineering plan: http://sites.google.com/site/narswang/publications/wang.roadmap.pdf
   *. The core logic: http://sites.google.com/site/narswang/publications/wang.inheritance_nal.pdf
   *. The semantics: http://sites.google.com/site/narswang/publications/wang.semantics.pdf
   *. The memory and control: http://sites.google.com/site/narswang/publications/wang.computation.pdf
 
-Additional materials:
-  * The Java application/applet demonstration at http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars-dist
-  * The javadoc files at http://www.cis.temple.edu/~pwang/Implementation/nars-dist/javadoc/index.html
-  * The example files at http://code.google.com/p/open-nars/source/browse/#svn/trunk/nars-dist/Examples
+To test the current implementation:
+  * The demonstration programs under Downloads.
+  * The working examples explained in SingleStepTestingCases and MultiStepExamples.
