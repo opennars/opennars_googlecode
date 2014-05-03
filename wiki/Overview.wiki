@@ -10,7 +10,7 @@ There are several types of tasks:
   * Question.  To process it means to find the best answer to it according to current beliefs.
   * Goal. To process it means to carry out some system operations to realize it. _This type of task is not implemented in the current version, 1.5.5, though it was tested before in 1.3.3 and 1.4.0._
 
-As a reasoning system, the [http://open-nars.googlecode.com/files/architecture.pdf architecture of NARS] consists of a memory, an inference engine, and a control mechanism. 
+As a reasoning system, the [http://www.cis.temple.edu/~pwang/Implementation/NARS/architecture.pdf architecture of NARS] consists of a memory, an inference engine, and a control mechanism. 
 
 The memory contains a collection of concepts, a list of operators, and a buffer for new tasks. Each concept is identified by a term, and contains tasks and beliefs directly on the term, as well as links to related tasks and terms.
 
