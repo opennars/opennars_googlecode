@@ -27,7 +27,7 @@ To realize dynamic resource allocation, NARS self-organizes its memory using pro
 
 Since NAL is a term logic, and its inference rules typically require shared term in premises, tasks and beliefs can be indexed and clustered by their subject and predicate. In NARS, each concept is named by a term, and refers to the tasks and beliefs with the term in it. A concept becomes an independent unit of storage and processing. Roughly speaking, the system's memory contains a bag of concepts; a concept contains a bag of tasks and a bag of beliefs.
 
-A summary for the architecture and working cycle is [http://open-nars.googlecode.com/files/architecture.pdf here]. NARS repeats the following working cycle:
+A summary for the architecture and working cycle is [https://sites.google.com/site/narswang/home/nars-introduction/architecture.jpg here]. NARS repeats the following working cycle:
   # Select a concept from the memory
   # Select a task from the concept
   # Select a belief from the concept
@@ -66,4 +66,3 @@ In the future versions, the inference control of NARS will be improved in the fo
   * Proper tutoring. As mentioned above, control knowledge usually cannot be directly loaded into the system, but has to grow by the system itself. Similar to how a human is trained in a domain, not only the content of the input knowledge matters, but also the order and timing of the input, as well as the existence of guiding questions and driving goals.
 
 On the other hand, if the objective of a project is to build a NARS-based application for a specific domain, the above strategy is probably not the best approach. It will be much more efficient to control the inference process using problem-specific algorithms.
-
