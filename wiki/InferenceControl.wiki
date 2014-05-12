@@ -1,4 +1,5 @@
 #summary The control aspect of NARS.
+#labels Phase-Design
 
 = Inference Control in NARS =
 
@@ -52,4 +53,4 @@ In the long run, the inference activities of the system will be controlled by bo
 
 == The Proper Usage of NARS ==
 
-The current implementation mostly service as a proof of concept 
+The current implementation mostly service as a proof of concept and a testing platform of Narsese and NAL.
