@@ -32,13 +32,13 @@ http://docs.oracle.com/javase/7/docs/api/javax/sql/package-summary.html
 
 JDBC is a Java standard for connecting to databases - of all kinds, not just SQL.  For example, there exist JDBC interfaces to other types of databases (NoSQL) and also data sources like CSV (comma separated value) and the file system.  So if NARS can completely access the JDBC interface (query and results), and possibly create a "connect string" (usually including host, username, and password) for dynamically creating a connection, it will have much data available.
 
-* MySQL http://dev.mysql.com/downloads/connector/j/
-* PostgreSQL http://jdbc.postgresql.org/
-* CSV http://csvjdbc.sourceforge.net/
-* MongoDB - http://www.unityjdbc.com/mongojdbc/mongo_jdbc.php 
-* File System https://code.google.com/p/jdbcfolder/
-* Other - http://www.databasedrivers.com/jdbc/ 
-* Other - http://www.oracle.com/technetwork/java/index-136695.html#
+ * MySQL http://dev.mysql.com/downloads/connector/j/
+ * PostgreSQL http://jdbc.postgresql.org/
+ * CSV http://csvjdbc.sourceforge.net/
+ * MongoDB - http://www.unityjdbc.com/mongojdbc/mongo_jdbc.php 
+ * File System https://code.google.com/p/jdbcfolder/
+ * Other - http://www.databasedrivers.com/jdbc/ 
+ * Other - http://www.oracle.com/technetwork/java/index-136695.html#
 
 A database's schema which should also be accessible via JDBC will also inform NARS.
 
