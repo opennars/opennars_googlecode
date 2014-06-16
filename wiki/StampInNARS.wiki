@@ -36,8 +36,8 @@ Though this design works fine for most cases, it has its limitations:
 While the first two probably have to be tolerated as inevitable consequence of insufficient knowledge and resources, the last case demands special treatments.
 
 Furthermore, two issues have been identified recently:
-  # Recursive Implication or Equivalence statements with independent variables (reported by Patrick Hammer): by nature, such statement should be used repeatedly in the same inference process, but the stamp check rule does not allow it.
-  # Product formed by the same inheritance statement (reported by Acilio Mendes): In the following example, <(*,a,a) --> (*,b,b)> cannot be derived from <a --> b>. 
+  # Recursive Implication or Equivalence statements with independent variables (reported by Patrick Hammer): by nature, such a statement may be used repeatedly in the same inference process, but the stamp check does not allow it.
+  # Product formed by the same inheritance statement (reported by Acilio Mendes): In the following example, <(*,a,a) --> (*,b,b)> cannot be derived from <a --> b>, because the two intermediate conclusions have the same stamp. 
 {{{
 *****RESET*****
   IN: <a --> b>. %1.00;0.90% {0 : 1}
@@ -49,7 +49,7 @@ Furthermore, two issues have been identified recently:
 42
  OUT: <(*,a,b) --> (*,b,b)>. %1.00;0.81% {133 : 1}
 }}}
-One possible solution is to explicitly identify such cases in the responsible inference rules, then relax the stamp checking rule for them. 
+One possible solution is to explicitly identify such cases in the responsible inference rules, then relax the stamp checking for them. 
 
 = Creation time =
 
