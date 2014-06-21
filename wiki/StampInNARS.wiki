@@ -20,6 +20,8 @@ For an input sentence, its evidential base contains only the serial number assig
 
 The derivation chain keeps track of all premises and conclusions in their specific rule-application-steps which leaded to the derivation of the new statement.
 
+= Purpose =
+
 Before the revision rule is applied to a pair of candidate premises, the evidential bases of the two are compared, and revision happens only when the two lists are _disjoint_, i.e., have no common element. Before a non-revision rule is applied, to a pair of candidate premises, to derive a new conclusion c, the derivation chain of both premises is checked if it contains c, only if they don't the rule-application will be allowed. This policy is established to prevent the following results:
   * Duplicated evidence. Without restriction, the revision rule could use the same evidence repeatedly to increase the confidence of a conclusion. However, if the same sentence happens multiple times in experience, each instance will get different serial numbers, so can be used by the revision rule to derive more confident conclusions. What is invalidated is multiple usage of the evidental source of a sentence in order to strenghten a statement which depends on the sentence the source claimed with revision.
   * Circular inference. Given the reversibility of the syllogistic rules in NAL, circular inference could happen if no restriction were made when premises are selected for inference. Whenever a new derived conclusion, depends on itself in order to derive itself, this would be faulty circular reasoning which needs to be avoided.
