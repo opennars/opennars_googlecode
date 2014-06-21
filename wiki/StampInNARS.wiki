@@ -4,7 +4,7 @@
 
 A Stamp (nars.entity.Stamp) serves several related functions in NARS. It is currently a component of a Sentence (nars.entity.Stamp), though conceptually it can also be considered as a component of TruthValue (nars.entity.TruthValue), since it contains information about the validity of a truth-value.
 
-A Stamp contains an _evidential base_, a _creation time_, and an optional _occurrence time_.
+A Stamp contains an _evidential base_, a _derivation chain_, a _creation time_, and an optional _occurrence time_.
 
 = Evidential base =
 
@@ -16,40 +16,21 @@ The _evidential base_ of a sentence is a list of serial numbers defined above.
 
 For an input sentence, its evidential base contains only the serial number assigned to it when it enters the system.
 
-Before an inference rule is applied to a pair of candidate premises, the evidential bases of the two are compared, and inference happens only when the two lists are _disjoint_, i.e., have no common element. This policy is established to prevent the following results:
-  * Duplicated evidence. Without restriction, the revision rule could use the same evidence repeatedly to increase the confidence of a conclusion. However, if the same sentence happens multiple times in experience, each instance will get different serial numbers, so can be used by the revision rule to derive more confident conclusions. What is invalidated is the same sentence to be used multiple times in the derivation of the same conclusion.
-  * Circular inference. Given the reversibility of the syllogistic rules in NAL, circular inference could happen if no restriction were made when premises are selected for inference.
+= Derivation chain =
+
+The derivation chain keeps track of all premises and conclusions in their specific rule-application-steps which leaded to the derivation of the new statement.
+
+Before the revision rule is applied to a pair of candidate premises, the evidential bases of the two are compared, and revision happens only when the two lists are _disjoint_, i.e., have no common element. Before a non-revision rule is applied, to a pair of candidate premises, to derive a new conclusion c, the derivation chain of both premises is checked if it contains c, only if they don't the rule-application will be allowed. This policy is established to prevent the following results:
+  * Duplicated evidence. Without restriction, the revision rule could use the same evidence repeatedly to increase the confidence of a conclusion. However, if the same sentence happens multiple times in experience, each instance will get different serial numbers, so can be used by the revision rule to derive more confident conclusions. What is invalidated is multiple usage of the evidental source of a sentence in order to strenghten a statement which depends on the sentence the source claimed with revision.
+  * Circular inference. Given the reversibility of the syllogistic rules in NAL, circular inference could happen if no restriction were made when premises are selected for inference. Whenever a new derived conclusion, depends on itself in order to derive itself, this would be faulty circular reasoning which needs to be avoided.
   * Correlated truth-values. Many truth-value functions in NAL are designed under the assumption that the truth-values of the two premises are independent in the sense that known one does not determine, or even bound, the other. When the two evidential bases are disjoint, the independence assumption holds.
 
-The disjoint requirement may look too restrictive, and it is not too hard to find examples where the two premises have overlapping evidential bases, while certain conclusions still look reasonable. However, instead of using a more complicated mechanism, they can be handled in one of the two ways in the current design:
-  # Different order of premise combination. For example, if P, Q, and R are input sentences with different evidential bases, then the conclusion of P-Q and the conclusion of Q-R cannot be used together for another inference, Because Q has been used in both premises. However, usually the same conclusion can be reached by the conclusion of P-R and Q, so no result will be missed.
-  # Multiple versions of the same conclusion. When the system's experience become complicated enough, important conclusions are usually derived in multiple ways, with different evidential bases. The current design allow them to co-exist (this is one reason for the "beliefs" in a Concept to be an ArrayList of Sentence, rather than a single Sentence), so when one of them cannot be used due to evidential-base conflict, another one may be used.
+The evidential base of the conclusion of two sentences (a belief and the task sentence) is conceptually the union (or concatenation) of their evidental bases, while the deviation chain will also add the two sentences itself. However, it is not directly implemented in this way, otherwise the time and space needed for evidential bases and derivation chains would grow exponentially to the length of the inference chain. Under the assumption of insufficient resources, the maximum size of an evidential base must be a constant (as a system parameter, MAXIMUM_EVIDENTAL_BASE_LENGTH, MAXIMUM_DERIVATION_CHAIN_LENGTH). The evidential bases of the premises are interwoven, then cut at the maximum length.
 
-When the evidential bases of two sentences are disjoint, the evidential base of their conclusion is conceptually the union (or concatenation) of them. However, it is not directly implemented in this way, otherwise the time and space needed for evidential bases would grow exponentially to the length of the inference chain. Under the assumption of insufficient resources, the maximum size of an evidential base must be a constant (as a system parameter, MAXIMUM_STAMP_LENGTH = 8). The evidential bases of the premises are interwoven, then cut at the maximum length.
+In this way, the order of elements in the list matters, and the two premises are treated equally. It will not work as well if the list is turned into a set, then the union of two sets are reduced to the maximum size, because in that way the serial numbers in the conclusion may only come from one parent.
 
-In this way, the order of elements in the list matters, and the two premises are treated equally. It will not work as well if the list is turned into a set, then the union of two sets are reduced to the maximum size, because in that way the serial numbers in the conclusion may only come from one parent, while in the current design two disjoint lists cannot have a common ancestor up to 3 generations. 
-
-Though this design works fine for most cases, it has its limitations:
+Though this design works fine for most cases, it has one limitation:
   * It cannot detect common ancestor beyond the maximum length allows.
-  * When two evidential bases overlap, it simply gives up the combination, rather than handles it in a more complicated manner.
-  * It cannot be directly applied to theorem proving, where it is valid for one premise to be used more than once in the proving of a theorem.
-While the first two probably have to be tolerated as inevitable consequence of insufficient knowledge and resources, the last case demands special treatments.
-
-Furthermore, two issues have been identified recently:
-  # Recursive Implication or Equivalence statements with independent variables (reported by Patrick Hammer): by nature, such a statement may be used repeatedly in the same inference process, but the stamp check does not allow it.
-  # Product formed by the same inheritance statement (reported by Acilio Mendes): In the following example, <(*,a,a) --> (*,b,b)> cannot be derived from <a --> b>, because the two intermediate conclusions have the same stamp. 
-{{{
-*****RESET*****
-  IN: <a --> b>. %1.00;0.90% {0 : 1}
-  IN: <(*,a,a) --> (*,a,b)>?  {0 : 2}
-  IN: <(*,a,b) --> (*,b,b)>?  {0 : 3}
-  IN: <(*,a,a) --> (*,b,b)>?  {0 : 4}
-92
- OUT: <(*,a,a) --> (*,a,b)>. %1.00;0.81% {91 : 1}
-42
- OUT: <(*,a,b) --> (*,b,b)>. %1.00;0.81% {133 : 1}
-}}}
-One possible solution is to explicitly identify such cases in the responsible inference rules, then relax the stamp checking for them. 
 
 = Creation time =
 
