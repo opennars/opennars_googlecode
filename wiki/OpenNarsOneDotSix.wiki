@@ -15,17 +15,20 @@ In package nars.language, the following three classes representing compound term
 
 In class nars.entity.Stamp, an occurrenceTime records the (observed, remembered or estimated) occurrence time of the event, together with its creation time. Different from the description in the book, the "tense" of a sentence is not stored with a sentence, but is only used at the interface. When a sentence is an input or output, the internal occurrenceTime will be translated to/from the external sense that is explicitly expressed in Narsese, as listed in [InputOutputFormat].
 
-The class nars.io.StringParser will be modified to support the temporal version of Narsese.
+The class nars.io.StringParser will be modified to support this temporal version of Narsese, as specified in the Grammar Rules of NAL-7 (Table 11.1) in the book, as well as implemented as [InputOutputFormat].
 
-Temporal inference
+As explained in the publications, temporal inference in NARS is designed by processing the logical and the temporal aspects separately. Therefore all the existing rules will be kept, except that the conclusion may contain a temporal term (with temporal order among components) and a temporal truth-value (with an occurrence time).
 
-
-
+As specified in the book, the temporal rules are designed in the following way:
+  # Each inference rule of IL-6 is extended by using the temporal copulas and connectors to replace the atemporal ones in the premises, then identifying the conclusions where both the logical and the temporal relations can be derived, so as to establish valid inference rules for IL-7.
+  # Each inference rule of IL-7 is extended into a strong inference rule in NAL-7, using the same truth-value function as the corresponding rule in NAL-6.
+  # Each strong inference rule of NAL-7 suggests one or more weak inference rules according to the reversibility relationship among the types of inference.
 
 
 = Procedural inference (NAL-8) =
 
 Beside [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning], procedural reasoning in NARS is also discussed in [http://www.degruyter.com/view/j/jagi.2012.3.issue-3/v10229-011-0021-5/v10229-011-0021-5.xml?format=INT Solving a Problem With or Without a Program]. A previous implementation exists as version 1.3.3, with [https://code.google.com/p/open-nars/source/browse/trunk/nars-dist/Examples-1.3.3/ working examples in several files], as well as descriptions in [ProceduralInference], [ProceduralExamples], and [ProceduralLearning].
+
 
 
 
