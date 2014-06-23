@@ -1,0 +1,28 @@
+#summary New functions of Open-NARS version 1.6.x.
+
+= Introduction =
+
+Open-NARS 1.6.x is different from 1.5.x in the following major aspects:
+  # In logic, it implements NAL-7, NAL-8, and NAL-9, and therefore completely implements NAL, as specified in [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning]. It is an attempt to re-do what [OpenNarsOneDotFour] planned to achieve.
+  # In control, it refines the automatic resources allocation that has been there from the beginning, and combines it with the voluntary control introduced in NAL-9.
+  # In software structure, it absorbs the ideas from previous discussions (such as in [AbstractDesignProposal], [Modules], [GUIRequest]) and implementations (the version built by Joe Geldart), as well as the recent discussions.
+
+= Temporal inference (NAL-7) =
+
+Beside [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning], temporal reasoning in NARS is also discussed in [http://www.cis.temple.edu/~pwang/Publication/temporal-causal.pdf Issues in Temporal and Causal Inference].
+
+= Procedural inference (NAL-8) =
+
+Beside [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning], procedural reasoning in NARS is also discussed in [http://www.degruyter.com/view/j/jagi.2012.3.issue-3/v10229-011-0021-5/v10229-011-0021-5.xml?format=INT Solving a Problem With or Without a Program].
+
+= Introspective inference (NAL-9) =
+
+
+
+= Memory and control =
+
+
+
+= Software structure =
+
+
