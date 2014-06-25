@@ -17,13 +17,25 @@ In class nars.entity.Stamp, an occurrenceTime records the (observed, remembered 
 
 The class nars.io.StringParser will be modified to support this temporal version of Narsese, as specified in the Grammar Rules of NAL-7 (Table 11.1) in the book, as well as implemented as [InputOutputFormat].
 
-As explained in the publications, temporal inference in NARS is designed by processing the logical and the temporal aspects separately. Therefore all the existing rules will be kept, except that the conclusion may contain a temporal term (with temporal order among components) and a temporal truth-value (with an occurrence time).
+As explained in the publications, temporal inference in NARS is designed by processing the logical and the temporal aspects separately. Therefore all the existing rules will be kept, except that the conclusion may contain a temporal term (with temporal order among components), a time interval(similar to the numbers in experience), and/or a temporal truth-value (with an occurrence time).
 
 As specified in the book, the temporal rules are designed in the following way:
   # Each inference rule of IL-6 is extended by using the temporal copulas and connectors to replace the atemporal ones in the premises, then identifying the conclusions where both the logical and the temporal relations can be derived, so as to establish valid inference rules for IL-7.
   # Each inference rule of IL-7 is extended into a strong inference rule in NAL-7, using the same truth-value function as the corresponding rule in NAL-6.
   # Each strong inference rule of NAL-7 suggests one or more weak inference rules according to the reversibility relationship among the types of inference.
 
+Therefore, the temporal term in the conclusion of a strong rule is produced in the following way:
+  # The events in each premise are ordered temporally.
+  # The two event sequences are merged, if possible.
+  # The temporal order of events in the conclusion is marked accordingly.
+
+For a weak rule, the temporal order is the one in the corresponding strong rule.  If the temporal orders among the premises are incompatible or insufficient to decide the order in the conclusion, no derivation will happen. 
+
+Different from the experience, the time interval between terms are represented as a special type of term, named Interval. This term represents the system's "sense of time", which is approximate, as the rounded logarithm function of the number of clock cycles in the interval. That is, Math.round(Math.log(n)). This approximation is used, because otherwise similar intervals will be judged as different, so the corresponding evidence will not be accumulated by the revision rule. Whenever accurate time measurement is needed, the system should not depend on this approximate measurement, but uses an external reference (e.g., clock). [The logarithm function may be replaced by a power function, such as Math.sqrt(n). This can be decided later.]
+
+Ideally, temporal inference is valid only when the premises are about the same moment, i.e., have the same occurrenceTime or no occurrenceTime (i.e., eternal). However, since occurrenceTime is approximate, a conclusion about one moment (that of the belief) can be projected to another (that of the task), at the cost of a confidence discount. Let _t0_ be the current time, and _t1_ and _t2_ are the occurrenceTime of the premises, then the discount factor is _d_ = 1 - |_t1-t2_| / (|_t0-t1_| + |_t0-t2_|), which is in [0,1]. This factor _d_ is multiplied to the confidence of a promise as a "temporal discount" to project it to the occurrence of the other promise, so as to derive a conclusion about that moment. In this way, if there are conflicting conclusions, the temporally closer one will be preferred by the choice rule.
+
+The conclusion does not always has the same occurrenceTime as a premise. For instance, if _A_ and _A /=> B_ has occurrence time _t_, then the conclusion _B_ should have occurrence time _t+1_. If _A_ and _(&&,A,C) /=> B_ has occurrence time _t_ and _C_ is an Interval term with argument _n_, _B_ should have occurrence time _t_+1+Math.exp(_n_).
 
 = Procedural inference (NAL-8) =
 
