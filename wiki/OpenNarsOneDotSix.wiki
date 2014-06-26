@@ -77,12 +77,15 @@ Other monitoring operations include:
 The following control operations will be implemented:
   * believe: create a judgment with a given statement
   * want: create a goal with a given statement
-  * wonder: create a a question or query with a given statement 
+  * wonder: create a question with a given statement 
+  * evaluate: create a query with a given statement 
   * doubt: decrease the confidence of a belief
   * hesitate: decrease the confidence of a goal
   * remind: activate a concept
   * consider: do a step of inference on a concept
   * infer: carry out an inference step with the given statements as premises
+
+The name of a mental operator only roughly corresponds to its meaning. The exact meaning of an operator is revealed by its preconditions and consequences.
 
 There are some other mental operations under consideration, but will not be attempted in this version.
 
@@ -102,3 +105,5 @@ The control mechanism will be revised to allow the mental operations to change t
 Since the main purpose of this version is still to test the conceptual design of NARS, especially Narsese and NAL, the software development should focus in the functionality of the design, rather than on the quality of code as asked for practical applications. Changes purely for software design reasons will be postponed to future versions.
 
 One task is to analyze and compare the versions of open-nars, and merge them into a single trunk at the project website, with optional parts that are clearly documented.
+
+One optional task is to explore the structure for NARS to call other systems, as well as for other systems to call NARS for reasoning service.
