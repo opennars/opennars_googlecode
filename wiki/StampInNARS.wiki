@@ -52,4 +52,4 @@ Since the system cannot have information about every moment on every sentence, t
 
 For an input sentence, its occurrence time is determined by its tense: no tense means "eternal", present sense means the current time (as indicated by the internal clock), and past/future tense means the current minus/plus a constant (a parameter).
 
-For a derived sentence, its occurrence time will be that of its parent task, and its parent belief's truth-value will be projected or eternalized, if necessary.  
+For a derived sentence, its occurrence time will be that of its parent task, and its parent belief's truth-value will be projected or eternalized, if necessary.  Some inference rules will be exceptions of this default policy. For example, the temporal detachment rule _{a, a =/> b} |- b_ will set the occurrence time of _b_ as after _a_.
