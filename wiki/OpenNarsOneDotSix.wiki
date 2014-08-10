@@ -11,34 +11,49 @@ Open-NARS 1.6.x is different from 1.5.x in the following major aspects:
 
 = Temporal inference (NAL-7) =
 
+===Representation of temporal information===
+
 Beside [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning], temporal reasoning in NARS is also discussed in [http://www.cis.temple.edu/~pwang/Publication/temporal-causal.pdf Issues in Temporal and Causal Inference]. A previous implementation exists as version 1.3.3, with [https://code.google.com/p/open-nars/source/browse/trunk/nars-dist/Examples-1.3.3/Example-NAL7-abridged.txt working examples].
 
-In package nars.language, the following three classes representing compound terms will be given an optional temporal order among its components: _Implication_, _Equivalence_, and _Conjunction_. This order can be represented either as subclasses, or as an attribute that takes three possible values: -1 for backward, +1 for forward, and 0 for concurrent. The plain text forms of the term connectors are listed in [InputOutputFormat].
+Beside using terms whose meanings are explicitly temporal, Narsese is extended to allow temporal order among components in certain CompoundTerm, as well as an "occurrence time stamp" on a truth-value.
 
-In class nars.entity.Stamp, an occurrenceTime records the (observed, remembered or estimated) occurrence time of the event, together with its creation time. Different from the description in the book, the "tense" of a sentence is not stored with a sentence, but is only used at the interface. When a sentence is an input or output, the internal occurrenceTime will be translated to/from the external sense that is explicitly expressed in Narsese, as listed in [InputOutputFormat].
+In package nars.language, the following three classes representing compound terms will be given an optional temporal order among its components: _Implication_, _Equivalence_, and _Conjunction_. This order can be represented either as subclasses, or as an attribute that takes three possible values: -1 for backward, +1 for forward, 0 for concurrent, and 2 for "no temporal order". These numbers are selected to make the later processing easy and natural, so should not be changed unless after careful consideration. The plain text forms of the term connectors are listed in [InputOutputFormat].
 
-The class nars.io.StringParser will be modified to support this temporal version of Narsese, as specified in the Grammar Rules of NAL-7 (Table 11.1) in the book, as well as implemented as [InputOutputFormat].
+In class nars.entity.Stamp, an occurrenceTime records the (observed, remembered, or estimated) occurrence time of the event, together with its creation time. Different from the description in the book, the "tense" of a sentence is not stored with a sentence, but is only used at the interface. When a sentence is an input or output, the internal occurrenceTime will be translated to/from the external sense that is explicitly expressed in Narsese, as listed in [InputOutputFormat].
 
-As explained in the publications, temporal inference in NARS is designed by processing the logical and the temporal aspects separately. Therefore all the existing rules will be kept, except that the conclusion may contain a temporal term (with temporal order among components), a time interval(similar to the numbers in experience), and/or a temporal truth-value (with an occurrence time).
+A system parameter DURATION is used to define the "present tense" as for events with an occurrenceTime in the [-DURATION, DURATION] neighborhood of the current time, as given by the system's internal clock. It's current default value is 5. The previous idea is to take 1 as its value, so "presently" means the current working cycle, but it seems too restrictive.  For an input judgment, if its tense is "present", its occurrenceTime will be set to the current time on the internal clock, "past" is mapped to "current time - DURATION", and "future" to "current time + DURATION". If no tense is used, the occurrenceTime takes a special value ETERNAL. The reverse mapping is used for output.
 
-As specified in the book, the temporal rules are designed in the following way:
-  # Each inference rule of IL-6 is extended by using the temporal copulas and connectors to replace the atemporal ones in the premises, then identifying the conclusions where both the logical and the temporal relations can be derived, so as to establish valid inference rules for IL-7.
-  # Each inference rule of IL-7 is extended into a strong inference rule in NAL-7, using the same truth-value function as the corresponding rule in NAL-6.
-  # Each strong inference rule of NAL-7 suggests one or more weak inference rules according to the reversibility relationship among the types of inference.
+===Inference on temporal order===
 
-Therefore, the temporal term in the conclusion of a strong rule is produced in the following way:
-  # The events in each premise are ordered temporally.
-  # The two event sequences are merged, if possible.
-  # The temporal order of events in the conclusion is marked accordingly.
+As explained in the publications, temporal inference in NARS is designed by processing the logical and the temporal aspects separately. Therefore all the existing rules will be kept, except that the conclusion may contain a temporal term (with temporal order among components), a time interval (similar to the numbers in experience), and/or a temporal truth-value (with an occurrence time).
 
-For a weak rule, the temporal order is the one in the corresponding strong rule.  If the temporal orders among the premises are incompatible or insufficient to decide the order in the conclusion, no derivation will happen. 
+The temporal order in CompoundTerms is processed in the following way:
+  # As described in the book, each inference rule of NAL-6 is extended by using the temporal copulas and connectors to replace the atemporal ones in the premises, then identifying the conclusions where both the logical and the temporal relations can be derived, so as to establish valid inference rules for NAL-7.
+  # Different from what is hinted in the book, the temporal order is taken to be binary, not multi-valued, so the matter of degree in the truth-value is completely caused by the logical factor, not the temporal factor. For this reason, in all inference rules (both strong and weak), the temporal order among the terms in the conclusion is the same order as those terms in the premises. If no such a temporal order can be decided in a certain combination of the terms, no conclusion is derived.
 
-Different from the experience, the time interval between terms are represented as a special type of term, named Interval. This term represents the system's "sense of time", which is approximate, as the rounded logarithm function of the number of clock cycles in the interval. That is, Math.round(Math.log(n)). This approximation is used, because otherwise similar intervals will be judged as different, so the corresponding evidence will not be accumulated by the revision rule. Whenever accurate time measurement is needed, the system should not depend on this approximate measurement, but uses an external reference (e.g., clock). The logarithm function may be replaced by a power function, such as Math.sqrt(n). This can be decided later.
+===Inference on occurrence time===
 
-Ideally, temporal inference is valid only when the premises are about the same moment, i.e., have the same occurrenceTime or no occurrenceTime (i.e., eternal). However, since occurrenceTime is approximate, a conclusion about one moment (that of the belief) can be projected to another (that of the task), at the cost of a confidence discount. Let _t0_ be the current time, and _t1_ and _t2_ are the occurrenceTime of the premises, then the discount factor is _d_ = 1 - |_t1-t2_| / (|_t0-t1_| + |_t0-t2_|), which is in [0,1]. This factor _d_ is multiplied to the confidence of a promise as a "temporal discount" to project it to the occurrence of the other promise, so as to derive a conclusion about that moment. In this way, if there are conflicting conclusions, the temporally closer one will be preferred by the choice rule.
+In most rules, the occurrenceTime is processed independent of the other aspects of the rule. There are the following cases:
+  * If both premises are ETERNAL, so is the conclusion. Therefore all the inference rules defined in the lower layers remain valid.
+  * If the task is "tensed" (i.e., with an occurrenceTime that is not ETERNAL) but the belief is not, then the conclusion has the same occurrenceTime as the tensed premise.
+  * If the task is not tensed but the belief is, then an _eternalization_ rule is used to take the belief as providing evidence for the sentence in the task.
+  * If both premises are tensed, then the belief is "projected" to the occurrenceTime of the task. Ideally, temporal inference is valid only when the premises are about the same moment, i.e., have the same occurrenceTime or no occurrenceTime (i.e., eternal). However, since occurrenceTime is an approximation and the system is adaptive, a conclusion about one moment (that of the belief) can be projected to another (that of the task), at the cost of a confidence discount. Let _t0_ be the current time, and _t1_ and _t2_ are the occurrenceTime of the premises, then the discount factor is _d_ = 1 - |_t1-t2_| / (|_t0-t1_| + |_t0-t2_|), which is in [0,1]. This factor _d_ is multiplied to the confidence of a promise as a "temporal discount" to project it to the occurrence of the other promise, so as to derive a conclusion about that moment. In this way, if there are conflicting conclusions, the temporally closer one will be preferred by the choice rule.
 
-The conclusion does not always has the same occurrenceTime as a premise. For instance, if _A_ and _A /=> B_ has occurrence time _t_, then the conclusion _B_ should have occurrence time _t+1_. If _A_ and _(&&,A,C) /=> B_ has occurrence time _t_ and _C_ is an Interval term with argument _n_, _B_ should have occurrence time _t_+1+Math.exp(_n_).
+*Issue*: The above formula looks natural, though there are still some issues to be resolved. For example, when _t1_ or _t2_ equals _t0_, _d_ will be 0. It may be possible to resolve this issue via eternalization.
 
+===Temporal induction and detachment===
+
+An inference where temporal order and occurrence time are tangled is temporal induction and its reverse, detachment (as special case of deduction and abduction).
+
+In NARS, temporal induction refers to the situation where events _e1_ and _e2_ are observed as occurring in succession, with a time interval in between with a length of _n_ clock cycles. As far as this sequence of events is noticed by the system, an inductive conclusion _(&/,e1,interval(n)) =/> e2_ is derived.
+
+There are still several issues about this inference.
+
+*Issue*: This rule is one of the exceptions of the "generalized syllogistic" pattern in NAL inference rules, which requires the premises to have a common term. This pattern guarantees the semantic relevance among the statements involved, and also greatly reduced the number of legal combinations of premises. The current exception is allowed, because the two events are related _temporally_, though not semantically, and in future works on sensation organs similar exceptions will be allowed for _spatially_ related events to be combined into compound events without shared components. However, it raises a problem on variable introduction. If _e1_ and _e2_ have common subject or predicate, it seems natural to introduce an independent variable, but what if the common term occupies other positions?
+
+*Issue*: Another problem is about the time interval _n_ between the two events. To simply derive _e1 =/> e2_ is correct, but does not capture the temporal information about the interval. To use another event to represent the interval (as tried in version 1.3.3) is too accurate to be useful, because _(&/,e1,interval(100)) =/> e2_ and _(&/,e1,interval(101)) =/> e2_ probably should be merged by the revision rule, since the difference between the two numbers are negligible. For this consideration, in the current implementation, the interval is represented by a special type of term, which approximately record _m = log(n)_ as an integer. With such a belief as premise, the detachment rule will do deduction with _e1_, and abduction with _e2_, and the occurrenceTime of the conclusion is calculated from that of the other event, plus or minus _exp(m)_ to approximately recover the _n_ value. Whether the log/exp functions should be replaced by power functions (such as sqrt/square) is a question to be answered later.
+ 
+As in other places, whenever an accurate time interval is needed, it is always possible to replace the approximate time interval by a better defined event, so that is not an issue.
 
 = Procedural inference (NAL-8) =
 
