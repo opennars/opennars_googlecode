@@ -9,7 +9,7 @@ Open-NARS 1.6.x is different from 1.5.x in the following major aspects:
   # In software structure, it absorbs the ideas from previous discussions (such as in [AbstractDesignProposal], [Modules], [GUIRequest]) and implementations (the version built by Joe Geldart), as well as the recent discussions.
 
 
-= Temporal inference (NAL-7) =
+= Temporal Inference (NAL-7) =
 
 ===Representation of temporal information===
 
@@ -55,8 +55,14 @@ There are still several issues about this inference.
  
 As in other places, whenever an accurate time interval is needed, it is always possible to replace the approximate time interval by a better defined event, so that is not an issue.
 
+*Issue*: Whether to derive conclusions like _e2 =\> (&/,e1,interval(n))_?
 
-= Procedural inference (NAL-8) =
+*Issue*: Whether to allow interval terms _interval(n)_ to appear in I/O (and in Narsese grammar), when the measurement _n_ is completely subjective?
+
+*Issue*: In the current implementation, the _e1_ and _e2_ are the mostly noticeable events at the previous moment and the current moment, respectively. It may be necessary to change this premise-selection policy.
+
+
+= Procedural Inference (NAL-8) =
 
 Beside [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning], procedural reasoning in NARS is also discussed in [http://www.degruyter.com/view/j/jagi.2012.3.issue-3/v10229-011-0021-5/v10229-011-0021-5.xml?format=INT Solving a Problem With or Without a Program]. A previous implementation exists as version 1.3.3, with [https://code.google.com/p/open-nars/source/browse/trunk/nars-dist/Examples-1.3.3/ working examples in several files], as well as descriptions in [ProceduralInference], [ProceduralExamples], and [ProceduralLearning].
 
@@ -68,11 +74,11 @@ Given the reversibility of the inference rules of NAL, the derivation of Goals a
 
 Though both Question and Goal are derived by backward inference, there is a major difference between the two: while derived Questions are directly accepted as new tasks, derived Goals do not immediately become tasks. instead, they contribute to the desirability of the corresponding sentences. Only when the desirability of a sentence reach a threshold, does a decision-making rule is triggered to decide whether to pursue the sentence as a goal.
 
-*Issue*: In the current issue, the decision-making rule only take the desire-value into account, while as described in the book, the plausibility of the goal should be considered, too. The problem is to find an reasonable way to calculate it.
+*Issue*: In the current version, the decision-making rule only take the desire-value into account, while as described in the book, the plausibility of the goal should be considered, too. The problem is to find a reasonable way to calculate it.
 
 Goals are eventually achieved by the execution of operations. An "operation" package will be introduced, with each operator defined as a class, with an "execute" method that takes a list of arguments for the operation. In Memory, a HashMap<String, Operator> will be used to remember the operators. When a task corresponds to an operation, the execute method is called.
 
-An operation with acquired operator _oper_ and arguments _args_ is internally represented as an Inheritance statement _(`*`, args, SELF) --> oper_, though at the I/O interface it is displayed as _(oper, args)_. Here _SELF_ is a special term representing the system itself.
+An operation with acquired operator _oper_ and arguments _args_ is internally represented as an Inheritance statement _(`*`, SELF, args) --> oper_, though at the I/O interface it is displayed as _(oper, args)_. Here _SELF_ is a special term representing the system itself.
 
 This part of the system will be further extended into a "universal sensorimotor interface", so that the commands or functions of other systems or decides can be registered in NARS, and called by it. With each operator, some initial knowledge about its preconditions and consequences should be provided to the system.
 
@@ -81,7 +87,8 @@ In summery, there will be three types of operators in NARS that share the format
   * *Standard operators*,  the operators to be introduced in NAL-9, and equipped in every normal NARS implementation
   * *Optional operators*,  the specific operators that turn a standard NARS into a customized NARS+ described in the book
 
-= Introspective inference (NAL-9) =
+
+= Introspective Inference (NAL-9) =
 
 A previous preliminary implementation exists as version 1.4.0, and explained briefly in [OpenNarsOneDotFour].
 
@@ -117,8 +124,10 @@ The name of a mental operator only roughly corresponds to its meaning. The exact
 
 There are some other mental operations under consideration, but will not be attempted in this version.
 
+*Issue*: Mental operator selection standard
 
-= Memory and control =
+
+= Memory and Control =
 
 Beside the main memory and existing task buffers for input tasks and tasks with novel (no-existing) concepts, new storage structures will be added for
   * recent events, as a Queue
@@ -127,11 +136,31 @@ Beside the main memory and existing task buffers for input tasks and tasks with 
 
 The control mechanism will be revised to allow the mental operations to change the default working procedure and the resource allocation policy.
 
+*Issue*: Theory and model of dynamic resource allocation.
 
-= Software structure =
+
+= Software Development =
 
 Since the main purpose of this version is still to test the conceptual design of NARS, especially Narsese and NAL, the software development should focus in the functionality of the design, rather than on the quality of code as asked for practical applications. Changes purely for software design reasons will be postponed to future versions.
 
 One task is to analyze and compare the versions of open-nars, and merge them into a single trunk at the project website, with optional parts that are clearly documented.
 
 One optional task is to explore the structure for NARS to call other systems, as well as for other systems to call NARS for reasoning service.
+
+*Issue*: Integrating the _ad hoc_ rules into the rule table, and evaluating the design.
+
+*Issue*: Mental operators integrated with the reasoning routine.
+
+
+= Testing and Tuning =
+
+Conceptual issues, Narsese and NAL
+
+testing cases: single steps and complete processes
+
+examples in AGI, AI, and CogSci
+
+Potential applications
+
+What to avoid: load a lot of knowledge into NARS and evaluates its capability based on the consequences.
+
