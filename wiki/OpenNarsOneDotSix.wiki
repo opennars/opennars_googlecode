@@ -61,6 +61,8 @@ As in other places, whenever an accurate time interval is needed, it is always p
 
 *Issue*: In the current implementation, the _e1_ and _e2_ are the mostly noticeable events at the previous moment and the current moment, respectively. It may be necessary to change this premise-selection policy.
 
+*Issue*: Because of the change in design, all examples for NAL-7 need to be checked and revised. Some examples should be added to cover the new functions.
+
 
 = Procedural Inference (NAL-8) =
 
@@ -86,6 +88,8 @@ In summery, there will be three types of operators in NARS that share the format
   * *Native operators*, the connectors of CompoundTerms that are directly recognized and processed by the grammar rules and inference rules
   * *Standard operators*,  the operators to be introduced in NAL-9, and equipped in every normal NARS implementation
   * *Optional operators*,  the specific operators that turn a standard NARS into a customized NARS+ described in the book
+
+*Issue*: Because of the changes in NAL-7, the temporal aspects of all NAL-8 examples need to be checked and revised.
 
 
 = Introspective Inference (NAL-9) =
@@ -163,4 +167,3 @@ examples in AGI, AI, and CogSci
 Potential applications
 
 What to avoid: load a lot of knowledge into NARS and evaluates its capability based on the consequences.
-
