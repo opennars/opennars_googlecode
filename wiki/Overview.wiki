@@ -1,14 +1,14 @@
 #summary A high-level overview of this NARS implementation
 #labels Phase-Design
 
-Open-NARS is the open-source version of [https://sites.google.com/site/narswang/home NARS], a general-purpose AI system, designed in the framework of a reasoning system.
+Open-NARS is the open-source version of [https://sites.google.com/site/narswang/home NARS (Non-Axiomatic Reasoning System)], a general-purpose AI system, designed in the framework of a reasoning system.
 
-NARS works by processing tasks imposed by its environment (human users or other computer systems). Tasks can arrive at any time, and there is no restriction on their contents, as far as they can be expressed in Narsese, the I/O language of NARS (see InputOutputFormat for the Grammar of Narsese).
+NARS works by processing tasks imposed by human users, other computer systems, as well as its own needs. Tasks can arrive at any time, and there is no restriction on their contents, as far as they can be expressed in Narsese, the I/O language of NARS (see InputOutputFormat for the Grammar of Narsese).
 
 There are several types of tasks:
   * Judgment. To process it means to accept it as the system's belief, as well as to derive new beliefs and to revise old beliefs accordingly.
-  * Question.  To process it means to find the best answer to it according to current beliefs.
-  * Goal. To process it means to carry out some system operations to realize it. _This type of task is not implemented in the current version, 1.5.5, though it was tested before in 1.3.3 and 1.4.0._
+  * Goal. To process it means to carry out some system operations to realize it.
+  * Question.  To process it means to find the best answer to it according to current beliefs and desires.
 
 As a reasoning system, the [http://www.cis.temple.edu/~pwang/Implementation/NARS/architecture.pdf architecture of NARS] consists of a memory, an inference engine, and a control mechanism. 
 
@@ -25,7 +25,7 @@ Roughly speaking, the control mechanism repeatedly carries out the _working cycl
 
 All the _selections_ in steps 1 and 2 are _probabilistic_, in the sense that all the items (tasks, beliefs, or concepts) within the scope of the selection have priority values attached, and the probability for each of them to be selected at the current moment is proportional to its priority value. When an new item is produced, its priority value is determined according to its parent items, as well as the type of mechanism that produces it. At step 5, the priority values of all the involved items are adjusted, according to the immediate feedback of the current cycle.
 
-At the current time, the most comprehensive description of NARS are the books [http://www.springer.com/west/home/computer/artificial?SGWID=4-147-22-173659733-0 Rigid Flexibility: The Logic of Intelligence] and [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning]. Various aspects of the system are introduced and discussed in many papers, most of which are available  [http://www.cis.temple.edu/~pwang/papers.html here].
+At the current time, the most comprehensive description of NARS are the books [http://www.springer.com/west/home/computer/artificial?SGWID=4-147-22-173659733-0 Rigid Flexibility: The Logic of Intelligence] (2006) and [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning] (2013). Various aspects of the system are introduced and discussed in many papers, most of which are available  [http://www.cis.temple.edu/~pwang/papers.html here].
 
 Beginners can start at the following online materials:
   *. The basic ideas behind the project: [http://sites.google.com/site/narswang/publications/wang.logic_intelligence.pdf The Logic of Intelligence]
@@ -34,6 +34,4 @@ Beginners can start at the following online materials:
   *. The semantics: [http://sites.google.com/site/narswang/publications/wang.semantics.pdf Experience-Grounded Semantics: A theory for intelligent systems]
   *. The memory and control: [http://sites.google.com/site/narswang/publications/wang.computation.pdf Computation and Intelligence in Problem Solving]
 
-To test the current implementation:
-  * The demonstration programs under Downloads.
-  * The working examples explained in SingleStepTestingCases and MultiStepExamples.
+To test the current implementation, download [https://drive.google.com/folderview?id=0B8Z4Yige07tBUk5LSUtxSGY0eVk&usp=sharing the most recent version], then try the working examples in the ZIP file. These examples are explained in SingleStepTestingCases and MultiStepExamples.
