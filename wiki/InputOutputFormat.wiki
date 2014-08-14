@@ -7,7 +7,7 @@ Each line in the system's input and output is either a _task_ (as defined in the
 
 In a task, all the space characters are optional, and will be ignored by the system in processing. 
 
-NOTE: Not all the constructs are implemented in the current version (1.5.5). The Narsese items for temporal inference (on time and tense) and procedural inference (on operation and goal) are removed from the code, and will be re-implemented. The explanation of these items are put in "()" to separate them from the implemented ones.
+NOTE: Not all the constructs are implemented in the current version (1.5.7). The Narsese items for temporal inference (on time and tense) and procedural inference (on operation and goal) are removed from the code, and are re-implemented in version 1.6.0 (under development). The explanation of these items are put in "()" to separate them from the implemented ones.
 
 = Narsese Grammar =
 {{{
