@@ -41,6 +41,10 @@ In most rules, the occurrenceTime is processed independent of the other aspects 
 
 *Issue*: The above formula looks natural, though there are still some issues to be resolved. For example, when _t1_ or _t2_ equals _t0_, _d_ will be 0. It may be possible to resolve this issue via eternalization.
 
+In principle, all inference rules should take temporal information into account. However, since an inference rule may be implemented as the cooperation of multiple methods, which not all of them will be responsible to check temporal information.
+
+Normally, if the premises are "tensed", so is the conclusion --- the knowledge derived about a moment is only valid for that moment. It is through "eternalization" that an eternal conclusion is arrived, at the cost of a confidence lost.
+
 ===Temporal induction and detachment===
 
 An inference where temporal order and occurrence time are tangled is temporal induction and its reverse, detachment (as special case of deduction and abduction).
@@ -81,6 +85,8 @@ Given the reversibility of the inference rules of NAL, the derivation of Goals a
 Though both Question and Goal are derived by backward inference, there is a major difference between the two: while derived Questions are directly accepted as new tasks, derived Goals do not immediately become tasks. instead, they contribute to the desirability of the corresponding sentences. Only when the desirability of a sentence reach a threshold, does a decision-making rule is triggered to decide whether to pursue the sentence as a goal.
 
 *Issue*: In the current version, the decision-making rule only take the desire-value into account, while as described in the book, the plausibility of the goal should be considered, too. The problem is to find a reasonable way to calculate it.
+
+*Issue*: The inference on Quest, as Question on desire-values, has not been carefully evaluated. In particular, the budget-value functions need to be properly selected in each rule, since in the same method, the selection may be different between Quest and Question on truth-value.
 
 === Inference on operations ===
 
@@ -150,3 +156,20 @@ This group of operator all extend Feel.java, and each returns a judgment of the 
 NARS only directly measure some fundamental feelings, from which many complicated ones can be built.
 
 *Issue*: Feelings should be used in the system's self-control process to improve the system's efficiency and attention allocation, by producing quick processing of crucial tasks.
+
+*Issue*: It may be interesting to show "emotions" (i.e., the current happyValue and busyValue) in the GUI, though there is no theoretical necessity to do so.
+
+=== Internal experience ===
+
+As mentioned above, the internal experience of the system will include the feedback of the mental operations.
+
+Beside that, it will also be necessary to record the major events within the system, and make it available to the inference. For this purpose, the current inference log will become partially perceivable by the system itself via certain feeling operations, or, some events will even automatically get into the internal experience, so as to allow the system to answer questions like "What I have been thinking?" or "what methods I've tried on that problem?".
+
+To achieve this purpose, an inference step can be summarized afterwards as an Implication statement from the premise(s) to the conclusion.
+
+*Issue*: For double-premise inference rules, it may be better to only include one premise (the task) in the summarizing Implication statement, while taking the other one (the belief) as part of the background knowledge.
+
+The internal experience may be treated similarly as the I/O channels, with a buffer and other features, though there is probably only one such channel.
+
+*Issue*: Whether it is necessary to have a single data structure corresponding to the "flow of consciousness" of the system?
+ 
