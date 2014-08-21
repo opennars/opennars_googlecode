@@ -94,6 +94,8 @@ will get higher priority because it more often leads to fullfilling the goal sta
 }}}
 and thus the second concept will not be considered that much often anymore (selectiveness).
 
+-------------------------------------------------------------------------------
+
 ===Teaching NARS NLP:===
 
 The examples above at the same time also suggest a way how natural language can be teached to NARS:
