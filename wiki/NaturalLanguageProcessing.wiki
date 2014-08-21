@@ -20,17 +20,20 @@ Also if we are not short in time, we will not remember every detail and all poss
 Just because a sentence describes the current situation, doesn't mean that we will say it.
 If, and also how we will formulate it, depends on what the current goals demand.
 
-Now we will look at a example which shows exactly those 2 principles, while using 
-like in Pei's NLP paper, a different concept for the word (noted with small letters), and the concept it represents (big letters),
+Now we will look at a example which shows exactly those 2 principles, while using like in Pei's NLP paper, a different concept for the word (noted with small letters), and the concept it represents (big letters),
 to allow a many-to-many mapping like the paper suggests.
 However we will not explicitely define a REPRESENT relation which maps Englisch to Narsese,
 instead we assume that the system itself will create a representation of REPRESENT in it by
 the temporal observations it will make:
 
 Let's assume the following event happened:
+
 IN: <(*,CAT,FISH) --> EATS>. :|:
+
 6
+
 and some person now says the follwing:
+
 IN: <(*,cat,eats,fish) --> sentence>. :|:
 
 first thing which will happen by temporal induction is that NARS will relate 
@@ -43,6 +46,7 @@ we will make "saying sentences" an operation, and define a goal which has as con
 Let's for simplicity just tell NARS that it should say sentences when they are representative for the current situation:
 
 IN: <(&&,<$1 --> sentence>,(^say,$1)) =/> <NARS --> chatty>>. %1.00;0.90%
+
 IN: <NARS --> chatty>! %1.00;0.90%
 
 as consequence, when now the event happens again:
@@ -57,24 +61,33 @@ just because it is its current goal to do so (Activeness).
 Also if the event now happens again,
 NARS will not trigger the telling of the sentence again,
 maybe because it already told it just some steps ago
-in which case the goal to be chatty is currently already fullfilled (Activeness),
-or because the goal lost importance (Activeness).
+in which case the goal to be chatty is currently already fullfilled (Activeness), or because the goal lost importance (Activeness).
 
 So far we only demonstrated Activeness and at the same time presented a representation of NLP you may use,
-------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+
 but let's go on with the role of Selectiveness for completeness:
 
 This one comes entirely for free in the NARS system, let's say NARS
 observed two different formulations of the same event:
+
 OUT: <(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,cat,eats,fish) --> sentence>>. 
+
 OUT: <(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,the,cat,eats,fish) --> sentence>>. 
 
 and lets redefine the goal state to prefer sentences which starts with "the"
+
 IN: <<(*,the,$1,$2,$3) --> sentence> ==> <(*,the,$1,$2,$3) --> starts_with_the>>.
+
 IN: <(&&,<$1 --> starts_with_the>,<$1 --> sentence>,(^say,$1)) =/> <NARS --> chatty>>. %1.00;0.90%
 
 now
+
 (&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,the,cat,eats,fish) --> sentence>>.
+
 will get higher priority because it more often leads to fullfilling the goal state than 
+
 <(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,cat,eats,fish) --> sentence>>. 
+
 and thus the second concept will not be considered that much often anymore (selectiveness).
