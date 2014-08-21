@@ -28,35 +28,37 @@ the temporal observations it will make:
 
 Let's assume the following event happened:
 
+{{{
 IN: <(*,CAT,FISH) --> EATS>. :|:
 
 6
+}}}
 
 and some person now says the follwing:
-
+{{{
 IN: <(*,cat,eats,fish) --> sentence>. :|:
-
+}}}
 first thing which will happen by temporal induction is that NARS will relate 
 the event that the cat eats fish, with the sentence which was told shortly after it.
-
+{{{
 OUT: <(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,cat,eats,fish) --> sentence>>. :|: %1.00;0.45%
-
+}}}
 However by the second property of "activeness",
 we will make "saying sentences" an operation, and define a goal which has as consequence the saying of sentences under certain conditions.
 Let's for simplicity just tell NARS that it should say sentences when they are representative for the current situation:
-
+{{{
 IN: <(&&,<$1 --> sentence>,(^say,$1)) =/> <NARS --> chatty>>. %1.00;0.90%
 
 IN: <NARS --> chatty>! %1.00;0.90%
-
+}}}
 as consequence, when now the event happens again:
-
+{{{
 IN: <(*,CAT,FISH) --> EATS>. :|:
-
+}}}
 NARS will execute telling the sentence that cat eats fish:
-
+{{{
 EXE: ^say [(*,cat,eats,fish)]
-
+}}}
 just because it is its current goal to do so (Activeness).
 Also if the event now happens again,
 NARS will not trigger the telling of the sentence again,
@@ -71,23 +73,23 @@ but let's go on with the role of Selectiveness for completeness:
 
 This one comes entirely for free in the NARS system, let's say NARS
 observed two different formulations of the same event:
-
+{{{
 OUT: <(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,cat,eats,fish) --> sentence>>. 
 
 OUT: <(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,the,cat,eats,fish) --> sentence>>. 
-
+}}}
 and lets redefine the goal state to prefer sentences which starts with "the"
-
+{{{
 IN: <<(*,the,$1,$2,$3) --> sentence> ==> <(*,the,$1,$2,$3) --> starts_with_the>>.
 
 IN: <(&&,<$1 --> starts_with_the>,<$1 --> sentence>,(^say,$1)) =/> <NARS --> chatty>>. %1.00;0.90%
-
+}}}
 now
-
+{{{
 (&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,the,cat,eats,fish) --> sentence>>.
-
+}}}
 will get higher priority because it more often leads to fullfilling the goal state than 
-
+{{{
 <(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,cat,eats,fish) --> sentence>>. 
-
+}}}
 and thus the second concept will not be considered that much often anymore (selectiveness).
