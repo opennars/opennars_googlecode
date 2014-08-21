@@ -15,7 +15,7 @@ What parts we will read more carefully in the "fast searching process" will also
 on what parts we judge to be possibly related to the detail we are searching for and what we know about this domain.
 Also if we are not short in time, we will not remember every detail and all possible interpretations, but we will tend to remember things we consider to be representative/important.
 
-===Activeness (output related):===
+===Activeness:===
 
 Just because a sentence describes the current situation, doesn't mean that we will say it.
 If, and also how we will formulate it, depends on what the current goals demand.
