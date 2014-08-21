@@ -21,7 +21,7 @@ Just because a sentence describes the current situation, doesn't mean that we wi
 If, and also how we will formulate it, depends on what the current goals demand.
 
 Now we will look at a example which shows exactly those 2 principles, while using 
-like in Pei's NLP paper, a different concept for the word (noted with big letters), and the concept it represents (small letters),
+like in Pei's NLP paper, a different concept for the word (noted with small letters), and the concept it represents (big letters),
 to allow a many-to-many mapping like the paper suggests.
 However we will not explicitely define a REPRESENT relation which maps Englisch to Narsese,
 instead we assume that the system itself will create a representation of REPRESENT in it by
