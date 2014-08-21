@@ -93,3 +93,29 @@ will get higher priority because it more often leads to fullfilling the goal sta
 <(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,cat,eats,fish) --> sentence>>. 
 }}}
 and thus the second concept will not be considered that much often anymore (selectiveness).
+
+===Teaching NARS NLP:===
+
+The examples above at the same time also suggest a way how natural language can be teached to NARS:
+
+{{{
+'concept to englisch pattern_1:
+IN: <(*,CAT,FISH) --> EATS>. :|:
+6
+IN: <(*,the,cat,eats,fish) --> sentence>. :|:
+6
+'concept to englisch pattern_2:
+IN: <(*,TIM,SPORT) --> LIKES>. :|:
+6
+IN: <(*,tim,likes,also,sport) --> sentence>. :|:
+...
+6
+'concept to englisch pattern_n:
+IN: <(*,TOM,TENNIS) --> PLAYS>. :|:
+6
+IN: <(*,tom,plays,tennis) --> sentence>. :|:
+'and a list of the meaning of the involved concepts by relating them together:
+<TENNIS --> SPORT>.
+<TENNIS --> ACTIVITY>.
+....
+}}}
