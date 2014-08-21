@@ -1,0 +1,80 @@
+This is a NLP wiki article for OpenNarsOneDotSix.
+Here we will borrow needed ideas from Dr. Pei Wang's publication "Natural Language Processing by Reasoning and Learning",
+which also presents the idea that natural language processing in AGI, especially in NARS, can be done by the inference rules an AGI provides anyway.
+
+However, to motivate the examples shown here, two things I consider important:
+Is there really a way to allow plain "natural language understanding" without using AGI itself? I doubt it,
+furthermore I think that natural language processing has to be an "active" and "selective" process which completely shares the goals of the AGI in order to cooperate correctly.
+
+
+
+Selectiveness (input related):
+
+Imagine we have short time to find some important detail in a big text. 
+What parts we will read more carefully in the "fast searching process" will also depend
+on what parts we judge to be possibly related to the detail we are searching for and what we know about this domain.
+Also if we are not short in time, we will not remember every detail and all possible interpretations, but we will tend to remember things we consider to be representative/important.
+
+Activeness (output related):
+
+Just because a sentence describes the current situation, doesn't mean that we will say it.
+If, and also how we will formulate it, depends on what the current goals demand.
+
+Now we will look at a example which shows exactly those 2 principles, while using 
+like in Pei's NLP paper, a different concept for the word (noted with big letters), and the concept it represents (small letters),
+to allow a many-to-many mapping like the paper suggests.
+However we will not explicitely define a REPRESENT relation which maps Englisch to Narsese,
+instead we assume that the system itself will create a representation of REPRESENT in it by
+the temporal observations it will make:
+
+Let's assume the following event happened:
+<(*,CAT,FISH) --> EATS>. :|:
+6
+and some person now says the follwing:
+<(*,cat,eats,fish) --> sentence>. :|:
+
+first thing which will happen by temporal induction is that NARS will relate 
+the event that the cat eats fish, with the sentence which was told shortly after it.
+
+OUT: <(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,cat,eats,fish) --> sentence>>. :|: %1.00;0.45%
+
+However by the second property of "activeness",
+we will make "saying sentences" an operation, and define a goal which has as consequence the saying of sentences under certain conditions.
+Let's for simplicity just tell NARS that it should say sentences when they are representative for the current situation:
+
+IN: <(&&,<$1 --> sentence>,(^say,$1)) =/> <NARS --> chatty>>. %1.00;0.90%
+IN: <NARS --> chatty>! %1.00;0.90%
+
+as consequence, when now the event happens again:
+
+<(*,CAT,FISH) --> EATS>. :|:
+
+NARS will execute telling the sentence that cat eats fish:
+
+EXE: ^say [(*,cat,eats,fish)]
+
+just because it is its current goal to do so (Activeness).
+Also if the event now happens again,
+NARS will not trigger the telling of the sentence again,
+maybe because it already told it just some steps ago
+in which case the goal to be chatty is currently already fullfilled (Activeness),
+or because the goal lost importance (Activeness).
+
+So far we only demonstrated Activeness and at the same time presented a representation of NLP you may use,
+------------------------------------------------------------------------------------------------------------
+but let's go on with the role of Selectiveness for completeness:
+
+This one comes entirely for free in the NARS system, let's say NARS
+observed two different formulations of the same event:
+<(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,cat,eats,fish) --> sentence>>. 
+<(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,the,cat,eats,fish) --> sentence>>. 
+
+and lets redefine the goal state to prefer sentences which starts with "the"
+<<(*,the,$1,$2,$3) --> sentence> ==> <(*,the,$1,$2,$3) --> starts_with_the>>.
+<(&&,<$1 --> starts_with_the>,<$1 --> sentence>,(^say,$1)) =/> <NARS --> chatty>>. %1.00;0.90%
+
+now
+(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,the,cat,eats,fish) --> sentence>>.
+will get higher priority because it more often leads to fullfilling the goal state than 
+<(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,cat,eats,fish) --> sentence>>. 
+and thus the second concept will not be considered that much often anymore (selectiveness).
