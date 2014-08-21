@@ -61,7 +61,7 @@ EXE: ^say [(*,cat,eats,fish)]
 }}}
 just because it is its current goal to do so (Activeness).
 Also if the event now happens again,
-NARS will not trigger the telling of the sentence again,
+NARS may not trigger the telling of the sentence again,
 maybe because it already told it just some steps ago
 in which case the goal to be chatty is currently already fullfilled (Activeness), or because the goal lost importance (Activeness).
 
