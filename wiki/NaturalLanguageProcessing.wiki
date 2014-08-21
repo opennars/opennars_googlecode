@@ -8,7 +8,7 @@ furthermore I think that natural language processing has to be an "active" and "
 
 
 
-===Selectiveness (input related):===
+===Selectiveness:===
 
 Imagine we have short time to find some important detail in a big text. 
 What parts we will read more carefully in the "fast searching process" will also depend
