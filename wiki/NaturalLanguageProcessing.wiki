@@ -119,5 +119,5 @@ IN: <(*,tom,plays,tennis) --> sentence>. :|:
 'and an optional list of the meaning of the involved concepts by relating them together (NARS will relate the concepts according to it's experience anyway):
 <TENNIS --> SPORT>.
 <TENNIS --> ACTIVITY>.
-....
+...
 }}}
