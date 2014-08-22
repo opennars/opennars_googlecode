@@ -116,7 +116,7 @@ IN: <(*,tim,likes,also,sport) --> sentence>. :|:
 IN: <(*,TOM,TENNIS) --> PLAYS>. :|:
 6
 IN: <(*,tom,plays,tennis) --> sentence>. :|:
-'and a list of the meaning of the involved concepts by relating them together:
+'and a optional list of the meaning of the involved concepts by relating them together (NARS will relate the concepts according to it's experience anyway):
 <TENNIS --> SPORT>.
 <TENNIS --> ACTIVITY>.
 ....
