@@ -34,7 +34,7 @@ IN: <(*,CAT,FISH) --> EATS>. :|:
 6
 }}}
 
-and some person now says the follwing:
+and some person now says the follwing (like shown in the paper, we express sentences as products):
 {{{
 IN: <(*,cat,eats,fish) --> sentence>. :|:
 }}}
