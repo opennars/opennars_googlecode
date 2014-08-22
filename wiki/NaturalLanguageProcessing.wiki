@@ -47,9 +47,9 @@ However by the second property of "activeness",
 we will make "saying sentences" an operation, and define a goal which has as consequence the saying of sentences under certain conditions.
 Let's for simplicity just tell NARS that it should say sentences when they are representative for the current situation:
 {{{
-IN: <(&&,<$1 --> sentence>,(^say,$1)) =/> <NARS --> chatty>>. %1.00;0.90%
+IN: <(&&,<$1 --> sentence>,(^say,$1)) =/> <NARS --> chatty>>.
 
-IN: <NARS --> chatty>! %1.00;0.90%
+IN: <NARS --> chatty>!
 }}}
 as consequence, when now the event happens again:
 {{{
@@ -82,7 +82,7 @@ and lets redefine the goal state to prefer sentences which starts with "the"
 {{{
 IN: <<(*,the,$1,$2,$3) --> sentence> ==> <(*,the,$1,$2,$3) --> starts_with_the>>.
 
-IN: <(&&,<$1 --> starts_with_the>,<$1 --> sentence>,(^say,$1)) =/> <NARS --> chatty>>. %1.00;0.90%
+IN: <(&&,<$1 --> starts_with_the>,<$1 --> sentence>,(^say,$1)) =/> <NARS --> chatty>>.
 }}}
 now
 {{{
