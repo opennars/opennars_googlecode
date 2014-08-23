@@ -92,7 +92,9 @@ will get higher priority because it more often leads to fullfilling the goal sta
 {{{
 <(&/,<(*,CAT,FISH) --> EATS>,+1) =/> <(*,cat,eats,fish) --> sentence>>. 
 }}}
-and thus the second concept will not be considered that much often anymore (selectiveness).
+and thus the second concept will not be considered that much often anymore (selectiveness). 
+
+Also if and how a sentence gets recognized and if and how NARS takes time to interpret it and think about the consequences in the current context, may depend on what concepts currently are considered being important (most probably the ones related to the current goals)
 
 -------------------------------------------------------------------------------
 
