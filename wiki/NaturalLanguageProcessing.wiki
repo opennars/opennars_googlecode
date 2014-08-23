@@ -63,7 +63,10 @@ just because it is its current goal to do so (Activeness).
 Also if the event now happens again,
 NARS may not trigger the telling of the sentence again,
 maybe because it already told it just some steps ago
-in which case the goal to be chatty is currently already fullfilled (Activeness), or because the goal lost importance (Activeness).
+in which case the goal to be chatty is currently already fullfilled, or because the goal lost importance.
+
+Also there may be "hidden interests" behind
+telling something, like we observe every day, with this approach this also holds for NARS. NARS may tell a sentence for different reasons than the content may indicate. (highly related: lying)
 
 So far we only demonstrated Activeness and at the same time presented a representation of NLP you may use,
 
