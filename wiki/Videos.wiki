@@ -89,7 +89,7 @@ This example shows, how NARS generalizes
 what it finds out about the go-to operations.
 At first it recognizes,
 after several go-tos,
-that after go-to X, at X is true. (first induction)
+that after go-to X, at X is relatively sure true. (first induction)
 and then it recognizes that this always holds,
 that this is not dependent on time.
 With this knowledge it successfully moves
