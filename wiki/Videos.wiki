@@ -60,7 +60,7 @@ by watching keyboard input and the result in the environment.
 Then the entire behavior of the system is the result
 of re-interpretation of this goal.
 Did a player just jump on a turtle randomly?
-Or did he do it because its important? Or was there another reasong for it? Multiple examples
+Or did he do it because its important? Or was there another reason for it? Multiple examples
 may decide this question, give evidence to the different variants.
 As a result, NARS will overtake this behavior according to the evidence it had, and with every action the system takes, and with every thought it may spend on this, its own behavior will be updated,
 and the meaning of the current goals adjusted.
