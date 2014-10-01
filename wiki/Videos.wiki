@@ -3,7 +3,7 @@
 = Introduction =
 
 There are already videos which show what OpenNARS is capable of.
-Since Youtube supports timing, a descriptions of the situations and a direct link is given:
+Since Youtube supports timing, descriptions of the situations and a direct link is given:
 
 = Relating parts of Natural Language =
 https://www.youtube.com/watch?v=BBmim5CTE4k&t=01m14s
