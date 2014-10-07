@@ -157,7 +157,6 @@ NARS only directly measure some fundamental feelings, from which many complicate
 
 *Issue*: Feelings should be used in the system's self-control process to improve the system's efficiency and attention allocation, by producing quick processing of crucial tasks.
 
-*Issue*: It may be interesting to show "emotions" (i.e., the current happyValue and busyValue) in the GUI, though there is no theoretical necessity to do so.
 
 === Internal experience ===
 
