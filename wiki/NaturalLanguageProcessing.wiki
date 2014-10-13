@@ -184,7 +184,5 @@ or
 <(&/,<eat --> word>,<fish --> word>) =/> <(*,CAT,FISH) --> EATS>>.
 }}}
 
-will also compete for priority, interpretation is a ever-changing process.
-
-
+will also compete for priority, interpretation is a ever-changing process and there is no way around.
 
