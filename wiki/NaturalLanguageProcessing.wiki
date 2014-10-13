@@ -183,4 +183,4 @@ or
 <(&/,<eat --> word>,<fish --> word>) =/> <(*,CAT,FISH) --> EATS>>.
 }}}
 
-will also compete for priority, interpretation and understanding of natural language is same like interpreting and understanding its environment, a ever-changing process which demands AGI, there is no way around,
+will also compete for priority, interpretation and understanding of natural language is same like interpreting and understanding its environment, a ever-changing process which demands AGI, there is no way around.
