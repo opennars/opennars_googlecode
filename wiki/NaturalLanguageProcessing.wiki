@@ -127,3 +127,64 @@ IN: <(*,tom,plays,tennis) --> sentence>. :|:
 <TENNIS --> ACTIVITY>.
 ...
 }}}
+
+===Others:===
+
+This example was using sentence-level, for example
+
+{{{
+IN: <(*,the,cat,will,now,eat,fish) --> sentence>. :|:
+6
+IN: <(*,CAT,FISH) --> EATS>. :|:
+}}}
+
+results in
+
+{{{
+<<(*,the,cat,will,now,eat,fish) --> sentence> =/> <(*,CAT,FISH) --> EATS>>.
+}}}
+
+However this also works for word level, which may give some advantages like that NARS can learn to create own sentences:
+
+{{{
+IN: <the --> word>. :|:
+6
+IN: <cat --> word>. :|:
+6
+IN: <will --> word>. :|:
+6
+IN: <now --> word>. :|:
+6
+IN: <eat --> word>. :|:
+6
+IN: <fish --> word>. :|:
+6
+IN: <(*,CAT,FISH) --> EATS>. :|:
+}}}
+
+may, if it happens often, result in a chain like:
+
+{{{
+(&/,<the --> word>,<cat --> word>,<will --> word>,<now --> word>,<eat --> word>,<fish --> word>) =/> <(*,CAT,FISH) --> EATS>>.
+}}}
+
+But here also lies the disadvantage, because it needs more training than the sentence-level approach, because who says that the entire sequence of words
+described that the cat will eat fish? 
+Maybe just the last word ore the last two words were essential?
+
+Hypotheses like
+
+{{{
+<<fish --> word> =/> <(*,CAT,FISH) --> EATS>>.
+}}}
+
+or
+
+{{{
+<(&/,<eat --> word>,<fish --> word>) =/> <(*,CAT,FISH) --> EATS>>.
+}}}
+
+will also compete for priority, interpretation is a ever-changing process.
+
+
+
