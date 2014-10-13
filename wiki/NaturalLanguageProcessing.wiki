@@ -2,7 +2,7 @@ This is a NLP wiki article for OpenNarsOneDotSix.
 Here we will borrow needed ideas from Dr. Pei Wang's publication "Natural Language Processing by Reasoning and Learning",
 which also presents the idea that natural language processing in AGI, especially in NARS, can be done by the inference rules an AGI provides anyway.
 
-However, to motivate the examples shown here, two things I consider important:
+To motivate the examples shown here, two things I consider important:
 Is there really a way to allow plain "natural language understanding" without using AGI itself? I doubt it,
 furthermore I think that natural language processing has to be an "active" and "selective" process which completely shares the goals of the AGI in order to cooperate correctly.
 
@@ -185,4 +185,3 @@ or
 }}}
 
 will also compete for priority, interpretation is a ever-changing process and there is no way around.
-
