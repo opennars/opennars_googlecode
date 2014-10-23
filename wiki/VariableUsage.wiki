@@ -6,7 +6,7 @@ The variable types of NAL sometimes create confusion. This article will be an ex
 
 = Independent Variables =
 They represent any unspecified related part of a term which matches the pattern of the term the variable occurs in, and has to start with "$". Intiutively they allow saying things like: "Whenever something has a certain property, it also has this and that property"
-"Whenever something is from type A, it also is from type B".
+"Whenever something is from type A, it also is from type B". They correspond at least loosely to variables under the "forall" quantor in first order logic.
 
 
 Example:
@@ -42,7 +42,7 @@ works:
 = Dependent Variables =
 They refer to a specific term and have to start with "#".
 Intiutively, they allow talking about a thing
-without having to name it.
+without having to name it. They correspond at least loosely to variables under the "exists" quantor in first order logic.
 
 Example:
 I see a cat
