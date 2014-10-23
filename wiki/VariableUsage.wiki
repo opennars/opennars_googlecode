@@ -65,6 +65,11 @@ Who is a cat?
 <?1 --> cat>?
 }}}
 
+Note the difference to for example "do you see a cat?" (not asking for a specific one)
+{{{
+(&&,<#1 --> cat>,<#1 --> see>)?
+}}}
+
 = Mixed Examples =
 
 Every lock can be opened by some key
