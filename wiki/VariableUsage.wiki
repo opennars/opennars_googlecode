@@ -19,7 +19,7 @@ Something which is a cat, is also an animal
 
 Or let us consider something more complicated, the uncle relation in Prolog, which can not be done in a single step:
 uncle(X,Y) :- parent(Z,Y), brother(X,Z). 
-which can bre represented as:
+which can be represented as:
 
 {{{
 <(&&,<(*,$Z,$Y) --> parent>,<(*,$X,$Z) --> brother>) ==> <(*,$X,$Y) --> uncle>>.
