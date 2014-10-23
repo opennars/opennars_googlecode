@@ -5,10 +5,9 @@
 The variable types of NAL sometimes create confusion. This article will be an explaination when to use which variable type, also some intiutive examples are given.
 
 = Independent Variables =
-TODO: Exact Definition
-Intiutively they allow saying things like:
-"Whenever something has a certain property, it also has this and that property"
-"Whenever something is from type A, it also is from type B"
+Represents any unspecified related part of a term which matches the pattern of the term the variable occurs in, and has to start with "$". Intiutively they allow saying things like: "Whenever something has a certain property, it also has this and that property"
+"Whenever something is from type A, it also is from type B".
+
 
 Example:
 
@@ -40,10 +39,10 @@ works:
 <(*,tim,tom) --> uncle>. %1.00;0.73% {281 ...
 }}}
 
-= Dependent/Anonymous Variables =
-TODO: Exact Definition
+= Dependent Variables =
+They refer to a specific term and have to start with "#".
 Intiutively, they allow talking about a thing
-without naming it.
+without having to name it.
 
 Example:
 I see a cat
@@ -58,7 +57,7 @@ The cat I see is green
 
 = Query Variables =
 
-Used as placeholder for a specific statement to ask about:
+Used just as placeholder for a specific constant statement to ask about:
 
 Who is a cat?
 {{{
