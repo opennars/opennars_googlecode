@@ -5,7 +5,7 @@
 The variable types of NAL sometimes create confusion. This article will be an explaination when to use which variable type, also some intiutive examples are given.
 
 = Independent Variables =
-Represents any unspecified related part of a term which matches the pattern of the term the variable occurs in, and has to start with "$". Intiutively they allow saying things like: "Whenever something has a certain property, it also has this and that property"
+They represent any unspecified related part of a term which matches the pattern of the term the variable occurs in, and has to start with "$". Intiutively they allow saying things like: "Whenever something has a certain property, it also has this and that property"
 "Whenever something is from type A, it also is from type B".
 
 
