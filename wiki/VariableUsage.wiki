@@ -1,0 +1,96 @@
+#summary When to use what variable type
+
+= Introduction =
+
+The variable types of NAL sometimes create confusion. This article will be an explaination when to use which variable type, also some intiutive examples are given.
+
+= Independent Variables =
+TODO: Exact Definition
+Intiutively they allow saying things like:
+"Whenever something has a certain property, it also has this and that property"
+"Whenever something is from type A, it also is from type B"
+
+Example:
+
+Something which is a cat, is also an animal
+{{{
+<<$1 --> cat> ==> <$1 --> animal>>.
+}}}
+
+Or let us consider something more complicated, the uncle relation in Prolog, which can not be done in a single step:
+uncle(X,Y) :- parent(Z,Y), brother(X,Z). 
+which can bre represented as:
+
+{{{
+<(&&,<(*,$Z,$Y) --> parent>,<(*,$X,$Z) --> brother>) ==> <(*,$X,$Y) --> uncle>>.
+}}}
+
+Let's try with:
+
+{{{
+<(*,adam,tom) --> parent>.
+<(*,eva,tom) --> parent>.
+<(*,tim,adam) --> brother>.
+<(*,tim,tom) --> uncle>?
+}}}
+
+
+{{{
+works:
+<(*,tim,tom) --> uncle>. %1.00;0.73% {281 ...
+}}}
+
+= Dependent/Anonymous Variables =
+TODO: Exact Definition
+Intiutively, they allow talking about a thing
+without naming it.
+
+Example:
+I see a cat
+{{{
+(&&,<#1 --> cat>,<#1 --> see>).
+}}}
+
+The cat I see is green
+{{{
+(&&,<#1 --> cat>,<#1 --> see>,<#1 --> green>).
+}}}
+
+= Query Variables =
+
+Used as placeholder for a specific statement to ask about:
+
+Who is a cat?
+{{{
+<?1 --> cat>?
+}}}
+
+= Mixed Examples =
+
+Every lock can be opened by some key
+{{{
+<<$x --> lock> ==> (&&,<#y --> key>,<$x --> (/,open,#y,_)>)>.  
+}}}
+
+Interesting NAL9 case which involves all variable types:
+
+"who is similar to tom" is a good question.
+{{{
+<<?who <-> tom> --> good_question>.
+}}}
+If something is a good question, and you ask yourself the question,
+some agent will be a good agent.
+{{{
+<(&&,<$1 --> good_question>,(^wonder,$1)) =/> (&&,<#3 --> agent>,<#3 --> good>)>.
+}}}
+
+nars is a agent
+{{{
+<nars --> agent>.
+}}}
+nars should also be good
+{{{
+<nars --> good>!
+}}}
+
+As a result, in order to make the goal true, it will ask itself who is similar to Tom.
