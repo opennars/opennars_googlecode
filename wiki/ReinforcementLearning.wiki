@@ -3,23 +3,23 @@
 = Introduction =
 
 The domain of classical reinforcement learning is from AGI perspective a very specialized domain, however, if we consider some interesting extensions at once:
-* stochastic environment
-* partial observability
-* delayed reward
-* multi-objective
-* sparse RL
-* RL with markov logic networks
-* lifelong learning
+- stochastic environment
+- partial observability
+- delayed reward
+- multi-objective
+- sparse RL
+- RL with markov logic networks
+- lifelong learning
 
 and even if the to these topics proposed related solutions are mostly incompatible with each other, if they could be combined we would be in a domain which is not that far away from AGI. But there are still some additional demanded properties:
 
-* Random exploration of action set should always be the AGI's decision and not pre-defined for the specific problem. (see next section)
+- Random exploration of action set should always be the AGI's decision and not pre-defined for the specific problem. (see next section)
 
-* The system has to make sense of observations even if no goals exist in the system, and make use of them when goals suddenly come into the system.
+- The system has to make sense of observations even if no goals exist in the system, and make use of them when goals suddenly come into the system.
 
-* Under the assumption that AIKR is required, the system has not only to be able to communicate an elegant representation of its observations but also input should be able influence the attention of the system.
+- Under the assumption that AIKR is required, the system has not only to be able to communicate an elegant representation of its observations but also input should be able influence the attention of the system.
 
-* And finally, the system may need to be able to observe, reason about and control its own internal thought processes which is a at least a key property of human intelligence.
+- And finally, the system may need to be able to observe, reason about and control its own internal thought processes which is a at least a key property of human intelligence.
 
 = How to use NARS in RL domains =
 
