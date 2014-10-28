@@ -45,7 +45,12 @@ a operator ^r is introduced, and an additional goal of average importance which 
 (^r,A)!
 }}}
 "choose an random action sometimes".
-The consequence of this action is execution of a random action,
+The consequence of this action is execution of a random action in simulation, and giving NARS the information that it was executed, for example
+{{{
+(^pick,key). :|:
+}}}
+if (^pick,key) was in A,
+
 in which case NARS will:
 
 1. Learn the consequences of selecting a random action in a certain situtation like it learns the consequence of any other action.
