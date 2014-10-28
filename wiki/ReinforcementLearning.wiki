@@ -3,12 +3,19 @@
 = Introduction =
 
 The domain of classical reinforcement learning is from AGI perspective a very specialized domain, however, if we consider some interesting extensions at once:
+
 - stochastic environment
+
 - partial observability
+
 - delayed reward
+
 - multi-objective
+
 - sparse RL
+
 - RL with markov logic networks
+
 - lifelong learning
 
 and even if the to these topics proposed related solutions are mostly incompatible with each other, if they could be combined we would be in a domain which is not that far away from AGI. But there are still some additional demanded properties:
