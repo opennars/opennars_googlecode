@@ -45,7 +45,7 @@ a operator ^r is introduced, and an additional goal of average importance which 
 (^r,A)!
 }}}
 "choose an random action sometimes".
-The consequence of this action is execution of a random action in simulation, and giving NARS the information that it was executed, for example
+The consequence of this action is execution of a random action in the simulation, and giving NARS the information that it was executed, for example
 {{{
 (^pick,key). :|:
 }}}
