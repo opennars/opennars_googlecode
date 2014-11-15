@@ -5,74 +5,7 @@
 There are already videos which show what OpenNARS is capable of.
 Since Youtube supports timing, descriptions of the situations and a direct link is given:
 
-= Relating parts of Natural Language =
-https://www.youtube.com/watch?v=BBmim5CTE4k&t=01m14s
-
-This example shows that when two nearly identical sentences are added,
-where just one word is different, that already the property of being in the sentence at same position, will cause NARS to relate them.
-This is rather abstract, but it shows what we target for: Instead
-of having a narrow-AI subsystem which pre-determines the meaning of sentences, NARS will itself interpret and relate sentences and parts of them as previous experience suggests. Fixed interpretations would conflict with AGI fundamentally. For example "pick the key up" may at the beginning not have any meaning to NARS but this doesn't make the sentence useless, for example when you say it while you let it pick up a key, NARS will relate it automatically, and next time it might go-to and pick up the key just because you said "pick the key up", the situations it occured in formed its meaning to NARS. This is how we humans learn natural language in reality, and this is what NARS aims for. We don't, and won't compromise the idea of AGI.
-
-= Make Light On in Closed Room =
-
-https://www.youtube.com/watch?v=BBmim5CTE4k&t=01m48s
-
-This example shows a every-day situation:
-Having to activate a switch to open a door to a room,
-entering it, and activating another switch in that room
-to turn a light on.
-
-In this example, NARS starts without prior knowledge about anything.
-We force it to execute the previous described sequence two times,
-to make sure it observed, that this sequence leaded to "light on".
- 
-However there was no goal like "light on" when we forced NARS to execute the sequence.
-Instead, we add "light on" as goal later,
-which ultimatively shows, that NARS is able
-to relate a new goal which pops up later ("light on"),
-with its past experience it previously observed.
-Shown is that it then recalls what happened in the past,
-and uses the same sequence of actions to make this goal true.
-
-This also shows a big difference to Reinforcement Learning,
-where a goal has to be defined before observation begins.
-Also different is that NARS will answer to very high-level questions like: "do both switches open the door?", which also sets it widely apart of the scope of Reinforcement Learning and also of all other current AGI approaches.
-
-
-= Nario =
-
-https://www.youtube.com/watch?v=BBmim5CTE4k&t=03m44s
-
-While the previous example was more related to high level thinking,
-Nario shows the opposite, using it in a realtime application were fast reaction is needed.
-
-We have to recall, that in NARS there is no direct barrier between sub-symbolic and symbolic knowledge. The system only
-works because both work together seamlessly.
-While a Narsese-Sentence can encode very complex high-level concepts,
-a concept itself has a priority assigned,
-which also encodes the relevance to the current situation, attention.
-When which thoughts are triggered,
-is a as important handlebar to the behavior of the system, as important as the content of the concepts.
-
-In Nario NARS starts with the only goal,
-to mimick the behavior of the player,
-by watching keyboard input and the result in the environment.
-Then the entire behavior of the system is the result
-of re-interpretation of this goal.
-Did a player just jump on a turtle randomly?
-Or did he do it because its important? Or was there another reason for it? Multiple examples
-may decide this question, give evidence to the different variants.
-As a result, NARS will overtake this behavior according to the evidence it had, and with every action the system takes, and with every thought it may spend on this, its own behavior will be updated,
-and the meaning of the current goals adjusted.
-Like we can see this mimicking goal is enough to let NARS in seconds overtake aspects about the player behavior,
-which leads to successfully playing the level to the end,
-without any additional winning-goal like RF algorithms need.
-However such winning-goals like "collect coins!!" may help the system to get even better, they can also be considered by the system of course.
-
-
-= Older Examples: =
-
-= Make Light On old =
+= Make Light On =
 
 https://www.youtube.com/watch?v=NfMvMOeC_rU&t=1m54s
 
