@@ -35,7 +35,8 @@ A summary for the architecture and working cycle is [https://sites.google.com/si
   # Select a belief from the concept the termlink refers to
   # Make inference with tasklink target task and belief: Use the task and the belief as premises for the applicable rules to derive new tasks
   # Put result into new tasks buffer
-  # Add the derived tasks and input tasks obtained in this cycle into the corresponding concepts (and create one if it doesn't exist yet). Report an answer to an input question if it is the best that the system has found.
+  # Add the derived tasks and input tasks obtained in this cycle into the corresponding concepts (and create one if it doesn't exist yet), and activate the concepts with the budget value of the derived task (which means their priority will be increased). Report an answer to an input question if it is the best that the system has found.
+Also act
 
 A graphical description of how questions are answered by the system by this process:
 
