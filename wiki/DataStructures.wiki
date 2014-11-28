@@ -31,7 +31,7 @@ from where it was derived (in order to avoid reasoning cycles, derivation chain)
 * Concept: 
 
 This is the most complex data type in the system which adds some additional terminology:
-A concept is named by one term.
+A concept is named by one term. Not all terms are concepts though: For example if the term of the concept has subterms, the concepts which were named by the subterms which once existed may have been already forgotten.
 A concept links to other concepts with different budget with tasks which are here called TaskLinks.
 A concept links to other concepts with termlinks, linking to exactly those concepts/terms who share a common term in bi-directional manner.
 
