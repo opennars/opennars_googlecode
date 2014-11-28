@@ -28,19 +28,21 @@ To realize dynamic resource allocation, NARS self-organizes its memory using pro
 Since NAL is a term logic, and its inference rules typically require shared term in premises, tasks and beliefs can be indexed and clustered by their subject and predicate. In NARS, each concept is named by a term, and refers to the tasks and beliefs with the term in it. A concept becomes an independent unit of storage and processing. Roughly speaking, the system's memory contains a bag of concepts; a concept contains a bag of tasks and a bag of beliefs.
 
 A summary for the architecture and working cycle is [https://sites.google.com/site/narswang/home/nars-introduction/architecture.jpg here]. NARS repeats the following working cycle:
-  # Select a concept from the memory
-  # Select a task from the concept
-  # Select a belief from the concept
-  # Use the task and the belief as premises for the applicable rules to derive new tasks
-  # Return the used items with adjusted priority
-  # Add the derived tasks and input tasks obtained in this cycle into the corresponding concepts. Report an answer to an input question if it is the best that the system has found.
+
+  # Select a concept C from the memory
+  # Select a tasklink from C
+  # select a termlink from C
+  # Select a belief from the concept the termlink refers to
+  # Make inference with tasklink target task and belief: Use the task and the belief as premises for the applicable rules to derive new tasks
+  # Put result into new tasks buffer
+  # Add the derived tasks and input tasks obtained in this cycle into the corresponding concepts (and create one if it doesn't exist yet). Report an answer to an input question if it is the best that the system has found.
 
 The priority of an item (task, belief, or concept) is determined at its creation time, then adjusted each time the item is accessed, mainly depending on the following factors:
   * its intrinsic quality (which remains stable over time)
   * its performance record (which accumulates over time)
   * its contextual relevance (which changes constantly).
 
-Generally speaking, the system constantly reorganizes its knowledge for question answering. The major criteria in organizing knowledge include:
+Generally speaking, the system constantly reorganizes its knowledge for question answering and goal fullfilling. The major criteria in organizing knowledge include:
   * Correctness with respect to experience,
   * Concreteness of prediction
   * Compactness in content
