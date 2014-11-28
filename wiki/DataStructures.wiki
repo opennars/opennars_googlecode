@@ -13,9 +13,18 @@ A term with a specific punctuation, a truth value and a stamp.
 * Goal: 
 
 Sentence with ! as punctuation. (with specific desire value)
-Judgement: Sentence with ! as punctuation. (with specific truth value)
-Quest: Sentence with @ as punctuation. (question of desire value)
-Question: Sentence with ? as punctuation. (question of truth value)
+
+* Judgement: 
+
+Sentence with ! as punctuation. (with specific truth value)
+
+* Quest: 
+
+Sentence with @ as punctuation. (question of desire value)
+
+* Question: 
+
+Sentence with ? as punctuation. (question of truth value)
 
 * Task: 
 
