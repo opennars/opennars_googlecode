@@ -8,17 +8,6 @@ Sentence: A term with a specific punctuation (which determines if it is a goal, 
 
 Task: A sentence with a budget value 
 
-which can be summarized like this:
-
-             Term Punctuation TruthValue BudgetValue
-
-Term:         x
- 
-Sentence:     x      x            x                   
-
-Task:         x      x            x         x        
-
-
 Stamp: Creation Time, Occurence Time, Evidental Base, Derivation Chain.
 Exists in order to give the sentence information like
 from where it was derived (in order to avoid reasoning cycles, derivation chain), from which input it was derived (needed because it is not allowed to allow revision on overlapping evidental base), its temporal information or tense (occurence time), and its creation time (when it was derived/when it entered memory) 
