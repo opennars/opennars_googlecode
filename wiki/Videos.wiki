@@ -39,36 +39,6 @@ where a goal has to be defined before observation begins.
 Also different is that NARS will answer to very high-level questions like: "do both switches open the door?", which also sets it widely apart of the scope of Reinforcement Learning and also of all other current AGI approaches.
 
 
-= Nario =
-
-https://www.youtube.com/watch?v=BBmim5CTE4k&t=03m44s
-
-While the previous example was more related to high level thinking,
-Nario shows the opposite, using it in a realtime application were fast reaction is needed.
-
-We have to recall, that in NARS there is no direct barrier between sub-symbolic and symbolic knowledge. The system only
-works because both work together seamlessly.
-While a Narsese-Sentence can encode very complex high-level concepts,
-a concept itself has a priority assigned,
-which also encodes the relevance to the current situation, attention.
-When which thoughts are triggered,
-is a as important handlebar to the behavior of the system, as important as the content of the concepts.
-
-In Nario NARS starts with the only goal,
-to mimick the behavior of the player,
-by watching keyboard input and the result in the environment.
-Then the entire behavior of the system is the result
-of re-interpretation of this goal.
-Did a player just jump on a turtle randomly?
-Or did he do it because its important? Or was there another reason for it? Multiple examples
-may decide this question, give evidence to the different variants.
-As a result, NARS will overtake this behavior according to the evidence it had, and with every action the system takes, and with every thought it may spend on this, its own behavior will be updated,
-and the meaning of the current goals adjusted.
-Like we can see this mimicking goal is enough to let NARS in seconds overtake aspects about the player behavior,
-which leads to successfully playing the level to the end,
-without any additional winning-goal like RF algorithms need.
-However such winning-goals like "collect coins!!" may help the system to get even better, they can also be considered by the system of course.
-
 = Make Light On =
 
 https://www.youtube.com/watch?v=NfMvMOeC_rU&t=1m54s
