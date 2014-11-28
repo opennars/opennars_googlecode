@@ -25,8 +25,8 @@ A concept links to other concepts with termlinks, linking to exactly those conce
 
 A concept also consist of:
 
-Beliefs, which are judgements sorted according to confidence.
+ * Beliefs, which are judgements sorted according to confidence.
 
-Desires, which are goals of the concept sorted according to confidence of desire.
+ * Desires, which are goals of the concept sorted according to confidence of desire.
 
-Questions, which are questions of the concept.
+* Questions, which are questions of the concept.
