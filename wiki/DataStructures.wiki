@@ -1,6 +1,6 @@
 #summary What the different data structures represent
 
-= Introduction =
+= Data Types =
 
 Term: A Narsese statement
 
