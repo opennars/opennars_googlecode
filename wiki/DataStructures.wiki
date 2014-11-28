@@ -29,4 +29,4 @@ A concept also consist of:
 
  * Desires, which are goals of the concept sorted according to confidence of desire.
 
-* Questions, which are questions of the concept.
+ * Questions, which are questions of the concept.
