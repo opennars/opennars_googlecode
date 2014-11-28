@@ -1,0 +1,30 @@
+#summary What the different data structures represent
+
+= Introduction =
+
+Term: A Narsese statement
+
+Sentence: A term with a specific punctuation (which determines if it is a goal, question, judgement, or quest) a truth value and a stamp.
+
+Task: A sentence with a budget value 
+
+which can be summarized like this:
+
+             Term Punctuation TruthValue BudgetValue
+
+Term:         x
+ 
+Sentence:     x      x            x                   
+
+Task:         x      x            x         x        
+
+
+Stamp: Creation Time, Occurence Time, Evidental Base, Derivation Chain.
+Exists in order to give the sentence information like
+from where it was derived (in order to avoid reasoning cycles, derivation chain), from which input it was derived (needed because it is not allowed to allow revision on overlapping evidental base), its temporal information or tense (occurence time), and its creation time (when it was derived/when it entered memory) 
+
+
+Concept: This is the most complex data type in the system which adds some additional terminology:
+A concept is named by one term.
+A concept links to other concepts with different budget with tasks which are here called TaskLinks.
+A concept links to other concepts with termlinks, linking to exactly those concepts/terms who share a common term in bi-directional manner.
