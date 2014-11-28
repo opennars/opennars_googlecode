@@ -37,6 +37,10 @@ A summary for the architecture and working cycle is [https://sites.google.com/si
   # Put result into new tasks buffer
   # Add the derived tasks and input tasks obtained in this cycle into the corresponding concepts (and create one if it doesn't exist yet). Report an answer to an input question if it is the best that the system has found.
 
+A graphical description of how questions are answered by the system by this process:
+
+http://open-nars.googlecode.com/svn-history/r443/trunk/wiki/question_answering.png
+
 The priority of an item (task, belief, or concept) is determined at its creation time, then adjusted each time the item is accessed, mainly depending on the following factors:
   * its intrinsic quality (which remains stable over time)
   * its performance record (which accumulates over time)
@@ -46,10 +50,6 @@ Generally speaking, the system constantly reorganizes its knowledge for question
   * Correctness with respect to experience,
   * Concreteness of prediction
   * Compactness in content
-
-A graphical description of how questions are answered by the system:
-
-http://open-nars.googlecode.com/svn-history/r443/trunk/wiki/question_answering.png
 
 == Dual-process in control ==
 
