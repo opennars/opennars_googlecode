@@ -47,6 +47,10 @@ Generally speaking, the system constantly reorganizes its knowledge for question
   * Concreteness of prediction
   * Compactness in content
 
+A graphical description of how questions are answered by the system:
+
+http://open-nars.googlecode.com/svn-history/r443/trunk/wiki/question_answering.png
+
 == Dual-process in control ==
 
 Beside the above _automatic_ process that _unconsciously_ controls the inference process of the system, the mental operations defined in NAL-9 also let the system to _consciously_ control its own inference process, as well as to self-program the system and to follow existing algorithms.
