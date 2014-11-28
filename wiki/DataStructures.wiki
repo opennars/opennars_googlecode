@@ -3,21 +3,26 @@
 = Data Types =
 
 * Term: 
+
 A Narsese statement
 
 * Sentence: 
+
 A term with a specific punctuation, a truth value and a stamp.
 
 * Goal: 
+
 Sentence with ! as punctuation. (with specific desire value)
 Judgement: Sentence with ! as punctuation. (with specific truth value)
 Quest: Sentence with @ as punctuation. (question of desire value)
 Question: Sentence with ? as punctuation. (question of truth value)
 
 * Task: 
+
 A sentence with a budget value and a placeholder for a solution which is a sentence (answer to a question or truth value of a goal which measures to what extent it is already fullfilled).
 
 * Stamp: 
+
 Creation Time, Occurence Time, Evidental Base, Derivation Chain.
 Exists in order to give the sentence information like
 from where it was derived (in order to avoid reasoning cycles, derivation chain), from which input it was derived (needed because it is not allowed to allow revision on overlapping evidental base), its temporal information or tense (occurence time), and its creation time (when it was derived/when it entered memory) 
