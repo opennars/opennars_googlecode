@@ -4,9 +4,14 @@
 
 Term: A Narsese statement
 
-Sentence: A term with a specific punctuation (which determines if it is a goal, question, judgement, or quest) a truth value and a stamp.
+Sentence: A term with a specific punctuation, a truth value and a stamp.
 
-Task: A sentence with a budget value 
+Goal: Sentence with ! as punctuation. (with specific desire value)
+Judgement: Sentence with ! as punctuation. (with specific truth value)
+Quest: Sentence with @ as punctuation. (question of desire value)
+Question: Sentence with ? as punctuation. (question of truth value)
+
+Task: A sentence with a budget value and a placeholder for a solution which is a sentence (answer to a question or truth value of a goal which measures to what extent it is already fullfilled).
 
 Stamp: Creation Time, Occurence Time, Evidental Base, Derivation Chain.
 Exists in order to give the sentence information like
@@ -17,3 +22,12 @@ Concept: This is the most complex data type in the system which adds some additi
 A concept is named by one term.
 A concept links to other concepts with different budget with tasks which are here called TaskLinks.
 A concept links to other concepts with termlinks, linking to exactly those concepts/terms who share a common term in bi-directional manner.
+
+A concept also consist of:
+Beliefs, which are judgements sorted according to confidence.
+
+Desires, which are goals of the concept.
+
+
+
+Questions, which are question tasks
