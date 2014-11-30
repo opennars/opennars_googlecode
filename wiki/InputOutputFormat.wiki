@@ -14,10 +14,10 @@ In a task, all the space characters are optional, and will be ignored by the sys
            <sentence> ::= <statement>"." [<tense>] [<truth>] // judgment to be remembered
                         | <statement>"?" [<tense>]           // question to be answered
                         | <statement>"@" [<tense>]           // question on desire value to be answered
-                        | <statement>"!" [<truth>]           // (goal to be realized)
+                        | <statement>"!" [<truth>]           // goal to be realized
           <statement> ::= "<"<term> <copula> <term>">"       // two terms related to each other
                         | <term>                             // a term can name a statement
-                        | "(^"<word> {","<term>} ")"         // (an operation to be executed)                         
+                        | "(^"<word> {","<term>} ")"         // an operation to be executed                         
              <copula> ::= "-->"                              // inheritance
                         | "<->"                              // similarity
                         | "{--"                              // instance
