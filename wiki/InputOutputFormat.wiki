@@ -11,8 +11,9 @@ In a task, all the space characters are optional, and will be ignored by the sys
 {{{
                         GRAMMAR RULE                          BRIEF EXPLANATION
                <task> ::= [<budget>] <sentence>              // task to be processed
-           <sentence> ::= [<tense>] <statement>"." [<truth>] // judgment to be remembered
-                        | [<tense>] <statement>"?"           // question to be answered
+           <sentence> ::= <statement>"." [<tense>] [<truth>] // judgment to be remembered
+                        | <statement>"?" [<tense>]           // question to be answered
+                        | <statement>"@" [<tense>]           // question on desire value to be answered
                         | <statement>"!" [<truth>]           // (goal to be realized)
           <statement> ::= "<"<term> <copula> <term>">"       // two terms related to each other
                         | <term>                             // a term can name a statement
@@ -79,4 +80,3 @@ Lifeforms are like maschines
 Tom eats chocolate
 
 {{{ <Tom --> (/,eat,_,chocolate)>. }}}
-
