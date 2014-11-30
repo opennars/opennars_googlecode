@@ -7,8 +7,6 @@ Each line in the system's input and output is either a _task_ (as defined in the
 
 In a task, all the space characters are optional, and will be ignored by the system in processing. 
 
-NOTE: Not all the constructs are implemented in the current version (1.5.7). The Narsese items for temporal inference (on time and tense) and procedural inference (on operation and goal) are removed from the code, and are re-implemented in version 1.6.0 (under development). The explanation of these items are put in "()" to separate them from the implemented ones.
-
 = Narsese Grammar =
 {{{
                         GRAMMAR RULE                          BRIEF EXPLANATION
@@ -25,12 +23,12 @@ NOTE: Not all the constructs are implemented in the current version (1.5.7). The
                         | "--]"                              // property
                         | "{-]"                              // instance-property
                         | "==>"                              // implication
-                        | "=/>"                              // (predictive implication)
-                        | "=|>"                              // (concurrent implication)
-                        | "=\>"                              // (retrospective implication)
+                        | "=/>"                              // predictive implication
+                        | "=|>"                              // concurrent implication
+                        | "=\>"                              // retrospective implication
                         | "<=>"                              // equivalence
-                        | "</>"                              // (predictive equivalence)
-                        | "<|>"                              // (concurrent equivalence)
+                        | "</>"                              // predictive equivalence
+                        | "<|>"                              // concurrent equivalence
                <term> ::= <word>                             // an atomic constant term
                         | <variable>                         // an atomic variable term
                         | <compound-term>                    // a term with internal structure
@@ -47,15 +45,38 @@ NOTE: Not all the constructs are implemented in the current version (1.5.7). The
                         | "(--," <term> ")"                  // negation
                         | "(||," <term> {","<term>} ")"      // disjunction
                         | "(&&," <term> {","<term>} ")"      // conjunction
-                        | "(&/," <term> {","<term>} ")"      // (sequential events)
-                        | "(&|," <term> {","<term>} ")"      // (parallel events)
+                        | "(&/," <term> {","<term>} ")"      // sequential events
+                        | "(&|," <term> {","<term>} ")"      // parallel events
            <variable> ::= "$"<word>                          // independent variable
                         | "#"[<word>]                        // dependent variable
                         | "?"[<word>]                        // query variable in question
-              <tense> ::= ":/:"                              // (future event)
-                        | ":|:"                              // (present event)
-                        | ":\:"                              // (past event)
+              <tense> ::= ":/:"                              // future event
+                        | ":|:"                              // present event
+                        | ":\:"                              // past event
               <truth> ::= "%"<frequency>[";"<confidence>]"%" // two numbers in [0,1]x(0,1)
              <budget> ::= "$"<priority>[";"<durability>]"$"  // two numbers in [0,1]x(0,1)
                <word> : Unicode string in an arbitrary alphabet
 }}}
+
+= Example Usage =
+
+Tim is dead
+
+{{{ <{Tim} --> [dead]> }}}
+
+Tim is a human
+
+{{{ <{Tim} --> human> }}}
+
+Humans are a lifeform
+
+{{{ <human --> lifeform> }}}
+
+Lifeforms are like maschines
+
+{{{ <lifeform <-> maschine> }}}
+
+Tom eats chocolate
+
+{{{ <Tom --> (/,eat,_,chocolate)>. }}}
+
