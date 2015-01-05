@@ -33,7 +33,7 @@ A sentence with a budget-value and a placeholder for a solution which is a sente
 * Stamp: 
 
 Creation Time, Occurence Time, Evidental Base, Derivation Chain.
-Exists in order to give the sentence information like from where it was derived (in order to avoid reasoning cycles, derivation chain), from which input it was derived (needed because it is not allowed to allow revision on overlapping evidental base), its temporal information or tense (occurrence time), and its creation time (when it was derived/when it entered memory). See StampInNARS wikipage for details.
+Exists in order to give the sentence information like from where it was derived (in order to avoid reasoning cycles, derivation chain), from which input it was derived (needed because it is not allowed to allow revision on overlapping evidental base), its temporal information or tense (occurrence time), and its creation time (when it was derived/when it entered memory). See wikipage StampInNARS for details.
 
 * Concept: 
 
