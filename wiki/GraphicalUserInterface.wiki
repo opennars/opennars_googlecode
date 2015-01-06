@@ -21,7 +21,7 @@ The left window shows from left to right, from top to bottom:
   * Belief Memory Duration, the same for beliefs.
   * Concept Memory Duration, the same for the entire concept.
 
-TODO: Describing what is plotted.
+Plotted are several different system parameters, like the CPU time the system needed for the different inference steps, the emotion indicators like happyness and busyness, when certain inference rules were applied and so on.
 
 http://open-nars.googlecode.com/svn/trunk/wiki/MainGUI.png
 
