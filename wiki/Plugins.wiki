@@ -27,7 +27,7 @@ This plugin is a planner plugin which works by collecting temporal coherence sta
 Because especially NAL9 operators may come with parameters, we decided to let operators also inherit from plugin. That way mental operators can be eliminated, added and configured at runtime.
 
 - Internal Experience -
-Allow the system to reason about internal processes, when removed entire NAL9 is deactivated. (is activated by default)
+Allow the system to reason about internal processes, when removed entire NAL9 is deactivated. NAL9 is very important for the development of consciousness. (is activated by default)
 
 - Runtime Settings -
 Some runtime parameters are not important enough to be part of the main window, but may be interesting to change sometimes, so we decided to add a little plugin which is just for changing runtime parameters which don't fit into the main window.
