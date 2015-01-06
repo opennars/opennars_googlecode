@@ -28,7 +28,7 @@ http://open-nars.googlecode.com/svn/trunk/wiki/MainGUI.png
 The right upper window shows the output of the system.
 Output in white is already forming a concept (because it came through the novel tasks filter), in which case one can click it. In the opening window the truth value of the belief of most confidence (same for desire) is shown. Also a frequency-confidence plot of all other beliefs of this concept is shown. For beliefs also a time-plot is shown when one of the beliefs is a event.
 The right lower window allows inputting Narsese.
-If the input is invalid, it will be assumed to be natural language.
+If the input is invalid, it will be assumed to be natural language or other data.
 
 = Task Tree =
 Shows the tasks and their parent tasks at one place.
