@@ -1,0 +1,37 @@
+#summary How to work with and what it displays.
+
+= Launcher =
+
+This is the start window, it shows you several options:
+  * Run NARS GUI - runs OpenNARS with main GUI interface
+  * Run Web GUI - runs OpenNARS with experimental web interface
+  * Run several application examples. See ApplicationPrograms wiki page.
+http://open-nars.googlecode.com/svn/trunk/wiki/Launcher.png
+
+= Main Window =
+
+The main GUI. (TODO)
+http://open-nars.googlecode.com/svn/trunk/wiki/MainGUI.png
+
+
+= Task Tree =
+Shows the tasks and their parent tasks at one place.
+http://open-nars.googlecode.com/svn/trunk/wiki/TaskTree.png
+
+
+= Concept Network =
+Shows all the concepts of the system, where the circles are the concepts and the squares are tasks. Green are tasklinks and red are termlinks.
+http://open-nars.googlecode.com/svn/trunk/wiki/ConceptNetwork.png
+
+
+= Sentence Table =
+Shows a listing of the sentences which were output of the system.
+Here you can sort according to different things like priority,
+also a plot is possible by selecting some and clicking on graph,
+which shows how they are semantically related.
+http://open-nars.googlecode.com/svn/trunk/wiki/SentenceTable.png
+
+= Plugin Menu =
+Shows the loaded plugins of the system and its configuration options.
+http://open-nars.googlecode.com/svn/trunk/wiki/PluginMenu.png
+
