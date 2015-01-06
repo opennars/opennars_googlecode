@@ -1,0 +1,27 @@
+#summary Example Programs using OpenNARS as AI.
+
+= Introduction =
+
+Since NARS is now very stable and has reached a certain value of stability and completeness, we decided to create first application examples, also to proof that NARS works in domains where usual a lot of domain knowledge and special algorithms are needed. In all these examples, NARS is used and no special domain knowledge is input. (altough NARS can make use of such knowledge)
+
+
+= Test Chamber =
+
+http://open-nars.googlecode.com/svn/trunk/wiki/TestChamber.png
+
+
+
+= Tic Tac Toe =
+
+This example is our first board game. Board games have a lot of implicit assumptions we are not aware of when we play them: Objects stay were they are until someone moves them. The board situations is most times not dependent on time at all, most times not even on how the situation looked like previously. When a stone is at a certain position there can't be another one at the same place, not can a stone be at different positions in the same game situation. Randomized things may not happen for a certain reason even if there is always some artifical reason to find for something happening. This example shows the extreme case, where not only the board game rules have to be learnt, but also typical assumptions of board games itself.
+
+http://open-nars.googlecode.com/svn/trunk/wiki/NarTacToe.png
+
+= Predict =
+
+This example uses NARS to predict the future values of a observed curve:
+This is where knowledge about often used functions like sinus can help a lot,
+but also here we decided to don't tell the system about anything by default,
+so that it has to built logic on how the values may behave in future entirely on its own.
+
+http://open-nars.googlecode.com/svn/trunk/wiki/Predict.png
