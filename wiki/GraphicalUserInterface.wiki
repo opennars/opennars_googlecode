@@ -8,10 +8,29 @@ This is the start window, it shows you several options:
   * Run several application examples. See ApplicationPrograms wiki page.
 http://open-nars.googlecode.com/svn/trunk/wiki/Launcher.png
 
-= Main Window =
+= Main Windows =
 
-The main GUI. (TODO)
+The main GUI.
+The left window shows from left to right, from top to bottom:
+  * The start button which activates the system.
+  * A step button to apply a single inference step.
+  * A finish button, which sets the system to maximum speed and maximul silence,
+    in which case only executions and answers to input questions will show up in the output log. (recommended for question answering)
+
+  * A volume slider, which controls how much priority a task needs to have in order to be shown in the output log.
+
+  * A decision threshold slider.
+  * Task Memory Duration, a forgetting parameter for tasklinks.
+  * Belief Memory Duration, the same for beliefs.
+  * Concept Memory Duration, the same for the entire concept.
+
+TODO: Describing what is plotted.
+
 http://open-nars.googlecode.com/svn/trunk/wiki/MainGUI.png
+
+The right upper window shows the output of the system.
+The right lower window allows inputting Narsese.
+If the input is invalid, it will be assumed to be natural language.
 
 
 = Task Tree =
@@ -34,4 +53,4 @@ http://open-nars.googlecode.com/svn/trunk/wiki/SentenceTable.png
 = Plugin Menu =
 Shows the loaded plugins of the system and its configuration options.
 http://open-nars.googlecode.com/svn/trunk/wiki/PluginMenu.png
-
+See Plugins wiki page.
