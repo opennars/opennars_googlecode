@@ -61,22 +61,26 @@ In a task, all the space characters are optional, and will be ignored by the sys
 
 = Example Usage =
 
-Tim is dead
+  * _Tim is dead._
 
-{{{ <{Tim} --> [dead]> }}}
+{{{ <{Tim} --> [dead]>. }}}
 
-Tim is a human
+  * _Tim is a human._
 
-{{{ <{Tim} --> human> }}}
+{{{ <{Tim} --> human>. }}}
 
-Humans are a lifeform
+  * _Humans are a lifeform._
 
-{{{ <human --> lifeform> }}}
+{{{ <human --> lifeform>. }}}
 
-Lifeforms are like maschines
+  * _Lifeforms are like machines._
 
-{{{ <lifeform <-> maschine> }}}
+{{{ <lifeform <-> machine>. }}}
 
-Tom eats chocolate
+  * _Tom eats chocolate._
 
-{{{ <Tom --> (/,eat,_,chocolate)>. }}}
+{{{ <(*,{Tom},chocolate) --> eat>. }}}
+
+{{{ <{Tom} --> (/,eat,_,chocolate)>. }}}
+
+{{{ <chocolate --> (/,eat,{Tom},_)>. }}}
