@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary How plugins can help, what they need to fullfill to be valid, and what plugins we have.
 
 = Introduction =
 
