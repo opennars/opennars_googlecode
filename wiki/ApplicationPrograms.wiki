@@ -33,3 +33,9 @@ but also here we decided to don't tell the system about anything by default,
 so that it has to built logic on how the values may behave in future entirely on its own.
 
 http://open-nars.googlecode.com/svn/trunk/wiki/Predict.png
+
+= Nario =
+
+More complex games like jump&runs usually have a lot from above, logical strict coherences in the environment, physical dynamics, partial observability, and so on. AI which plays such games usually knows everything (has a complete model), or has tremendous training time or computational resources in order to deal with such domains. Here you can watch NARS starting from no knowledge, learning to jump over obstacles and so on.
+
+http://open-nars.googlecode.com/svn/trunk/wiki/Nario.png
