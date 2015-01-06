@@ -6,7 +6,7 @@ Beginning with OpenNARS 1.6.1, there is the possibility to code plugins for the 
 
 There are some properties plugins have to fullfill in order to be valid:
 
-  * Don't violate NAL, if plugins generate NAL statements by other NAL statements, the plugin has to apply valid NAL rules and manage the stamp correctly. For example when a planner-plugin helps the general control mechanism to generate a plan to fullfill a desired goal, the resulting plan will have the truth value same as the general control mechanism would have created with temporal induction and the temporal chaining rule.
+  * They are not allowed to violate NAL, if plugins generate NAL statements by other NAL statements, the plugin has to apply valid NAL rules and manage the stamp correctly. For example when a planner-plugin helps the general control mechanism to generate a plan to fullfill a desired goal, the resulting plan will have the truth value same as the general control mechanism would have created with temporal induction and the temporal chaining rule.
 
   * If they need the system to actively call an operator in order to use the plugin (most plugins are that way), they need to provide the system with the needed usage desire evidence when loaded, the system won't use what it doesn't know that it exists. A example for a possible wiki-ask-plugin:
 
