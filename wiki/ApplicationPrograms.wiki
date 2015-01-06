@@ -80,3 +80,17 @@ but also here we decided to don't tell the system about anything by default,
 so that it has to built logic on how the values may behave in future entirely on its own.
 
 http://open-nars.googlecode.com/svn/trunk/wiki/Predict.png
+
+= Natural Language and Structure Learning =
+
+Besides the fact that the input window gives information about syntax error in your Narsese, input is not restricted to Narsese. You can put in any data you can think of, in which case it will be up to NARS to make sense of it in the current situation (for example in the examples).
+
+http://open-nars.googlecode.com/svn/trunk/wiki/StructureLearning.png
+
+Such a input will be transformed to 
+
+{{{
+<(*,word-tom,word-is,word-the,word-brother,word-of,word-me) --> linepart>. :|: %1.00;0.90%
+}}}
+
+where the words are changed automatically so that the words wont conflict with the concepts the words represent. See NaturalLanguageProcessing wiki page for more information of how such a input will be interpreted according to the current situation.
