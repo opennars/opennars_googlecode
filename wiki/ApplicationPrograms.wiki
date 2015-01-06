@@ -93,4 +93,4 @@ Such a input will be transformed to
 <(*,word-tom,word-is,word-the,word-brother,word-of,word-me) --> linepart>. :|: %1.00;0.90%
 }}}
 
-where the words are changed automatically so that the words wont conflict with the concepts the words represent. See NaturalLanguageProcessing wiki page for more information of how such a input will be interpreted according to the current situation.
+where the words are changed automatically so that the words wont conflict with the concepts the words represent. See NaturalLanguageProcessing wiki page for more information of how such a input will be interpreted according to the current situation. Also "Natural Language Processing by Reasoning and Learning" is relevant here: http://www.cis.temple.edu/~pwang/Publication/NLP.pdf
