@@ -36,7 +36,7 @@ Shows the tasks and their parent tasks at one place.
 http://open-nars.googlecode.com/svn/trunk/wiki/TaskTree.png
 
 = Concept Network =
-Shows all the concepts of the system, where the circles are the concepts and the squares are tasks. Green are tasklinks and red are termlinks.
+Shows all the concepts of the system, where the circles are the concepts and the squares are tasks. Green are tasklinks and red are termlinks. The size of the elements encodes their priority.
 
 http://open-nars.googlecode.com/svn/trunk/wiki/ConceptNetwork.png
 
