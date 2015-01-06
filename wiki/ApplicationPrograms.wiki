@@ -62,7 +62,7 @@ http://open-nars.googlecode.com/svn/trunk/wiki/Rover.png
 
 = Tic Tac Toe =
 
-This example is our first board game. Board games have a lot of implicit assumptions we are not aware of when we play them: Objects stay were they are until someone moves them. The board situations is most times not dependent on time at all, most times not even on how the situation looked like previously. When a stone is at a certain position there can't be another one at the same place, not can a stone be at different positions in the same game situation. Randomized things may not happen for a certain reason even if there is always some artifical reason to find for something happening. This example shows the extreme case, where not only the board game rules have to be learnt, but also typical assumptions of board games itself.
+This example is our first board game. Board games have a lot of implicit assumptions we are not aware of when we play them: Objects stay were they are until someone moves them. The board situations is most times not dependent on time at all, most times not even on how the situation looked like previously. When a stone is at a certain position there can't be another one at the same place, not can a stone be at different positions in the same game situation. Randomized things may not happen for a certain reason even if there is always some artifical reason to find for something happening. This example shows the extreme case, where not only the board game rules have to be learnt, but also typical assumptions of board games itself. In order to give information of whether NARS thinks about a certain board position, the current priority of the tile is visualized with color.
 
 http://open-nars.googlecode.com/svn/trunk/wiki/NarTacToe.png
 
