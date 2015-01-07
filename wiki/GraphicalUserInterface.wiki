@@ -66,4 +66,4 @@ To input custom statements just use the input window (the bottom blank part in t
 {{{
 <{tom} --> cat>.
 }}} 
-When one wants to load another experience file, one may at first want to reset NARS's memory with Memory -> Reset, so that the examples won't influence each other.
+When we want to load another experience file, we may at first want to reset NARS's memory with Memory -> Reset, so that the examples won't influence each other.
