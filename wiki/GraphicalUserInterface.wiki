@@ -54,3 +54,15 @@ Shows the loaded plugins of the system and its configuration options.
 http://open-nars.googlecode.com/svn/trunk/wiki/PluginMenu.png
 
 See Plugins wiki page.
+
+= Basic Usage =
+
+Especially for beginners who want to get used to the system by trying the basic NAL examples, the most straightfoward way to do so is the following:
+
+http://open-nars.googlecode.com/svn/trunk/wiki/Launcher.png
+
+Also the current experience can be recorded by the button in the left upper corner of the I/O window, or with Memory -> Save Experience.
+To input custom statements just use the input window (the bottom blank part in the I/O window), a possible example input:
+{{{
+<{tom} --> cat>.
+}}} 
