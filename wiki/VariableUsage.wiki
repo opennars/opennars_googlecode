@@ -2,12 +2,13 @@
 
 = Introduction =
 
-The variable types of NAL sometimes create confusion. This article will be an explaination when to use which variable type, also some intiutive examples are given.
+The variable terms of NAL sometimes create confusion. This article is an explanation about when to use which variable type, also some intuitive examples are given.
 
 = Independent Variables =
-They represent any unspecified related part of a term which matches the pattern of the term the variable occurs in, and has to start with "$". Intiutively they allow saying things like: "Whenever something has a certain property, it also has this and that property"
-"Whenever something is from type A, it also is from type B". They correspond at least loosely to variables under the "forall" quantor in first order logic.
 
+They represent any unspecified term that matches the pattern the variable occurs in, and has to start with "$". Intuitively they allow saying things like: "Whenever something has a this property (or instance), it also has that property (or instance)". 
+
+This type of variable typically appears as the common subject term or predicate term of two inheritance statements in an implication or equivalency statement. They correspond at least loosely to variables under the universal ("for all") quantifier in first order logic.
 
 Example:
 
@@ -16,43 +17,17 @@ Something which is a cat, is also an animal
 <<$1 --> cat> ==> <$1 --> animal>>.
 }}}
 
-Or let us consider something more complicated, the uncle relation in Prolog, which can not be done in a single step:
-uncle(X,Y) :- parent(Z,Y), brother(X,Z). 
-which can be represented as:
-
-{{{
-<(&&,<(*,$Z,$Y) --> parent>,<(*,$X,$Z) --> brother>) ==> <(*,$X,$Y) --> uncle>>.
-}}}
-
-Let's try with:
-
-{{{
-<(*,adam,tom) --> parent>.
-<(*,eva,tom) --> parent>.
-<(*,tim,adam) --> brother>.
-<(*,tim,tom) --> uncle>?
-}}}
-
-
-{{{
-works:
-<(*,tim,tom) --> uncle>. %1.00;0.73% {281 ...
-}}}
-
 = Dependent Variables =
+
 They refer to a specific term and have to start with "#".
-Intiutively, they allow talking about a thing
-without having to name it. They correspond at least loosely to variables under the "exists" quantor in first order logic.
+Intuitively, they allow talking about a thing without having to name it. 
+
+This type of variable typically appears as the common subject term or predicate term of two (or more) inheritance statements in a conjunction. They correspond at least loosely to variables under the existential ("there is") quantifier in first order logic.
 
 Example:
-I see a cat
+There are red apples.
 {{{
-(&&,<#1 --> cat>,<#1 --> see>).
-}}}
-
-The cat I see is green
-{{{
-(&&,<#1 --> cat>,<#1 --> see>,<#1 --> green>).
+(&&,<#1 --> [red]>,<#1 --> apple>).
 }}}
 
 = Query Variables =
@@ -64,41 +39,68 @@ Who is a cat?
 <?1 --> cat>?
 }}}
 
-Note the difference to for example "do you see a cat?" (not asking for a specific one)
+Note the difference to for example "Are there red apples?" and "Which is a red apple?" are expressed respectively as
 {{{
-(&&,<#1 --> cat>,<#1 --> see>)?
+(&&,<#1 --> [red]>,<#1 --> apple>)?
 }}}
+{{{
+(&&,<?1 --> [red]>,<?1 --> apple>)?
+}}}
+where the former only asks for a truth-value, while the latter asks for a concrete instance.
 
 = Mixed Examples =
 
-Every lock can be opened by some key
+Different types of variable can be used together in several ways to represent something more complicated. For example, the "uncle" relation in Prolog can be defined as:
+uncle(X,Y) :- parent(Z,Y), brother(X,Z). 
+
+In Narsese, a similar representation is:
+
+{{{
+<(&&,<(*,#Z,$Y) --> parent>,<(*,$X,#Z) --> brother>) ==> <(*,$X,$Y) --> uncle>>.
+}}}
+
+Let's try with:
+
+{{{
+<(*,adam,tom) --> parent>.
+<(*,eva,tom) --> parent>.
+<(*,tim,adam) --> brother>.
+<(*,tim,tom) --> uncle>?
+}}}
+
+{{{
+works:
+<(*,tim,tom) --> uncle>. %1.00;0.73% {281 ...
+}}}
+
+More complicated cases: 
+"Every lock can be opened by some key" is expressed as:
 {{{
 <<$x --> lock> ==> (&&,<#y --> key>,<$x --> (/,open,#y,_)>)>.  
 }}}
 
 Interesting NAL9 case which involves all variable types:
 
-"who is similar to tom" is a good question.
+"Who is similar to Tom?" is a good question.
 {{{
-<<?who <-> tom> --> good_question>.
+<{<?who <-> Tom>} --> (&, [good], question)>.
 }}}
 If something is a good question, and you ask yourself the question,
 some agent will be a good agent.
 {{{
-<(&&,<$1 --> good_question>,(^wonder,$1)) =/> (&&,<#3 --> agent>,<#3 --> good>)>.
+<(&&,<#1 --> (&, [good], question)>, (*, {$2}, #1) --> wonder>) ==> ({#2} --> (&, [good], agent)>.
 }}}
 
-nars is a agent
+NARS is a agent
 {{{
-<nars --> agent>.
+<{NARS} --> agent>.
 }}}
-nars should also be good
+NARS should also be good
 {{{
-<nars --> good>!
+<{NARS} --> [good]>!
 }}}
 
 As a result, in order to make the goal true, it will ask who is similar to Tom.
-
 
 = Syllogistic Pattern =
 
@@ -108,7 +110,7 @@ Dependent Variables and Independent Variables only get introduced in the followi
              independent                      dependent
 extensional  <<$x --> S> ==> <$x --> P>>      (&&,<#x --> S>,<#x --> P>)
 
-intensional  <<P --> $x> ==> <S --> #x>>      (&&,<S --> #x>,<P --> #x>)
+intensional  <<P --> $x> ==> <S --> $x>>      (&&,<S --> #x>,<P --> #x>)
 }}}
 
 and for equivalence:
@@ -117,7 +119,7 @@ and for equivalence:
              independent                      dependent
 extensional  <<$x --> S> <=> <$x --> P>>      <#x --> (&,S,P)>
 
-intensional  <<P --> $x> <=> <S --> @x>>      <(|,P,S) --> #x>
+intensional  <<P --> $x> <=> <S --> $x>>      <(|,P,S) --> #x>
 }}}
 
 For example <<$x --> S> ==> <$x --> P>>. can be created based on <a --> S> and <a --> P> because <<$x --> S> ==> <$x --> P>> matches <<$x --> S> ==> <$x --> P>> by instantiating $x with a.
