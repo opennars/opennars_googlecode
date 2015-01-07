@@ -2,13 +2,13 @@
 
 = Introduction =
 
-Since NARS is now very stable and has reached a certain value of stability and completeness, we decided to create first application examples, also to proof that NARS works in domains where usual a lot of domain knowledge and special algorithms are needed, also domains where usually numerical learning algorithms are applied are shown. In all these examples, NARS is used and no special domain knowledge is input. (altough NARS can make use of such knowledge)
-Usually AI in such domains is unable to master other such domains without programmatical changes and reconfigurations, or even more important, is not able to take knowledge from one domain to the other even if some situations might be similar and be solveable by similar solutions.
+Since NARS is now very stable and has reached a certain value of stability and completeness, we decided to create first application examples, also to proof that NARS works in domains where usual a lot of domain knowledge and special algorithms are needed, also domains where usually numerical learning algorithms are applied are shown. In all these examples, NARS is used and no special domain knowledge is input. (although NARS can make use of such knowledge)
+Usually AI in such domains is unable to master other such domains without programmatical changes and reconfigurations, or even more important, is not able to take knowledge from one domain to the other even if some situations might be similar and be solvable by similar solutions.
 
 
 = Test Chamber =
 
-Originally built just to be able to visualize the existing NAL8 examples, it is now our most complex application example, there you can built arbitrary logic circuits, combine doors and lights with switches, create maschines which produce pizza, build arbitrary mazes the system has to solve on the fly, where the structure of the circuits are not known to NARS (if not especially told).
+Originally built just to be able to visualize the existing NAL8 examples, it is now our most complex application example, there you can built arbitrary logic circuits, combine doors and lights with switches, create machines which produce pizza, build arbitrary mazes the system has to solve on the fly, where the structure of the circuits are not known to NARS (if not especially told).
 This example will one day show the difference between narrow AI and general AI very clearly, and already now is a source of very interesting results.
 
 The Elements of TestChamber in the left window from top to bottom:
@@ -37,45 +37,43 @@ Request Goal: Force NARS to desire something.
   * make closed: same for closing
   * be chatty: let NARS gain some defined experience in which case it will get desire to apply the say operator in different situations. (experimental, but works, communication as a desire, see more in: NaturalLanguageProcessing wiki page)
 
-Predefine knowledge: Contains some knowledge one can tell it about. like for example common sense in which case it will have evidence that it is somewhere after it goes there, that it holds something after it picks it, made to speed up learning a bit.
+Predefine knowledge: Contains some knowledge one can tell it about, like for example common sense in which case it will have evidence that it is somewhere after it goes there, that it holds something after it picks it, made to speed up learning a bit.
 
-Need of Resources: if need pizza is activated, a hunger goal will show up in NARS from time to time, only achieveable by eating pizza which can be placed.
+Need of resources: if "need pizza" is activated, a hunger goal will show up in NARS from time to time, which is only achievable by eating pizza which can be placed.
 
 Advanced Settings:
 
- * Allow joy in action inserts forced actions as goal, in which case they will gain desire of forced actions directly, which destracts NARS from doing what you want often as consequence, but allows it to like repeating what it was forced to do. Don't allow joy deactivates this mode.
+ * Allow joy in action inserts forced actions as goal, in which case they will gain desire of forced actions directly, which distracts NARS from doing what you want often as consequence, but allows it to like repeating what it was forced to do. Don't allow joy deactivates this mode.
 
- * Tell object categories will suggest an category to objects which get placed, like when {key0} is placed, NARS will get the information <{key0} --> key>, what this means NARS needs to find out, but it helps NARS to categorize keys together for example, and not just objects by what actions leaded to what changes in the environment (in which case NARS would develop its own concept of key, but this can happen despite the given information, but the similarity of the own concept to key will likely be recognized)
+ * Tell object categories will suggest a category to objects which get placed, like when {key0} is placed, NARS will get the information <{key0} --> key>, what this means NARS needs to find out, but it helps NARS to categorize keys together for example, and not just objects by what actions leaded to what changes in the environment (in which case NARS would develop its own concept of key, but this can happen despite the given information, but the similarity of the own concept to key will likely be recognized)
 
-  * Load/Save: Save the state of testchamber into a file, or load examples we provided.
-
-
+  * Load/Save: Save the state of TestChamber into a file, or load examples we provided.
 
 http://open-nars.googlecode.com/svn/trunk/wiki/TestChamber.png
 
 
 = Rover =
 
-This is a usual reinforcement learning example, except that the input space is so complex that usually a classifier is applied. NARS has to correlate sequences of actions itself with getting the reward from its body when a object has been catched, like a simple lifeform searching for food, driven by body rewards.
+This is a usual reinforcement learning example, except that the input space is so complex that usually a classifier is applied. NARS has to correlate sequences of actions itself with getting the reward from its body when an object has been catched, like a simple lifeform searching for food, driven by body rewards.
 
 http://open-nars.googlecode.com/svn/trunk/wiki/Rover.png
 
 = Tic Tac Toe =
 
-This example is our first board game. Board games have a lot of implicit assumptions we are not aware of when we play them: Objects stay were they are until someone moves them. The board situations is most times not dependent on time at all, most times not even on how the situation looked like previously. When a stone is at a certain position there can't be another one at the same place, not can a stone be at different positions in the same game situation. Randomized things may not happen for a certain reason even if there is always some artifical reason to find for something happening. This example shows the extreme case, where not only the board game rules have to be learnt, but also typical assumptions of board games itself. In order to give information of whether NARS thinks about a certain board position, the current priority of the tile is visualized with color.
+This example is our first board game. Board games have a lot of implicit assumptions we are not aware of when we play them: Objects stay where they are until someone moves them. The board situations are most times not dependent on time at all, most times not even on how the situation looked like previously. Where a stone is at a certain position there can't be another one at the same place, nor can a stone be at different positions in the same game situation. Randomized things may not happen for a certain reason even if there is always some artificial reason to find for something happening. This example shows the extreme case, where not only the board game rules have to be learnt, but also typical assumptions of board games itself. In order to give information of whether NARS thinks about a certain board position, the current priority of the tile is visualized with color.
 
 http://open-nars.googlecode.com/svn/trunk/wiki/NarTacToe.png
 
 = Nario =
 
-More complex games like jump&runs usually have a lot from above, logical strict coherences in the environment, physical dynamics, partial observability, and so on. AI which plays such games usually knows everything (has a complete model), or has tremendous training time or computational resources in order to deal with such domains. Here you can watch NARS starting from no knowledge, learning to jump over obstacles and so on.
+More complex games like jumps and runs usually have a lot more than above, logical strict coherences in the environment, physical dynamics, partial observability, and so on. AI which plays such games usually knows everything (has a complete model), or has tremendous training time or computational resources in order to deal with such domains. Here you can watch NARS starting from no knowledge, learning to jump over obstacles and so on.
 
 http://open-nars.googlecode.com/svn/trunk/wiki/Nario.png
 
 = Predict =
 
-This example uses NARS to predict the future values of a observed curve:
-This is where knowledge about often used functions like sinus can help a lot,
+This example uses NARS to predict the future values of an observed curve:
+This is where knowledge about often used functions like sine can help a lot,
 but also here we decided to don't tell the system about anything by default,
 so that it has to built logic on how the values may behave in future entirely on its own.
 
@@ -93,4 +91,4 @@ Such a input will be transformed to
 <(*,word-tom,word-is,word-the,word-brother,word-of,word-me) --> linepart>. :|: %1.00;0.90%
 }}}
 
-where the words are changed automatically so that the words wont conflict with the concepts the words represent. See NaturalLanguageProcessing wiki page for more information of how such a input will be interpreted according to the current situation. Also "Natural Language Processing by Reasoning and Learning" is relevant here: http://www.cis.temple.edu/~pwang/Publication/NLP.pdf
+where the words are changed automatically so that the words won't conflict with the concepts the words represent. See NaturalLanguageProcessing wiki page for more information of how such a input will be interpreted according to the current situation. Also "Natural Language Processing by Reasoning and Learning" is relevant here: http://www.cis.temple.edu/~pwang/Publication/NLP.pdf
