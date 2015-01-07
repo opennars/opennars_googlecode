@@ -53,7 +53,7 @@ Shows the loaded plugins of the system and its configuration options.
 
 http://open-nars.googlecode.com/svn/trunk/wiki/PluginMenu.png
 
-See Plugins wiki page.
+See [Plugins] wiki page.
 
 = Basic Usage =
 
