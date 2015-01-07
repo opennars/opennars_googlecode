@@ -55,7 +55,7 @@ http://open-nars.googlecode.com/svn/trunk/wiki/PluginMenu.png
 
 See [Plugins] wiki page.
 
-= Basic Usage =
+= Experience Library & Basic Usage =
 
 Especially for beginners who want to get used to the system by trying the basic NAL examples, the most straightfoward way to do so is the following:
 
