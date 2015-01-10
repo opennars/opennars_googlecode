@@ -25,8 +25,8 @@ Plugins we created include:
   * TemporalParticlePlanner
   * Eternalized Implication Graph,
   * Derivation Filters
-- ClassicalConditioningHelper
-- A interval alone can neither form a sentence nor create things like +3 =/> b
+  * ClassicalConditioningHelper
+  * A interval alone can neither form a sentence nor create things like +3 =/> b
   * Elimination of the problem that often sentences like <$1 --> test>. were formed
   * Other mental plugins
 New inference rules:
