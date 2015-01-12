@@ -3,7 +3,7 @@
 
 = Current Situation =
 
-The most recent release [OpenNarsOneDotSixDotOne OpenNARS 1.6.1] (finished in January 2015) implements the whole NAL (NAL 1-9), as described in [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning]. 
+The most recent release [OpenNARSOneDotSixDotOne OpenNARS 1.6.1] (finished in January 2015) implements the whole NAL (NAL 1-9), as described in [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning]. 
 
 Another major release is OpenNARS 1.5.7, a stable implementation of NAL 1-6. 
 
