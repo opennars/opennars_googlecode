@@ -3,7 +3,9 @@
 
 = Current Situation =
 
-The main Open-NARS project (under https://github.com/opennars/opennars) has been updated to [https://drive.google.com/folderview?id=0B8Z4Yige07tBUk5LSUtxSGY0eVk&usp=sharing version 1.6.0] in August 2014. This version implementes NAL-1 to NAL-9 as described in [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning]. This version was based on 1.5.7 which was a major refactoring of the previous versions with issue resolutions and performance improvements done by SeH, Patrick, and Pei, and was extended with NAL7-9. As such it provides all major functions of NAL for the first time. Also it comes with a new GUI with different visualizations and also a 2D test environment. This version also realizes some ideas previously suggested by Joe Geldart, Jeff Thompson, and Jean-Marc Vanel. The design is briefly described in OpenNarsOneDotSix.
+The most recent release [OpenNarsOneDotSixDotOne OpenNARS 1.6.1] (finished in January 2015) implements the whole NAL (NAL 1-9), as described in [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning]. 
+
+Another major release is OpenNARS 1.5.7, a stable implementation of NAL 1-6. 
 
 = Future Tasks =
 
@@ -17,35 +19,20 @@ The conceptual issues usually cannot be resolved by coding considerations, but s
 
 In the near future, the focus of conceptual design should be on the logic part (i.e., Narsese and NAL). The details of the control part (memory structure and resource allocation) will wait until the logic part is relatively stable.
 
-=== Working examples ===
+=== Working examples and applications ===
 
-As before, there are two types of testing cases, single-step and multiple-step. 
+There are several types of testing cases:
+  * [SingleStepTestingCases Single-step examples] show the premise-conclusion relationship of each inference rule
+  * [MultiStepExamples Multi-step examples] show typical functions of the system that takes several steps
+  * There are more complicated tests described in OpenNarsOneDotSixDotOne and [http://www.cis.temple.edu/~pwang/demos.html Testing Cases].
 
-The single-step test cases of NAL 7-9 need to check every types of inference one-by-one, with easily understandable examples. The examples for NAL-7 and NAL-8 need to be checked for validity, and more examples for NAL-9 should be constructed.
-
-The single-step examples will be turned into unit tests, though the plain text files still need to be maintained, since they work better for demonstration purpose.
-
-The multiple-step examples are designed mainly for demonstration, that is, to show how the system works in various representative situations. For this purpose, their intermediate results also make sense. The current file needs to be revised (some desired intermediate results do not appear), as well as extended to cover the new functions. It may be better to split the current file into multiple files, each contains a single example. All these cases should be collected in a folder.
-
-After the examples are updated, the wiki pages about them should be updated accordingly.
-
-=== New releases ===
-
-Versions 1.6.1 and newer ones will be released after major revisions.
-
-=== Application tests ===
-
-More complicated testing can be domain-specific, as shown by the previous [http://www.cis.temple.edu/~pwang/demos.html Testing Cases] and the [http://www.cis.temple.edu/~pwang/Publication/NLP.pdf experiment on NLP].
-
-The functions of version 1.6.0 is ready for practical application, though the control part may need some customization.
-
-To carry out such an application test, it is important to remember that it cannot be done by simply dump a large number of tasks into the system then let it run. It is more efficient to do it in a step-by-step manner, and to follow the order of (1) Narsese (i.e., make sure all the problems and solutions can be expressed), (2) NAL (i.e., make sure all the desired steps are supported by existing rules), and (3) NARS (i.e., make sure the complete process can be carried out when given proper experience).
+To carry out an application test, it is important to remember that it cannot be done by simply dump a large number of tasks into the system then let it run. It is more efficient to do it in a step-by-step manner, and to follow the order of (1) Narsese (i.e., make sure all the problems and solutions can be expressed), (2) NAL (i.e., make sure all the desired steps are supported by existing rules), and (3) NARS (i.e., make sure the complete process can be carried out when given proper experience).
 
 Some testing cases can be the problems that have been studied in AI and CogSci. To process them in NARS will clarify its relations with other theories and models.
 
 === Software development ===
 
-Beside the conceptual issues, developmental tasks include:
+Beside the conceptual issues, future developmental tasks include:
   * Debugging
   * Documentation (both javadoc and wiki)
   * Refactoring (some ad hoc code should be merged into the overall structure)
