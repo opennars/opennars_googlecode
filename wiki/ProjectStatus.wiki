@@ -13,7 +13,7 @@ In the near future, there are the following tasks to be accomplished, probably i
 
 === Conceptual design ===
 
-Though the major design decisions have been implemented, there are still remaining conceptual issues. Some of them are listed in OpenNarsOneDotSix, and there will surely more to be found in the testing process.
+Though the major design decisions have been implemented, there are still remaining conceptual issues. Some of them are listed in OpenNARSOneDotSix, and there will surely more to be found in the testing process.
 
 The conceptual issues usually cannot be resolved by coding considerations, but should be addressed in ways that are consistent with the overall design of NARS.
 
