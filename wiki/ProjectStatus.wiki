@@ -28,7 +28,7 @@ There are several types of testing cases:
 
 To carry out an application test, it is important to remember that it cannot be done by simply dump a large number of tasks into the system then let it run. It is more efficient to do it in a step-by-step manner, and to follow the order of (1) Narsese (i.e., make sure all the problems and solutions can be expressed), (2) NAL (i.e., make sure all the desired steps are supported by existing rules), and (3) NARS (i.e., make sure the complete process can be carried out when given proper experience).
 
-Some testing cases can be the problems that have been studied in AI and CogSci. To process them in NARS will clarify its relations with other theories and models.
+Some testing cases can be the problems that have been studied in AI and cognitive science. To process them in NARS will clarify its relations with other theories and models.
 
 === Software development ===
 
