@@ -1,6 +1,8 @@
 This is a NLP wiki article for OpenNarsOneDotSix.
 Here we will borrow needed ideas from Dr. Pei Wang's publication "Natural Language Processing by Reasoning and Learning",
 which also presents the idea that natural language processing in AGI, especially in NARS, can be done by the inference rules an AGI provides anyway.
+#summary How to give NARS natural language experience.
+
 
 To motivate the examples shown here, two things I consider important:
 Is there really a way to create "natural language understanding" without using AGI itself? I doubt it, natural language sentences most time talk/are related to things in the environment the AGI perceives (the meaning of a sentence is not inherent in a sentence itself, but by what it relates to), and need a flexible interpretation (for example AGI agents would probably create a language on their own if the current situation demands efficient communication between them). Furthermore I think that natural language processing has to be an "active" and "selective" process which completely shares the goals of the AGI in order to cooperate correctly.
