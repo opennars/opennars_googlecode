@@ -149,6 +149,6 @@ in which case a anticipation is formed by the system, an application of closed w
   IN: <(&/,<a --> b>,+3) =/> <b --> c>>.
   IN: <a --> b>. :|:
 25
-<(&/,<a --> b>,+3) =/> <b --> c>>. :\: %0.00;0.45%
-<<(&/,<a --> b>,+3) =/> <b --> c>>. :\: %0.92;0.91%
+ OUT: <(&/,<a --> b>,+3) =/> <b --> c>>. :\: %0.00;0.45%
+ OUT: <<(&/,<a --> b>,+3) =/> <b --> c>>. :\: %0.92;0.91%
 }}}
