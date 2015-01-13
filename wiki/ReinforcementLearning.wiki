@@ -66,13 +66,13 @@ when it has a better idea in a certain situation, it will tend to not do so whil
 In simplest case in order to represent a binary reward value, it would just be
 
 {{{
-<nars --> good>. :|: 
+<{nars} --> [good]>. :|: 
 }}}
 
 in case of good reward, and 
 
 {{{
-(--,<nars --> good>). :|: 
+(--,<{nars} --> [good]>). :|: 
 }}}
 
 in case of bad reward.
@@ -81,7 +81,7 @@ However, NARS is not restricted to this, you can give anything you can express i
 
 The goal in this case would be for example:
 {{{
-<nars --> good>!
+<{nars}--> [good]>!
 }}}
 so that it will desire this state and try to achieve it.
 
@@ -90,7 +90,7 @@ so that it will desire this state and try to achieve it.
 
 This one works analogous,
 {{{
-<door --> opened>. :|: 
+<{door} --> [opened]>. :|: 
 }}}
 
 In order to represent numeric values, it is a good idea to give it information of how the numbers are subjectively related:
