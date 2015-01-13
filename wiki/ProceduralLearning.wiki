@@ -1,8 +1,6 @@
 #summary Learning temporal and procedural knowledge
 #labels Phase-QA
 
-*This document describes NARS 1.3.3 and the corresponding examples.*
-
 == Introduction ==
 
 The basic notions in procedural inference have been introduced in ProceduralInference, with examples given in ProceduralExamples. In this document, one example is explained with more details. The example itself is in Example-NAL8-5.txt, and here only the abridged version is discussed.
@@ -143,3 +141,14 @@ Similarly, a belief about an implication relation can be conditioned, so as to g
  OUT: <(&/,<(*,Self,key001) --> reachable>,<(*,key001) --> ^pick>) =/> <(*,Self,key001) --> hold>>. %1.00;0.91%
 }}}
 Again, the new evidence is merged with the previous knowledge, to gradually increase the confidence of knowledge about operations.
+
+Also it can happen, that a future belief does not happen as predicted,
+in which case a anticipation is formed by the system, an application of closed world assumption justified by the fact that the system expected to observe it but it didn't. To complete the process, revision takes over.
+
+{{{
+  IN: <(&/,<a --> b>,+3) =/> <b --> c>>.
+  IN: <a --> b>. :|:
+25
+<(&/,<a --> b>,+3) =/> <b --> c>>. :\: %0.00;0.45%
+<<(&/,<a --> b>,+3) =/> <b --> c>>. :\: %0.92;0.91%
+}}}
