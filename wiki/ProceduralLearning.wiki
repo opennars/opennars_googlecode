@@ -166,39 +166,57 @@ The first example shows how the system (as a robot) uses procedural inference to
 
 It starts with 9 input sentences, and they are roughly translated into English in the following.
 
-{{{*** [01] <{t001} --> [opened]>!}}}
+{{{
+*** [01] <{t001} --> [opened]>!
+}}}
 
 "To make t001 opened!"
 
-{{{*** [02] <{t001} --> door>.}}}
+{{{
+*** [02] <{t001} --> door>.
+}}}
 
 "t001 is a door."
 
-{{{*** [03] <(&/, <(*, Self, {t002}) --> hold>, <(*, Self, {t001}) --> at>, (^open, {t001})) =/> <{t001} --> [opened]>>.}}}
+{{{
+*** [03] <(&/, <(*, Self, {t002}) --> hold>, <(*, Self, {t001}) --> at>, (^open, {t001})) =/> <{t001} --> [opened]>>.
+}}}
 
 "If I hold t002, arrive at t001, and execute the operation 'open' at t001, then t001 will be opened."
 
-{{{*** [04] <(*, {t002}, {t001}) --> key-of>.}}}
+{{{
+*** [04] <(*, {t002}, {t001}) --> key-of>.
+}}}
 
 "t002 is the key of t001."
 
-{{{*** [05] <(&/, <(*, Self, {t002}) --> reachable>, (^pick, {t002})) =/> <(*, Self, {t002}) --> hold>>.}}}
+{{{
+*** [05] <(&/, <(*, Self, {t002}) --> reachable>, (^pick, {t002})) =/> <(*, Self, {t002}) --> hold>>.
+}}}
 
 "If I can reach t002, and execute the operation 'pick' at t002, then I will hold t002."
 
-{{{*** [06] <(&|, <(*, #x, #y(#x)) --> on>, <(*, Self, #y(#x)) --> at>) =|> <(*, Self, #x) --> reachable>>.}}}
+{{{
+*** [06] <(&|, <(*, $x, #y) --> on>, <(*, Self, #y) --> at>) =|> <(*, Self, $x) --> reachable>>.
+}}}
 
 "If an object is on something, which is located at the same place as me, I can reach that object."
 
-{{{*** [07] <(*, {t002}, {t003}) --> on>. :|:}}}
+{{{
+*** [07] <(*, {t002}, {t003}) --> on>. :|:
+}}}
 
 "t002 is on t003."
 
-{{{*** [08] <{t003} --> desk>.}}}
+{{{
+*** [08] <{t003} --> desk>.
+}}}
 
 "t003 is a desk."
 
-{{{*** [09] <(^go-to, #x) =/> <(*, Self, #x) --> at>>.}}}
+{{{
+*** [09] <(^go-to, $x) =/> <(*, Self, $x) --> at>>.
+}}}
 
 "If I execute the 'go to' operation aimed at a place, I'll arrive at that place."
 
