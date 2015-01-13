@@ -1,4 +1,6 @@
-This is a NLP wiki article for OpenNarsOneDotSix.
+#summary How to provide natural language experience.
+
+This is a NLP wiki article for OpenNarsOneDotSixDotOne.
 Here we will borrow needed ideas from Dr. Pei Wang's publication "Natural Language Processing by Reasoning and Learning",
 which also presents the idea that natural language processing in AGI, especially in NARS, can be done by the inference rules an AGI provides anyway.
 #summary How to give NARS natural language experience.
