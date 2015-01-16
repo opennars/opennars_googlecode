@@ -15,7 +15,7 @@ There are some properties plugins have to fulfill in order to be valid:
 <nars --> knows>! 
 }}}
 
-  * They shouldn't violate AIKR (Assumption of Insufficient Knowledge and Resources). For some application-specific plugins it is okay to violate it though it should really just operate in this domain.
+  * They shouldn't violate AIKR (Assumption of Insufficient Knowledge and Resources). For some application-specific plugins it is okay to violate it though if it should really just operate in this domain.
 
 = Internal Experience =
 Allow the system to reason about internal processes, when removed NAL9 will not be used by the system if not especially trained. NAL9 is very important for the development of consciousness. (is activated by default)
