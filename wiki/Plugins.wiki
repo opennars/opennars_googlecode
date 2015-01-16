@@ -12,7 +12,7 @@ There are some properties plugins have to fulfill in order to be valid:
 
 {{{
 <(&/,(^wonder,$sth),(^pluginAskWiki,$sth)) =/> <(*,SELF,$sth) --> know>>.
-<(*,SELF,#sth) --> know>! 
+(&&,<#sth --> knowledge>,<(*,SELF,#sth) --> know>)! 
 }}}
 
   * They shouldn't violate AIKR (Assumption of Insufficient Knowledge and Resources). For some application-specific plugins it is okay to violate it though if the entire system should really just operate in this domain.
