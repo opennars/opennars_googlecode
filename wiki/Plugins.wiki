@@ -11,8 +11,8 @@ There are some properties plugins have to fulfill in order to be valid:
   * If they need the system to actively call an operator in order to use the plugin (most plugins are that way), they need to provide the system with the needed usage desire evidence when loaded. The system won't use what it doesn't know that it exists. A example for a possible wiki-ask-plugin:
 
 {{{
-<(&/,(^wonder,$sth),(^pluginAskWiki,$sth)) =/> <(*,SELF,$sth) --> know>>.
-(&&,<#sth --> knowledge>,<(*,SELF,#sth) --> know>)! 
+<(&/,(^wonder,$sth),(^pluginAskWiki,$sth)) =/> <(*,SELF,$sth) --> [knows]>>.
+(&&,<#sth --> knowledge>,<(*,SELF,#sth) --> [knows]>)! 
 }}}
 
   * They shouldn't violate AIKR (Assumption of Insufficient Knowledge and Resources). For some application-specific plugins it is okay to violate it though if the entire system should really just operate in this domain.
