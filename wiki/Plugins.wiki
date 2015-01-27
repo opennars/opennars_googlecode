@@ -37,13 +37,4 @@ Some runtime parameters are not important enough to be part of the main window, 
 Those are plugins which didn't make it into the release anymore. They can be downloaded now, OpenNARS-1.6.1 is able to load them at runtime:
 
 - GlobalAnticipation -
-This plugin is for accelerating the revision of temporal hypotheses by overcoming some issues which are caused by the current anticipation approach by a temporal matching strategy. The issues it tries to solve are:
-
-1. Anticipations disturb the cognition of temporal events (mainly temporal induction), because anticipation generates events on its own.
-
-2. Multiple anticipations often lead to a lot of confusion of the system like <(--,a) =|> (--,b)>. because let's say (--,b) was a result of disappointment of a previous anticipation, but because another disappointment of "a" leaded to interference, the disappointment of "b" leaded to a useless statement and not to the "revision" of the temporal hypothesis which formed the anticipation of "a". 
-In more complex environments a lot of anticipations need to happen in parallel without interferring with each other. 
-
-3. Problem of derivation: When two chained hypotheses like <(&/,a,b) =/> c> as a result of <a =/> b> and <b =/> c>, it is even more difficult to revise this hypothesis, because the same chaining needs to happen again after the disappointment of the anticipation already happened.
-
-All 3 points are solved by this plugin which pushes the decision making performance a lot, however since it currently risks to take too much time for anticipations, I guess we need to find a middle way between this strategy and the default strategy. However, for practical examples which need decision making, this plugin in combination with the temporal particle planner pushes the performance of the system a lot.
+This plugin is for accelerating the updating of temporal hypotheses by the strategy, to let all hypotheses over a certain threshold of priority directly watch the input events. When the preconditions are matched, and the predicted event happens, it gets strenghtened (temporal induction), if not, it gets weakened. (When loaded it overwrites the default strategy, which works by generating a negative event when a disappointment of a prediction happens)
