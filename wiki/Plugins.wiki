@@ -36,5 +36,5 @@ Some runtime parameters are not important enough to be part of the main window, 
 
 Those are plugins which didn't make it into the release anymore. They can be downloaded now, OpenNARS-1.6.1 is able to load them at runtime:
 
-- GlobalAnticipation -
+= Global Anticipation =
 This plugin is for accelerating the updating of temporal hypotheses by the strategy, to let all hypotheses over a certain threshold of priority directly watch the input events. When the preconditions are matched, and the predicted event happens, it gets strenghtened (temporal induction), if not, it gets weakened. (When loaded it overwrites the default strategy, which works by generating a negative event when a disappointment of a prediction happens)
