@@ -9,30 +9,46 @@ Every reasoning system has a "logic" part and a "control" part. The former speci
 
 The logic part of NARS consists of the formal language [InputOutputFormat Narsese], [http://www.cis.temple.edu/~pwang/Publication/semantics.pdf Experience-Grounded Semantics (EGS)], and [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic (NAL)]. It has been formally specified and mostly implemented.
 
-The control part of NARS is relatively underdeveloped. It fundamental principles had been decided at the very beginning of the project, but many concrete details remain to be decided, and the current implementation is only a very rough prototype that only handles simple examples (such as those in MultiStepExamples). A major reason of this situation is the dependency of the control part on the logic part: each time a major change is made in the former, the letter often needs to be changed accordingly, while on the other hand, the logic part does not depend on the details of the control part. Because of this, the past work on NARS has been focused on the logic part, and the control part has been implemented to serve the purpose of testing Narsese and NAL, rather than for the solving of actual problems. Now the logic part is relatively mature, so the attention is gradually moving into the control part of the system.
+The control part of NARS is relatively underdeveloped. It fundamental principles had been decided at the very beginning of the project, but many concrete details remain to be decided, and the current implementation is only a very rough prototype that only handles simple cases. A major reason of this situation is the dependency of the control part on the logic part: each time a major change is made in the former, the letter often needs to be changed accordingly, while on the other hand, the logic part does not depend on the details of the control part. Because of this, the past work on NARS has been focused on the logic part, and the control part has been implemented to serve the purpose of testing Narsese and NAL, rather than for the solving of actual problems. Now the logic part is relatively mature, so the attention is gradually moving into the control part of the system.
 
 == Design principle ==
 
 Traditionally, the control mechanism in a reasoning system depends on either a domain-specific "strong method" or a domain-independent "weak method". In the former case, the inference steps are organized into inference algorithms specially designed for the problem to be solved; in the latter case, some universal algorithm, such as exhaustive research, is applied that does not need domain-specific knowledge. In both cases, the inference process follows an algorithm that is repeatable, either deterministically or probabilistically.
 
-NARS is based on the theory that intelligence is a relative rationality, and an intelligent system should be adaptive and work with insufficient knowledge and resources. Consequently, NARS uses neither the "strong method" nor the "weak method", but works in a "non-algorithmic" manner, by selecting its inference steps at run time, depending on many ever-changing factors. Consequently, an individual inference process, as part of the system's lifelong experience, is not repeatable, even in the probabilistic sense. It is not a "strong method" because NARS is designed to be general-purpose, without assuming any domain knowledge. On the other hand, it is not "weak method", neither, because the system learns domain knowledge gradually, so its selection of steps will become more and more based on its past experience.
+NARS is based on the theory that intelligence is a _relative rationality_, and an intelligent system should be _adaptive_ and work with _insufficient knowledge and resources_. Consequently, NARS uses neither the "strong method" nor the "weak method", but works in a "non-algorithmic" manner, by selecting its inference steps at run time, depending on many ever-changing factors. Consequently, an individual inference process, as part of the system's lifelong experience, is not repeatable, even in the probabilistic sense. It is not a "strong method" because NARS is designed to be general-purpose, without assuming any domain knowledge. On the other hand, it is not "weak method", neither, because the system learns domain knowledge gradually, so its selection of steps will become more and more based on its past experience.
 
-Roughly speaking, the function of control mechanism in NARS is to dynamically allocate the system's limited resources to the activities demanding them, according to the estimations made according to the system's beliefs summarizing the system's past experience. Under the assumption of insufficient resources, the system will be unable to satisfy all the demands, and under the assumption of insufficient knowledge, there is no guarantee that the selections the system makes are optimal, judged according to the system's future experience.
+Roughly speaking, the function of control mechanism in NARS is to dynamically allocate the system's limited resources to the activities demanding them, based on the estimations made according to the system's beliefs summarizing the past experience. Under the assumption of insufficient resources, the system will not be able to satisfy all the resource demands, and under the assumption of insufficient knowledge, there is no guarantee that the selections the system makes are optimal when judged according to the system's future experience.
 
 For theoretical discussions about this approach, see the two books and the [http://www.cis.temple.edu/~pwang/papers.html publications on Resource Management].
+
+== Formal model of resource allocation ==
+
+The control problem can be abstractly specified as an optimization problem: given finite processing time and storage space, find the best allocation plan to satisfy the system's demands as much as possible.
+
+There are many formal models for such problems, but none of them can be used here, because their assumptions cannot be satisfied, even approximately. For instance, it cannot be assumed that the problems occur according to a probability distribution (even a unknown one), nor that the problems will appear at specific time. New models need to be developed.
+
+The objective of the system, at every moment, is to accomplish its tasks (judgment, goals, and questions) to the best possible result. Given that NAL does not produce "final solution" to normal tasks, the more beliefs are used on a task, the better the solution will be. Since new tasks may come to the system at any moment, it is usually impossible to decide an algorithm, with a resource budget, before the processing starts and remains fixed.
+
+Given this situation, the objective of NARS is not to process all of its tasks perfectly, not even to process them to a "satisfying level", but to achieve the highest overall efficiency in resource usage. It means to use priority values to summarize the various factors involved in each resource allocation decision, and to adjust the priority values at run time to reflect the change in the environment and within the system itself.
+
+Similar to the design of truth-value functions, in the control part almost all related quantities are represented as "extended Boolean values" (EB values), that is, real numbers in [0, 1]. The basic functions defined on them are "extended Boolean functions" (EB functions) that extend the traditional Boolean functions _and_, _or_, and _not_ from binary to EB values (the first two are also known as triangular norm and triangular conorm, or t-norm and t-conorm, respectively). The functions used in NARS are _and(x, y) = xy_, _or(x, y) = 1 - (1 - x)(1 - y)_, and _not(x) = 1 - x_. A few other simple functions are also used, such as the average of a few EB values. 
+
+A control function is designed by first considering the factors that should be involved, then analyzing their relationship and represent it using the basic EB functions. All the control functions are tentative, in the sense that they are based on the current research results, and may be revised as the research progresses.
 
 == Memory structure and control strategy ==
 
 To realize dynamic resource allocation, NARS self-organizes its memory using probabilistic priority-queue to give data items different treatment. A _bag_ is a data structure with the basic operations (1) _put in_, (2) _take out_, and (3) _access by key_. The _take-out_ operation is probabilistic, according to the priority distribution of the items in the bag. Each operation takes a small constant time to finish. Bag deals with insufficient time and space by allowing relative and absolute forgetting.
+
+*Issue*: Currently the probability of an item to be taken out is _proportional_ to its priority value. It may be necessary to add a parameter to control the evenness of the probability.
 
 Since NAL is a term logic, and its inference rules typically require shared term in premises, tasks and beliefs can be indexed and clustered by their subject term and predicate term. In NARS, each concept is named by a term, and refers to the tasks and beliefs with the term in it. Consequently, a concept is an independent unit of storage and processing. Roughly speaking, the system's memory contains a bag of concepts; a concept contains a bag of tasks and a bag of beliefs.
 
 A summary for the architecture and working cycle is [https://sites.google.com/site/narswang/home/nars-introduction/architecture.jpg here]. NARS repeats the following working cycle:
 
   # Select a concept C from the memory
-  # Select a tasklink from C, which specifies the task to be used
-  # Select a termlink from C, which specifies the belief to be used
-  # Invoke the applicable inference rules with the task and the belief as premises to derive new tasks
+  # Select a tasklink from C, which specifies the task T to be used
+  # Select a termlink from C, which specifies the belief B to be used
+  # Invoke the applicable inference rules with T and B as premises to derive new tasks
   # Put the derived tasks into new tasks buffer
   # Process selected derived tasks and input tasks obtained in this cycle by putting them into the corresponding concepts (and create one if it doesn't exist yet), increasing the priority of the concepts with the budget of the derived task, revising existing beliefs and create new beliefs according to the new task, reporting an answer to an input question if it is the best that the system has found
 
@@ -40,17 +56,29 @@ A graphical description of how questions are answered by the system by this proc
 
 http://open-nars.googlecode.com/svn-history/r446/trunk/wiki/question_answering.png
 
-The priority of an item (task, belief, or concept) is determined at its creation time, then adjusted each time the item is accessed, mainly depending on the following factors:
-  * its intrinsic quality (which remains stable over time)
-  * its performance record (which accumulates over time)
-  * its contextual relevance (which changes constantly).
+*Issue*: It may be necessary to add task buffers to each concept to hold the tasks added, so as to postpone their processing until the concept is selected. Competition can be added into the buffer, so only selected tasks are processed. 
 
-Generally speaking, the system constantly reorganizes its knowledge for question answering and goal fulfilling. The major criteria in organizing knowledge include:
-  * Correctness with respect to experience
-  * Concreteness of prediction
-  * Compactness in content
+== Budget values and functions ==
 
-Most of the factors involved in control are measured by real numbers in [0, 1], and the budget-functions are recursively formed using extended Boolean operations (_and_, _or_, and _not_), as well as simple functions like _average_.
+In OpenNARS, every data item participating in resource competition extends the abstract class Item, which contains a BudgetValue. Examples of such data item include task, belief, and concept.
+
+Each BudgetValue contains 3 EB values: _priority_, _durability_, and _quality_.
+
+The _priority_ of an item determines its relative access rate with respect to the other items in the same bag. This value is usually adjusted after each access of the item to reflect the feedback from its usage, as well as the change in the internal context. This value depends on many other values.
+
+The _durability_ an item determines the decay rate of its _priority_. After a constant period, the _priority_ value decay by multiplying the _durability_ value, which is one of the factors that changes _priority_. This mechanism is responsible for _relative forgetting_ of items: unless it is "activated" by other forces, every item becomes less accessible in time.
+
+The _quality_ of an item is mostly determined by its intrinsic value to the system, without considering its relevance to the current context. It also depends on multiple factors.
+
+[_content to be added_]
+
+== Attention and activation spreading ==
+
+[_content to be added_]
+
+== System parameters ==
+
+[_content to be added_]
 
 == Dual-process in control ==
 
@@ -62,6 +90,10 @@ Beside (external) knowledge about the environment, NARS will learn several types
   * _Structural_ knowledge embedded among the priority values. This type of knowledge decides the chance for a data item (task, belief, or concept) to be accessed, and it cannot be expressed in Narsese, but have to be obtained via repeated practise.
   * _Procedural_ knowledge expressed as compound operations. This type of knowledge control the routine actions taken by the system, and is also mainly obtained through practise, though it can be expressed in Narsese.
   * _Declaritive_ knowledge expressed as descriptions of methods and processes. This type of knowledge can be fully represented as judgments in Narsese, and can influence the system's selections.
+
+== Feeling and emotion ==
+
+[_content to be added_]
 
 == The proper usage of NARS ==
 
