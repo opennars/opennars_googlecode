@@ -43,7 +43,7 @@ To realize dynamic resource allocation, NARS self-organizes its memory using pro
 
 Since NAL is a term logic, its inference rules typically require shared term in premises, so tasks and beliefs can be indexed and clustered by their component terms. In NARS, each _concept_ is a data structure named by a term, and it links to the tasks and beliefs with the term in it. Consequently, a concept is an independent unit of storage and processing.
 
-Roughly speaking, the system's memory contains a bag of concepts; a concept contains a bag of taskLinks referring to the relevant tasks (justment, goal, or question) and a bag of termLinks referring to the relevant beliefs (judgments only).
+Roughly speaking, the system's memory contains a bag of concepts; a concept contains a bag of task-links referring to the relevant tasks (justment, goal, or question) and a bag of term-links referring to the relevant beliefs (judgments only).
 
 The following figure summarizes the overall architecture and procedure of NARS:  https://sites.google.com/site/narswang/home/nars-introduction/architecture.jpg 
 
@@ -135,13 +135,24 @@ Each concept contains a bag of task-links that refers to the relevant tasks and 
 
 The control mechanism of NARS shares ideas with evolutionary computation and neural network, though does not directly use their techniques.
 
-context of task processing
+The resource competition of _items_ in a _bag_ is similar to the competition of _individuals_ in a _population_; the _priority-biased processing_ is similar to the _fitness-biased reproduction_; and the derivation of a new task from a parent task and a parent belief is similar to the creation of an individual from two parents. On the other hand, NARS does not have pure random action like _mutation_, and the various inference carries out much more complicated and justifiable ways to produce new tasks than _crossover_. 
 
-[_content to be added_]
+The memory of NARS can be naturally interpreted as a conceptual network that supports distributed representation and parallel processing, with the inference rules as actions that modify the topological structure and weights on the links. Under this interpretation, the priority distribution among concepts is similar to the activation distribution in neural networks (NNs), and priority adjustments is similar to activation spreading. However, there are several key differences in this analogy:
+  * In NARS, the logic and the control are clearly separated. Priority is part of the latter, so does not play a representational role (as in NNs).
+  * In NARS, activation spreading is not a stand-alone process, but a consequence of task derivation. That is, what is sent from a concept to another is not "pure energy", but a task with meaning, which triggers an increase in priority of the receiver.
+  * In NARS, this activation spreading is highly selective. A "firing concept" does not increase the activity of all of its neighbors, but only a small portion of them.
+
+The overall priority distribution in memory at a moment represents how the system's attention is distributed at that time, and this attention shifts constantly, both according to the external input tasks and the internal processing of the tasks.
+
+For a given task, the current priority distribution in memory and in the relevant concept form the processing _context_ of the task, and it determines what beliefs will be used to process the task. Unlike most other approaches, NARS does not take "context" as micro world models with labels, but as the internal environment in which a task is processed. In this sense, context is unlabeled, ever-changing, and have no clear boundary. Even so, it still captures what we usually mean by "context sensitive" in AI and cognitive science.
 
 == System parameters ==
 
-[_content to be added_]
+The control mechanism is specified with many "system parameters", which are quantities that has not been given a unique value. It is may be because the best value has not been found, but more likely it is because there is no "best value". As the development advances, the former cases will be gradually eliminated, while the latter cases will remain.
+
+A system parameter indicates a bias of the system, so different values will give the system different "personalities". There is no best value because a certain personality may be good for solving some problems, but bad for some others. Even though, usually there is a "normal range" for each parameter, and values outside it will not be acceptable.
+
+One way to tune and study system parameters is to compare them in a community of multiple NARS implementations, each with a different personality. It is also possible to use an evolutionary process to generate and select new personalities. However, such experiments should wait until the individual NARS systems to become relatively complete and stable.
 
 == Dual-process in control ==
 
@@ -156,11 +167,17 @@ Beside (external) knowledge about the environment, NARS will learn several types
 
 == Feeling and emotion ==
 
-subjective evaluation
+Feeling and emotion play an important role in truly intelligent systems, and they start from subjective appraisal of events, entities, and situations, with respect to goals of the system.
 
-overall status
+Goals provide the ultimate criteria for the system's appraisals and references.
 
-desire-value of non-statement terms
+First, the appraisal of statements is represented by the _desire-value_ of a statement. It is determined by the statement's logical relation with the goals that have been taken into account.
+
+Second, the overall status of the system in goal satisfaction is measured by a few global variables, such as _satisfaction_ and _busyness_. 
+
+Finally, a _desire-value_ will be added to every term, to record the system's appraisal to it, evaluated according to the relation of the term with the events and situations. Its value may be various degrees of "like" or "dislike", as well as "mixed" or "don't care".
+
+*Issue*: The last type has not been implemented yet, and may wait the first two to become relatively stable. Another open issue is how to effectively use emotion in the control mechanism.
 
 == The proper usage of NARS ==
 
