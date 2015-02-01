@@ -33,7 +33,7 @@ Given this situation, the objective of NARS is not to process all of its tasks p
 
 Similar to the design of truth-value functions, in the control part of NARS almost all related quantities are represented as "extended Boolean values" (EB values), that is, real numbers in [0, 1] with the boundary cases taken as Boolean values. The basic functions defined on them are "extended Boolean functions" (EB functions) that extend the traditional Boolean functions _and_, _or_, and _not_ from binary to EB values (the first two are also known as _triangular norm_ and _triangular conorm_, or _t-norm_ and _t-conorm_, respectively). The basic EB functions used in NARS are _and(x, y) = xy_, _or(x, y) = 1 - (1 - x)(1 - y)_, and _not(x) = 1 - x_. A few other simple functions are also used, such as the average of a few EB values. 
 
-A control function is designed by first considering the factors that should be involved in thar case, then analyzing their relationship and representing it using the basic EB functions. All the control functions are tentative, since they are based on the current research results, so may be revised as the research progresses.
+A control function is designed by first considering the factors that should be involved in that case, then analyzing their relationship and representing it using the basic EB functions. All the control functions are tentative, since they are based on the current research results, so may be revised as the research progresses.
 
 == Memory structure and control strategy ==
 
@@ -68,7 +68,7 @@ The system's working cycle follow a fixed algorithm, and takes a small constant 
 
 In OpenNARS, every data item participating in resource competition (such as _belief_, _task_, _concept_, as well as the links to them) extends the abstract class Item, which has a _budget_ consisting of 3 EB values: _priority_, _durability_, and _quality_.
   * The _priority_ of an item determines its current access chance with respect to the other items in the same bag. This value is increased when the item is activated, and is highly context-sensitive. It summarizes many factors.
-  * The _durability_ of an item determines the decay rate of the _priority_ by multiplying into it periodically. This process is responsible for the _relative forgetting_ of items, and is the only one that deactivates an item, that is, there is no "inhibition" or "forced forgetting" at this level.
+  * The _durability_ of an item determines the decay rate of the _priority_ by multiplying into it periodically. This process is responsible for the _relative forgetting_ of items, and is normally the only one that deactivates an item, that is, there is no "inhibition" or "forced forgetting" at this level.
   * The _quality_ of an item is mostly determined by its intrinsic value to the system, without considering its relevance to the current context. It also determines the _residual priority_ of the item where relative forgetting stops.
 
 In each working cycle, only the directly related items will have their budgets adjusted, which means the system may need to decide for an item how long a decay has been "overdue", and to decrease its priority for multiple decay periods. The system will not attempt to globally traverse the items to implement forgetting. 
@@ -95,13 +95,47 @@ The _durability_ a belief is increased together with the _priority_ in the first
 
 === budget of task ===
 
-[_content to be added_]
+A task can be a new judgment to be absorbed into beliefs, a goal to be achieved, or a question to be answered. Each of the three types is handled differently, though there are some common treatments.
+
+The _quality_ of a task is similar to that of a belief, though goal and question have no truth-value.
+
+The _priority_ and _durability_ of an input task are specified by the user, which gives the user an opportunity to influence the system's processing of the task. System default values are used when no values are provided.
+
+*Issue*: In the future when different types of users and task sources are involved, each may have a different default budget or a different allowed budget range. One option is to add this into input channel.
+
+The _priority_ and _durability_ of a derived task depends on those of its parent task and belief, as well as the type of the inference.
+
+*Issue*: One unusual feature of NARS is that a derived task will exist and be processed independently, without a permanent bond to its parent task. For some applications, such a feature may be undesired. In that case, a link can be added so every derived task links to its parent task. Each time when it is selected, the existence of its parent task is checked first, and when the parent no longer exist, the child will be removed, too. However, such a treatment will decrease the system's creativity and autonomy. A compromise is to use a system parameter to tune the _durability_ of the derived tasks, so that after the parent task is removed, its children will all disappear soon.
+
+The _priority_ and _durability_ of a task are increased only on one situation: the same task is repeatedly generated, either from the same source and from different sources. This situation should not be confused with the treatment of truth-value. If the same judgment is derived multiple times from the same parent task and belief, the copies will be merged into a task with a larger budget, though the truth-value remains the same, since the premises are based on overlapping evidence. In this way, repeated inference is not completely a waste of time, since it will at least increase the chance for the conclusion to be further processed.
+
+The budget of a goal or a question is reduced when the task is partially satisfied. The better the solution is (evaluated by the choice rule), the lower the budget will become. This process and the relative forgetting process will eventually let a task be removed from the system, though it does not necessarily mean that the task has been processed to a certain level of satisfaction.
 
 === budget of concept ===
 
-[_content to be added_]
+A concept is created when an accepted task contains a term for which there is no existing concept. In this case, the initial _priority_ and _durability_ of the concept is determined by those of the task. After that, the budget of the concept is adjusted independently.
+
+The _quality_ of a concept is initially determined by the complexity of the term, and then adjusted according to the quality of the links and the usefulness of the concept to the system.
+
+*Issue*: Currently the complexity of a term is completely defined according to its internal structure: atomic terms have complexity value 1, and a compound's complexity is the sum of the complexity values of its components plus 1 (for the operator). To reward often used compounds, their complexity may be considered as lower than their "literal complexity" defined above, since they are often used as a whole, and its internal structure becomes less and less "visible". The same effect can be achieved by the _^naming_ operator, which creates an atomic term for an often used compound, and builds a strong similarity statement between the two. It is unclear whether both mechanisms are needed, and if not, which one should be used.
+
+The quality of links is a more complicated issue. Currently only a very rough function is there as a placeholder.
+
+*Issue*: The _quality_ of a concept is probably a compromise or balance of the following factors:
+  * "Well-defined" concepts are preferred. The beliefs of such a concept can be derived from a small and relatively stable "core meaning" (as its "essence" or "definition"), and most questions about its instance or properties have sharp "yes/no" answers.
+  * "Basic-level" concepts are preferred. Such a concept has balanced extension and intension, that is, many instances sharing many properties. For example, concept "car" is usually preferred than both the more general concept "vehicle" and the more specific concept "truck".
+  * Useful concepts are preferred. This evaluation is completely based on the system's experience, according how often a task is successfully solved using the concept.
+How to measure the above factors and whether there are others remain to be decided.
+
+=== budget of link ===
+
+Each concept contains a bag of task-links that refers to the relevant tasks and a bag of term-links that refers to its compound or component terms from where the beliefs are obtained. Therefore, the initial budget of a link is obtained from the target it links to. However, after that, the budget of the link is adjusted independently. For example, the belief "dove --> bird" is linked from both the concept "dove" and the concept "bird", and the quality of the belief remains the same for the two concepts. However, this belief is more useful for "dove" than for "bird", so gradually the two links will have very different budget values.
 
 == Attention and activation spreading ==
+
+The control mechanism of NARS shares ideas with evolutionary computation and neural network, though does not directly use their techniques.
+
+context of task processing
 
 [_content to be added_]
 
@@ -122,7 +156,11 @@ Beside (external) knowledge about the environment, NARS will learn several types
 
 == Feeling and emotion ==
 
-[_content to be added_]
+subjective evaluation
+
+overall status
+
+desire-value of non-statement terms
 
 == The proper usage of NARS ==
 
