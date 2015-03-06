@@ -1,10 +1,10 @@
-#summary Functions and remaing issues of Open-NARS 1.6.x.
+#summary Functions and remaining issues of Open-NARS 1.6.x.
 
 = Introduction =
 
 Open-NARS 1.6.x is different from 1.5.x in the following major aspects:
   # In logic, it implements NAL-7, NAL-8, and NAL-9, and therefore completely implements NAL, as specified in [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning].
-  # It contains new ideas to be further explored, such as [https://code.google.com/p/open-nars/wiki/PerceptionInNARS Perception] and [https://code.google.com/p/open-nars/wiki/Plugins Plugins].
+  # It introduces some new ideas to be further explored, such as [PerceptionInNARS] and [Plugins].
   # In [https://code.google.com/p/open-nars/wiki/InferenceControl control], it refines the automatic resources allocation that has been there from the beginning, and combines it with the voluntary control introduced in NAL-9.
   # In software structure, it absorbs the ideas from previous discussions, as well as the recent discussions. The program has a completely new GUI and very different internal structure.
 
@@ -51,19 +51,20 @@ In NARS, temporal induction refers to the situation where events _e1_ and _e2_ a
 
 This rule is one of the exceptions of the "generalized syllogistic" pattern in NAL inference rules, which requires the premises to have a common term. This pattern guarantees the semantic relevance among the statements involved, and also greatly reduced the number of legal combinations of premises. The current exception is allowed, because the two events are related _temporally_, though not semantically, and in future works on sensation organs similar exceptions will be allowed for _spatially_ related events to be combined into compound events without shared components. This rule also includes variable introduction. If _e1_ and _e2_ have common subject or predicate, an independent variable will be introduced in the conclusion.
 
-*Issue*: Other forms of variable introduction where the common term occupies other positions.
-
-*Issue*: Though in principle temporal induction can happen between any two tensed judgments, two do that exhaustively is not affordable. Currently the rule is applied only on consecutive new (input or derived) events, though it can be extended to non-consecutive ones. Also, it should be implemented as question driven, in response to _e1 =/> e2?_ or similar questions.
-
-*Issue*: Another problem is about the time interval _n_ between the two events. To simply derive _e1 =/> e2_ is correct, but does not capture the temporal information about the interval. To use another event to represent the interval (as tried in version 1.3.3) is too accurate to be useful, because _(&/,e1,interval(100)) =/> e2_ and _(&/,e1,interval(101)) =/> e2_ probably should be merged by the revision rule, since the difference between the two numbers are negligible. For this consideration, in the current implementation, the interval is represented by a special type of term, which approximately record _m = log(n)_ as an integer. With such a belief as premise, the detachment rule will do deduction with _e1_, and abduction with _e2_, and the occurrenceTime of the conclusion is calculated from that of the other event, plus or minus _exp(m)_ to approximately recover the _n_ value. Whether the log/exp functions should be replaced by power functions (such as sqrt/square) is a question to be answered later. As in other places, whenever an accurate time interval is needed, it is always possible to replace the approximate time interval by a better defined event, so that is not an issue.
+*Issue*: There may be other forms of variable introduction where the shared term is neither the common subject nor the common predicate.
 
 *Issue*: Whether to derive conclusions like _e2 =\> (&/,e1,interval(n))_?
 
-*Issue*: Whether to allow interval terms _interval(n)_ to appear in I/O (and in Narsese grammar), when the measurement _n_ is completely subjective?
+*Issue*: Though in principle temporal induction can happen between any two tensed judgments, to do that exhaustively is not affordable. Beside what has been implemented, the rule may be invoked (1) as question driven, too, in response to _e1 =/> e2?_ or similar questions, and (2) exhaustively between events in a buffer (the system's "flow of consciousness") that contains "active events", which is separated from the current task buffers in that it only contains significant events after preprocessing. In this way, non-event tasks and trivial (i.e., anticipated or irrelevant) events will not be involved.
+
+As for the time interval _n_ between the two events, to simply derive _e1 =/> e2_ is correct, but it does not capture the temporal information about the interval. To use another event to represent the interval (as tried in version 1.3.3) is too accurate to be useful, because _(&/,e1,interval(100)) =/> e2_ and _(&/,e1,interval(101)) =/> e2_ probably should be merged by the revision rule, since the difference between the two numbers are negligible. For this consideration, in the current implementation, the interval is represented by a special type of term, which approximately record _m = log(n)_ as an integer. With such a belief as premise, the detachment rule will do deduction with _e1_, and abduction with _e2_, and the occurrenceTime of the conclusion is calculated from that of the other event, plus or minus _exp(m)_ to approximately recover the _n_ value. Whether the log/exp functions should be replaced by power functions (such as sqrt/square) is a question to be answered later. As in other places, whenever an accurate time interval is needed, it is always possible to replace the approximate time interval by a better defined event, so that is not an issue.
+
+Since the interval measurement is subjective, it will not appear in the system's communication language, but is used in internal representation only. In the future, different intervals will be associated with different temporal terms, such as "after a while", "hours later", etc., via learning, so as to be expressible in communication.
+
 
 = Procedural Inference (NAL-8) =
 
-Beside [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning], procedural reasoning in NARS is also discussed in [http://www.degruyter.com/view/j/jagi.2012.3.issue-3/v10229-011-0021-5/v10229-011-0021-5.xml?format=INT Solving a Problem With or Without a Program]. A previous implementation exists as version 1.3.3, with [https://code.google.com/p/open-nars/source/browse/trunk/nars-dist/Examples-1.3.3/ working examples in several files], as well as descriptions in [ProceduralInference], [ProceduralExamples], and [ProceduralLearning].
+Beside [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning], procedural reasoning in NARS is also discussed in [http://www.degruyter.com/view/j/jagi.2012.3.issue-3/v10229-011-0021-5/v10229-011-0021-5.xml?format=INT Solving a Problem With or Without a Program]. A previous implementation exists as version 1.3.3, with [https://code.google.com/p/open-nars/source/browse/trunk/nars-dist/Examples-1.3.3/ working examples in several files], as well as descriptions in [ProceduralLearning].
 
 == Inference on goals ==
 
@@ -85,23 +86,27 @@ An operation with acquired operator _oper_ and arguments _args_ is internally re
 
 *Issue*: Technically, _(`*`, SELF, args) --> oper_ and _(`*`, args, SELF) --> oper_ both work as the internal representation of an operation. The former looks more natural (so is used in the book), while the latter is slightly more efficient (so is used in the code). A final decision will need to be made to keep the descriptions consistent.
 
+The key of procedural learning is the generation of "compound operations". The major structures compound operations are _sequential, parallel, conditional_, and _recursive_.
+
+*Issue*: Do all of the four fully covered in the current code? Does _recursive_ operations need special treatment, or can be handled as special cases of _conditional_ statements?
+
+*Issue*: Should "compound operations" be clearly separated from "compound terms", so that they can be directly executed, without going through the intermediate inference steps?
+
 == Operational interface ==
 
-A "universal sensorimotor interface" is provided in class Operator.java, where the commands or functions of other systems or decides can be registered in NARS, and called by it. With each operator, some initial knowledge about its preconditions and consequences should be provided to the system, so inference can be carried out on it.
+A "universal sensorimotor interface" is provided, where the commands or functions of other systems or decides can be registered in NARS, and called by it. With each operator, some initial knowledge about its preconditions and consequences should be provided to the system, so inference can be carried out on it.
 
 As an example, a _nars.operator.math_ package is defined to contain some simple math operators. Currently there are two operators, which can be called as "(`^`count, {a, b, c}, #x)!" and "(`^`add, 2, 3, #x)!", where _#x_ will be replaced by the result after the execution, as "(`^`count, {a, b, c}, 3)." and "(`^`add, 2, 3, 5)." To embed them into knowledge, the input arguments should be independent variables, such as "... (`^`count, $y, #x) ..." and "... (`^`add, $y, $z, #x) ...". In the future, each group of optional operators should be kept in a sub-package of _nars.operator_, and each class should extend Operator.java, as well as to add a line to call _registerOperator_ in its super class.
 
-In summery, there will be three types of operators in NARS that share the format _(oper, args)_:
+In summary, there will be three types of operators in NARS that share the format _(oper, args)_:
   * *Native operators*, the connectors of CompoundTerms that are directly recognized and processed by the grammar rules and inference rules
   * *Standard operators*,  the operators to be introduced in NAL-9, and equipped in every normal NARS implementation
   * *Optional operators*,  the specific operators that turn a standard NARS into a customized NARS+ described in the book
 
-The first two types will be fixed, while the last is extendable. There is a possibility of letting the set of standard operators differ from system to system, though the benefit of this flexibility remains unknown. 
+The first two types will be fixed, while the last is extendable. For more details, see [Plugins].
 
 
 = Introspective Inference (NAL-9) =
-
-A previous preliminary implementation exists as version 1.4.0, and explained briefly in [OpenNarsOneDotFour].
 
 This layer of NAL will be mainly implemented as a set of mental operations whose major consequences are within the system itself. These operations carries out various types of self-monitoring and self-control.
 
@@ -122,26 +127,17 @@ These mental operators are introduced for experimental purpose. The details in e
 
 While the above operations work on individual data items like a sentence or a concept, there are also operators that work on the system as a whole.
 
-There are a few indicators used to measure the current status of the system:
-  * _happyValue_: a summary of the satisfaction values (i.e., the quality of its current solution) of the recently pursued goals
-  * _busyValue_: a summary of the priority values of the recently processed tasks
+The foundation of feeling and emotion in the system is based on a _satisfaction_ value, which is a summary of the individual satisfaction values (i.e., the quality of its current solution) of the recently pursued goals. This value is periodically updated by taking a weighted average of its previous value and a new value from the goal under consideration, so as to represent the "recent" situation.
 
-Both are updated by taking a weighted average of its previous value and a new value, so as to represent the "recent" situation.
+The "feeling" operation reports the corresponding value as the truth-value of a Narsese judgment. Now the system's experience includes internal sensations, which are processed in the same way as the sensations about the outside events.
 
-The "feeling" operations report the corresponding value. For example, a goal _(`^`feelHappy)!_ is rewritten into _<(`*`,SELF) --> `^`feelHappy>!_ in the system, and then the result is an input judgment like _<{SELF} --> `[`Happy`]`>._  where the frequency is the current value in that sensation. Now the system's experience includes internal sensations, which are processed in the same way as the sensations about the outside events.
+*Issue*: The desire-value of non-statement terms should also be used to express the system's attitude toward the term. For example, if the occurrence of concept _bird_ is usually associated with the satisfaction of goals (or the "happy" and "pleasant" feeling), then it will have a relatively high desire-value, and is considered as to be "liked" by the system. This feature can be checked by certain operator and taken into account in decision making.
 
-*Issue*: It is maybe necessary to keep a list of reserved words, and to prevent them from being misused. Currently there are "Happy", "Busy", and "SELF".
-
-*Issue*: It will be necessary to call the corresponding operations to answer related questions, such as _<{SELF} --> `[`Happy`]`>?_
-
-*Issue*: The desire-value of non-statement terms should also be used to prepare the system's attitude toward the term. For example, if the occurrence of concept _bird_ is usually associated with the satisfaction of goals (or, equivalently, high happyValue), then it will have a relatively high desire-value, and is considered as to be "liked" by the system. This feature can be checked by certain operator, like _`^`feelLike_, and taken into account in decision making.
-
-This group of operator all extend Feel.java, and each returns a judgment of the pattern _<{SELF} --> `[`Xyz`]`>. :|:_, while the corresponding operator is _(`^`feelXyz)!_ with "Xyz" being the name of the feeling.
-
-NARS only directly measure some fundamental feelings, from which many complicated ones can be built.
+NARS only directly measures some fundamental feelings, from which many complicated ones can be built.
 
 *Issue*: Feelings should be used in the system's self-control process to improve the system's efficiency and attention allocation, by producing quick processing of crucial tasks.
 
+Beside _satisfaction_, the system has other system-level indicators, such as _busyness_ that summarize the average priority values of the recently processed. There are corresponding feeling operators for these indicators. According to certain theories of emotion, these indicators are not emotions, since they do not evaluate the currently status s "good" or "bad", though they serve similar functions as emotion.
 
 == Internal experience ==
 
@@ -151,9 +147,6 @@ Beside that, it will also be necessary to record the major events within the sys
 
 To achieve this purpose, an inference step can be summarized afterwards as an Implication statement from the premise(s) to the conclusion.
 
-*Issue*: For double-premise inference rules, it may be better to only include one premise (the task) in the summarizing Implication statement, while taking the other one (the belief) as part of the background knowledge.
+For double-premise inference rules, it may be better to only include one premise (the task) in the summarizing Implication statement, while taking the other one (the belief) as part of the background knowledge.
 
 The internal experience may be treated similarly as the I/O channels, with a buffer and other features, though there is probably only one such channel.
-
-*Issue*: Whether it is necessary to have a single data structure corresponding to the "flow of consciousness" of the system?
- 
