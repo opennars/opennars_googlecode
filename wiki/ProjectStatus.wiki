@@ -3,7 +3,7 @@
 
 = Current Situation =
 
-The most recent release [OpenNARSOneDotSixDotOne OpenNARS 1.6.1] (finished in January 2015) implements the whole Non-Axiomatic Logic (NAL 1-9), as described in [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning]. 
+The most recent release [OpenNARSOneDotSixDotTwo OpenNARS 1.6.2] (finished in March 2015) implements the whole Non-Axiomatic Logic (NAL 1-9), as described in [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning]. 
 
 Another major release is OpenNARS 1.5.7, a stable implementation of NAL 1-6. 
 
@@ -13,11 +13,13 @@ In the near future, there are the following tasks to be accomplished, probably i
 
 === Conceptual design ===
 
-Though the major design decisions have been implemented, there are still remaining conceptual issues. Some of them are listed in OpenNarsOneDotSix, and there will surely more to be found in the testing process.
+Though the major design decisions have been implemented, there are still remaining conceptual issues. Some of them are listed in [OpenNarsOneDotSix], and there will surely more to be found in the testing process.
 
 The conceptual issues usually cannot be resolved by coding considerations, but should be addressed in ways that are consistent with the overall design of NARS.
 
-In the near future, the focus of conceptual design should be on the logic part (i.e., Narsese and NAL). The details of the control part (memory structure and resource allocation) will wait until the logic part is relatively stable.
+In the near future, the focus of conceptual design will still be on the logic part, that is on the expressive power of Narsese and the inferential power of NAL. The hypothesis to be tested is that the language and the logic are _complete_ with respect to the objective of A(G)I. 
+
+The details of the control part (memory structure and resource allocation) will wait until the logic part is relatively stable.
 
 === Working examples and applications ===
 
