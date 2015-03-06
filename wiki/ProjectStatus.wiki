@@ -26,7 +26,7 @@ The details of the control part (memory structure and resource allocation) will 
 There are several types of testing cases:
   * [SingleStepTestingCases Single-step examples] show the premise-conclusion relationship of each inference rule
   * [MultiStepExamples Multi-step examples] show typical functions of the system that takes several steps
-  * There are more complicated tests described in [ApplicationPrograms 1.6.1 ApplicationPrograms page] and [http://www.cis.temple.edu/~pwang/demos.html Testing Cases].
+  * There are more complicated tests described in ApplicationPrograms and [http://www.cis.temple.edu/~pwang/demos.html Testing Cases].
 
 To carry out an application test, it is important to remember that it cannot be done by simply dump a large number of tasks into the system then let it run. It is more efficient to do it in a step-by-step manner, and to follow the order of (1) Narsese (i.e., make sure all the problems and solutions can be expressed), (2) NAL (i.e., make sure all the desired steps are supported by existing rules), and (3) NARS (i.e., make sure the complete process can be carried out when given proper experience).
 
