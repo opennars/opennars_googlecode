@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary What is new in OpenNARS-1.6.2.
 
 = Introduction =
 
