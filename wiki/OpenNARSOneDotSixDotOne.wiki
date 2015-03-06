@@ -1,4 +1,4 @@
-#summary The current flagship, everything about this release.
+#summary Everything about OpenNARS-1.6.1.
 
 = Introduction =
 
