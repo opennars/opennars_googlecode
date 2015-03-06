@@ -1,17 +1,17 @@
-#summary New functions of Open-NARS version 1.6.x.
-
+#summary Functions and remaing issues of Open-NARS 1.6.x.
 
 = Introduction =
 
 Open-NARS 1.6.x is different from 1.5.x in the following major aspects:
-  # In logic, it implements NAL-7, NAL-8, and NAL-9, and therefore completely implements NAL, as specified in [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning]. It is an attempt to re-do what [OpenNarsOneDotFour] planned to achieve.
-  # In control, it refines the automatic resources allocation that has been there from the beginning, and combines it with the voluntary control introduced in NAL-9.
-  # In software structure, it absorbs the ideas from previous discussions (such as in [AbstractDesignProposal], [Modules], [GUIRequest]) and implementations (the version built by Joe Geldart), as well as the recent discussions.
+  # In logic, it implements NAL-7, NAL-8, and NAL-9, and therefore completely implements NAL, as specified in [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning].
+  # It contains new ideas to be further explored, such as [https://code.google.com/p/open-nars/wiki/PerceptionInNARS Perception] and [https://code.google.com/p/open-nars/wiki/Plugins Plugins].
+  # In [https://code.google.com/p/open-nars/wiki/InferenceControl control], it refines the automatic resources allocation that has been there from the beginning, and combines it with the voluntary control introduced in NAL-9.
+  # In software structure, it absorbs the ideas from previous discussions, as well as the recent discussions. The program has a completely new GUI and very different internal structure.
 
 
 = Temporal Inference (NAL-7) =
 
-===Representation of temporal information===
+==Representation of temporal information==
 
 Beside [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning], temporal reasoning in NARS is also discussed in [http://www.cis.temple.edu/~pwang/Publication/temporal-causal.pdf Issues in Temporal and Causal Inference]. A previous implementation exists as version 1.3.3, with [https://code.google.com/p/open-nars/source/browse/trunk/nars-dist/Examples-1.3.3/Example-NAL7-abridged.txt working examples].
 
@@ -23,7 +23,7 @@ In class nars.entity.Stamp, an occurrenceTime records the (observed, remembered,
 
 A system parameter DURATION is used to define the "present tense" as for events with an occurrenceTime in the [-DURATION, DURATION] neighborhood of the current time, as given by the system's internal clock. It's current default value is 5. The previous idea is to take 1 as its value, so "presently" means the current working cycle, but it seems too restrictive.  For an input judgment, if its tense is "present", its occurrenceTime will be set to the current time on the internal clock, "past" is mapped to "current time - DURATION", and "future" to "current time + DURATION". If no tense is used, the occurrenceTime takes a special value ETERNAL. The reverse mapping is used for output.
 
-===Inference on temporal order===
+==Inference on temporal order==
 
 As explained in the publications, temporal inference in NARS is designed by processing the logical and the temporal aspects separately. Therefore all the existing rules will be kept, except that the conclusion may contain a temporal term (with temporal order among components), a time interval (similar to the numbers in experience), and/or a temporal truth-value (with an occurrence time).
 
@@ -31,7 +31,7 @@ The temporal order in CompoundTerms is processed in the following way:
   # As described in the book, each inference rule of NAL-6 is extended by using the temporal copulas and connectors to replace the atemporal ones in the premises, then identifying the conclusions where both the logical and the temporal relations can be derived, so as to establish valid inference rules for NAL-7.
   # Different from what is hinted in the book, the temporal order is taken to be binary, not multi-valued, so the matter of degree in the truth-value is completely caused by the logical factor, not the temporal factor. For this reason, in all inference rules (both strong and weak), the temporal order among the terms in the conclusion is the same order as those terms in the premises. If no such a temporal order can be decided in a certain combination of the terms, no conclusion is derived.
 
-===Inference on occurrence time===
+=== - Inference on occurrence time===
 
 In most rules, the occurrenceTime is processed independent of the other aspects of the rule. There are the following cases:
   * If both premises are ETERNAL, so is the conclusion. Therefore all the inference rules defined in the lower layers remain valid.
@@ -39,40 +39,33 @@ In most rules, the occurrenceTime is processed independent of the other aspects 
   * If the task is not tensed but the belief is, then an _eternalization_ rule is used to take the belief as providing evidence for the sentence in the task.
   * If both premises are tensed, then the belief is "projected" to the occurrenceTime of the task. Ideally, temporal inference is valid only when the premises are about the same moment, i.e., have the same occurrenceTime or no occurrenceTime (i.e., eternal). However, since occurrenceTime is an approximation and the system is adaptive, a conclusion about one moment (that of the belief) can be projected to another (that of the task), at the cost of a confidence discount. Let _t0_ be the current time, and _t1_ and _t2_ are the occurrenceTime of the premises, then the discount factor is _d_ = 1 - |_t1-t2_| / (|_t0-t1_| + |_t0-t2_|), which is in [0,1]. This factor _d_ is multiplied to the confidence of a promise as a "temporal discount" to project it to the occurrence of the other promise, so as to derive a conclusion about that moment. In this way, if there are conflicting conclusions, the temporally closer one will be preferred by the choice rule.
 
-*Issue*: The above formula looks natural, though there are still some issues to be resolved. For example, when _t1_ or _t2_ equals _t0_, _d_ will be 0. It may be possible to resolve this issue via eternalization.
-
-In principle, all inference rules should take temporal information into account. However, since an inference rule may be implemented as the cooperation of multiple methods, which not all of them will be responsible to check temporal information.
-
 Normally, if the premises are "tensed", so is the conclusion --- the knowledge derived about a moment is only valid for that moment. It is through "eternalization" that an eternal conclusion is arrived, at the cost of a confidence lost.
 
-===Temporal induction and detachment===
+In principle, all inference rules should take temporal information into account. However, since an inference rule may be implemented as the cooperation of multiple methods, not all of them will be responsible to check temporal information.
+
+=== - Temporal induction and detachment===
 
 An inference where temporal order and occurrence time are tangled is temporal induction and its reverse, detachment (as special case of deduction and abduction).
 
 In NARS, temporal induction refers to the situation where events _e1_ and _e2_ are observed as occurring in succession, with a time interval in between with a length of _n_ clock cycles. As far as this sequence of events is noticed by the system, an inductive conclusion _(&/,e1,interval(n)) =/> e2_ is derived.
 
-There are still several issues about this inference.
+This rule is one of the exceptions of the "generalized syllogistic" pattern in NAL inference rules, which requires the premises to have a common term. This pattern guarantees the semantic relevance among the statements involved, and also greatly reduced the number of legal combinations of premises. The current exception is allowed, because the two events are related _temporally_, though not semantically, and in future works on sensation organs similar exceptions will be allowed for _spatially_ related events to be combined into compound events without shared components. This rule also includes variable introduction. If _e1_ and _e2_ have common subject or predicate, an independent variable will be introduced in the conclusion.
 
-*Issue*: This rule is one of the exceptions of the "generalized syllogistic" pattern in NAL inference rules, which requires the premises to have a common term. This pattern guarantees the semantic relevance among the statements involved, and also greatly reduced the number of legal combinations of premises. The current exception is allowed, because the two events are related _temporally_, though not semantically, and in future works on sensation organs similar exceptions will be allowed for _spatially_ related events to be combined into compound events without shared components. However, it raises a problem on variable introduction. If _e1_ and _e2_ have common subject or predicate, it seems natural to introduce an independent variable, but what if the common term occupies other positions?
+*Issue*: Other forms of variable introduction where the common term occupies other positions.
 
-*Issue*: Another problem is about the time interval _n_ between the two events. To simply derive _e1 =/> e2_ is correct, but does not capture the temporal information about the interval. To use another event to represent the interval (as tried in version 1.3.3) is too accurate to be useful, because _(&/,e1,interval(100)) =/> e2_ and _(&/,e1,interval(101)) =/> e2_ probably should be merged by the revision rule, since the difference between the two numbers are negligible. For this consideration, in the current implementation, the interval is represented by a special type of term, which approximately record _m = log(n)_ as an integer. With such a belief as premise, the detachment rule will do deduction with _e1_, and abduction with _e2_, and the occurrenceTime of the conclusion is calculated from that of the other event, plus or minus _exp(m)_ to approximately recover the _n_ value. Whether the log/exp functions should be replaced by power functions (such as sqrt/square) is a question to be answered later.
- 
-As in other places, whenever an accurate time interval is needed, it is always possible to replace the approximate time interval by a better defined event, so that is not an issue.
+*Issue*: Though in principle temporal induction can happen between any two tensed judgments, two do that exhaustively is not affordable. Currently the rule is applied only on consecutive new (input or derived) events, though it can be extended to non-consecutive ones. Also, it should be implemented as question driven, in response to _e1 =/> e2?_ or similar questions.
+
+*Issue*: Another problem is about the time interval _n_ between the two events. To simply derive _e1 =/> e2_ is correct, but does not capture the temporal information about the interval. To use another event to represent the interval (as tried in version 1.3.3) is too accurate to be useful, because _(&/,e1,interval(100)) =/> e2_ and _(&/,e1,interval(101)) =/> e2_ probably should be merged by the revision rule, since the difference between the two numbers are negligible. For this consideration, in the current implementation, the interval is represented by a special type of term, which approximately record _m = log(n)_ as an integer. With such a belief as premise, the detachment rule will do deduction with _e1_, and abduction with _e2_, and the occurrenceTime of the conclusion is calculated from that of the other event, plus or minus _exp(m)_ to approximately recover the _n_ value. Whether the log/exp functions should be replaced by power functions (such as sqrt/square) is a question to be answered later. As in other places, whenever an accurate time interval is needed, it is always possible to replace the approximate time interval by a better defined event, so that is not an issue.
 
 *Issue*: Whether to derive conclusions like _e2 =\> (&/,e1,interval(n))_?
 
 *Issue*: Whether to allow interval terms _interval(n)_ to appear in I/O (and in Narsese grammar), when the measurement _n_ is completely subjective?
 
-*Issue*: In the current implementation, the _e1_ and _e2_ are the mostly noticeable events at the previous moment and the current moment, respectively. It may be necessary to change this premise-selection policy.
-
-*Issue*: Because of the change in design, all examples for NAL-7 need to be checked and revised. Some examples should be added to cover the new functions.
-
-
 = Procedural Inference (NAL-8) =
 
 Beside [http://www.worldscientific.com/worldscibooks/10.1142/8665 Non-Axiomatic Logic: A Model of Intelligent Reasoning], procedural reasoning in NARS is also discussed in [http://www.degruyter.com/view/j/jagi.2012.3.issue-3/v10229-011-0021-5/v10229-011-0021-5.xml?format=INT Solving a Problem With or Without a Program]. A previous implementation exists as version 1.3.3, with [https://code.google.com/p/open-nars/source/browse/trunk/nars-dist/Examples-1.3.3/ working examples in several files], as well as descriptions in [ProceduralInference], [ProceduralExamples], and [ProceduralLearning].
 
-=== Inference on goals ===
+== Inference on goals ==
 
 In nars.entity.Sentence, a "desire" value is added, which is truth-value interpreted differently. The desire-value of statement _S_ is the truth-value of _S==>D_, where _D_ is a _virtual_ statement representing a desired situation. Furthermore, add "Goal" and "Query" as two types of Sentence, and process them like "Judgment" and "Question", but using desire-value, rather than truth-value.
 
@@ -80,15 +73,11 @@ In all the inference rules, "Query/Goal" and "Judgment/Question" are processed i
 
 Given the reversibility of the inference rules of NAL, the derivation of Goals and Quests are basically the existing rules, except that the desire-values are calculated using different functions, according to the above correspondence between truth-value and desire-value. 
 
-*Issue*: Testing examples are needed for the inference on goal and query. The calculations of truth-value and/or budget value in some rules may be incorrect.
-
 Though both Question and Goal are derived by backward inference, there is a major difference between the two: while derived Questions are directly accepted as new tasks, derived Goals do not immediately become tasks. instead, they contribute to the desirability of the corresponding sentences. Only when the desirability of a sentence reach a threshold, does a decision-making rule is triggered to decide whether to pursue the sentence as a goal.
-
-*Issue*: In the current version, the decision-making rule only take the desire-value into account, while as described in the book, the plausibility of the goal should be considered, too. The problem is to find a reasonable way to calculate it.
 
 *Issue*: The inference on Quest, as Question on desire-values, has not been carefully evaluated. In particular, the budget-value functions need to be properly selected in each rule, since in the same method, the selection may be different between Quest and Question on truth-value.
 
-=== Inference on operations ===
+== Inference on operations ==
 
 Goals are eventually achieved by the execution of operations. An "operation" package is introduced, with each operator defined as a class, with an "execute" method that takes a list of arguments for the operation. In Memory, a HashMap<String, Operator> is used to associate the operators with their names. When a goal corresponds to an operation, the _execute_ method of its operator is called.
 
@@ -96,9 +85,7 @@ An operation with acquired operator _oper_ and arguments _args_ is internally re
 
 *Issue*: Technically, _(`*`, SELF, args) --> oper_ and _(`*`, args, SELF) --> oper_ both work as the internal representation of an operation. The former looks more natural (so is used in the book), while the latter is slightly more efficient (so is used in the code). A final decision will need to be made to keep the descriptions consistent.
 
-*Issue*: Because of the changes in NAL-7, the temporal aspects of all NAL-8 examples need to be checked and revised.
-
-=== Operational interface ===
+== Operational interface ==
 
 A "universal sensorimotor interface" is provided in class Operator.java, where the commands or functions of other systems or decides can be registered in NARS, and called by it. With each operator, some initial knowledge about its preconditions and consequences should be provided to the system, so inference can be carried out on it.
 
@@ -118,7 +105,7 @@ A previous preliminary implementation exists as version 1.4.0, and explained bri
 
 This layer of NAL will be mainly implemented as a set of mental operations whose major consequences are within the system itself. These operations carries out various types of self-monitoring and self-control.
 
-=== Deliberate control ===
+== Deliberate control ==
 
 The package _nars.operator.mental_ contains operators that allow the system to deliberately override the automatic inference control mechanism:
   * *task creation*: This group of operators each takes a Term as argument, and uses it as content to create a new task to be processed: _`^`believe_ for judgment, _`^`want_ for goal, _`^`wonder_ for question, and _`^`evaluate_ for query. 
@@ -131,9 +118,7 @@ The name of a mental operator only roughly corresponds to its meaning. The exact
 
 These mental operators are introduced for experimental purpose. The details in each of them may be revised, and other operators may be introduced. In general, each operator should be relatively simple and meaningful. It is neither necessary nor possible for the system to explicitly manage all its internal actions, so it is not a good idea to define a large number of mental operators.
 
-*Issue*: There are some I/O operations to be coded, as listed in Operator.java as comments.
-
-=== Feeling and emotion ===
+== Feeling and emotion ==
 
 While the above operations work on individual data items like a sentence or a concept, there are also operators that work on the system as a whole.
 
@@ -158,7 +143,7 @@ NARS only directly measure some fundamental feelings, from which many complicate
 *Issue*: Feelings should be used in the system's self-control process to improve the system's efficiency and attention allocation, by producing quick processing of crucial tasks.
 
 
-=== Internal experience ===
+== Internal experience ==
 
 As mentioned above, the internal experience of the system will include the feedback of the mental operations.
 
