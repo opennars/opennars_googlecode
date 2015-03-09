@@ -74,7 +74,11 @@ Since OpenNARS-1.6.2, if nars.sh (in run_specific folder) is started,
 then NARS runs in an interactive commandline mode. (nars.core.NARRun)
 Input can be typed in and will be accepted after pressing enter at any time. To don't let NARS spam the console, the volume can be adjusted by entering for example 
 {{{
-"*volume=0" and reset using "***".
+"*volume=0" 
+}}}
+and reset using 
+{{{
+"***".
 }}}
 
 = IRC Interface =
