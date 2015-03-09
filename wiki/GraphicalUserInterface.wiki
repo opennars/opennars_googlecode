@@ -78,7 +78,7 @@ Input can be typed in and will be accepted after pressing enter at any time. To 
 }}}
 and reset using 
 {{{
-"***".
+"***"
 }}}
 
 = IRC Interface =
