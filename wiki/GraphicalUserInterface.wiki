@@ -67,3 +67,15 @@ To input custom statements just use the input window (the bottom blank part in t
 <{tom} --> cat>.
 }}} 
 And when we want to load another experience file, we may at first want to reset NARS's memory with Memory -> Reset, so that the examples won't influence each other.
+
+= Commandline Interface =
+
+Since OpenNARS-1.6.2, if nars.sh (in run_specific folder) is started,
+then NARS runs in an interactive commandline mode. (nars.core.NARRun)
+Input can be typed in and will be accepted after pressing enter at any time. To don't let NARS spam the console, the volume can be adjusted by entering for example "*volume=0".
+
+= IRC Interface =
+
+Since OpenNARS-1.6.2, OpenNARS can also be used by multiple users at the same time in a IRC channel. (using NARS_IRC_Bot.py)
+
+
