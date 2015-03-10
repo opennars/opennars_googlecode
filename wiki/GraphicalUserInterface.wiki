@@ -97,7 +97,7 @@ so that NARS can reason about the sentence.
 
 Examples using the IRC bot:
 
-Natural Language Example:
+Natural Language Example (this works by reasoning directly about the structure of the sentences, the meaning is not known to the system here):
 {{{
 <patham9_> 'bit enters the stage. 
 <patham9_> 'bit is dead now. 
