@@ -119,6 +119,7 @@ Complex NLP example distinguishing words from the concepts they represent (mappi
 <patham9_> <(\,SELF,_,HAS) --> BEER>!
 <patham9_> <(\,SELF,_,HAS) --> BEER>!
 <patham9_> <(\,SELF,_,HAS) --> BEER>!
-//leads to execution of saying "I want beer", supported by past experience namely by the observed temporal coherence, and the knowledge that "beer" stands for its internal concept "BEER".
+//leads to execution of saying "I want beer", supported by past experience namely by the observed temporal coherence, 
+//and the knowledge that "beer" stands for its internal concept "BEER".
 <nars> EXE: ^say([I, want, beer, SELF])
 }}}
