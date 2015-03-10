@@ -104,7 +104,7 @@ Examples using the IRC bot:
 //adding the goal that it should have beer
 <patham9_> <(\,nars,_,has) --> beer>! 
 //leads to execution of saying "I want beer"
-<nars> EXE: $0.40;0.36;0.64$ ^say([I, want, beer, SELF])=null 
+<nars> EXE: ^say([I, want, beer, SELF])
 }}}
 
 Natural Language Example:
