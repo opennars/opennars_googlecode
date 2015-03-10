@@ -103,7 +103,7 @@ Examples using the IRC bot:
 <patham9_> <(\,SELF,_,has) --> food>. :|: 
 //adding the goal that it should have beer
 <patham9_> <(\,nars,_,has) --> beer>! 
-//leads to execution of saying "I want beer"
+//leads to execution of saying "I want beer", supported by past experience
 <nars> EXE: ^say([I, want, beer, SELF])
 }}}
 
