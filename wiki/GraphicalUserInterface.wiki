@@ -134,5 +134,5 @@ Distinguishing words from the concepts they represent (mapping sentences to mean
 <patham9_> <(\,SELF,_,HAS) --> BEER>!
 <patham9_> <(\,SELF,_,HAS) --> BEER>!
 //leads to execution of saying "I want beer", supported by past experience
-<nars> EXE ^say([I, want, beer, SELF])
+<nars> EXE: ^say([I, want, beer, SELF])
 }}}
