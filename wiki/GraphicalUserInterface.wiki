@@ -106,7 +106,7 @@ Natural Language Example:
 }}}
 
 
-More complex example (the words equal the concepts of interest)
+More complex example (the words still equal the concepts of interest)
 {{{
 //saying I want food
 <patham9_> (^say,I,want,food). :|: 
@@ -119,7 +119,7 @@ More complex example (the words equal the concepts of interest)
 }}}
 
 
-Distinguishing words from the concepts they represent:
+Distinguishing words from the concepts they represent (mapping sentences to meaning in not necessary unambiguous way):
 {{{
 //the word food stands for the concept FOOD
 <patham9_> <(*,food,FOOD) --> REPRESENT>.
