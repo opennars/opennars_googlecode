@@ -105,21 +105,7 @@ Natural Language Example:
 <nars_> bot is dead now 
 }}}
 
-
-More complex example (the words still equal the concepts of interest)
-{{{
-//saying I want food
-<patham9_> (^say,I,want,food). :|: 
-//leads to NARS having food
-<patham9_> <(\,SELF,_,has) --> food>. :|: 
-//adding the goal that it should have beer
-<patham9_> <(\,SELF,_,has) --> beer>! 
-//leads to execution of saying "I want beer", supported by past experience
-<nars> EXE: ^say([I, want, beer, SELF])
-}}}
-
-
-Distinguishing words from the concepts they represent (mapping sentences to meaning in not necessary unambiguous way):
+Complex NLP example distinguishing words from the concepts they represent (mapping sentences to meaning in not necessary unambiguous way):
 {{{
 //the word food stands for the concept FOOD
 <patham9_> <(*,food,FOOD) --> REPRESENT>.
