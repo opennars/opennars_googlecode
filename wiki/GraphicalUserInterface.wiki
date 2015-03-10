@@ -83,4 +83,13 @@ and reset using
 
 = IRC Interface =
 
-Since OpenNARS-1.6.2, OpenNARS can also be used by multiple users at the same time in a IRC channel. (using NARS_IRC_Bot.py)
+Since OpenNARS-1.6.2, OpenNARS can also be used by multiple users at the same time in an IRC channel. (using NARS_IRC_Bot.py)
+The NARS_NLP_IRC_Bot.py also supports natural language input,
+for example 'this is a test. will be converted to <(*,this,is,a,test) --> sentence>. so that NARS can reason about the sentence.
+Example:
+{{{
+[05:40:05] <patham9_> (^say,I,want,food). :|: 
+[05:40:09] <patham9_> <(\,nars,_,has) --> food>. :|: 
+[05:40:13] <patham9_> <(\,nars,_,has) --> beer>! 
+[05:40:14] <nars> EXE: $0.40;0.36;0.64$ ^say([I, want, beer, SELF])=null 
+}}}
