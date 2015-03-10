@@ -91,7 +91,7 @@ for example
 }}}
 will be converted to 
 {{{
-<(*,this,is,a,test) --> sentence>. 
+<(*,this,is,a,test) --> sentence>. :|:
 }}}
 so that NARS can reason about the sentence.
 Example:
