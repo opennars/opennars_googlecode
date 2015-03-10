@@ -96,6 +96,17 @@ will be converted to
 so that NARS can reason about the sentence.
 
 Examples using the IRC bot:
+
+Natural Language Example:
+{{{
+<patham9_> 'bit enters the stage. 
+<patham9_> 'bit is dead now. 
+<patham9_> 'bot enters the stage. 
+<nars_> bot is dead now 
+}}}
+
+
+More complex example (still word level)
 {{{
 //saying I want food
 <patham9_> (^say,I,want,food). :|: 
@@ -107,10 +118,21 @@ Examples using the IRC bot:
 <nars> EXE: ^say([I, want, beer, SELF])
 }}}
 
-Natural Language Example:
+
+Distinguishing words from the concepts they represent:
 {{{
-<patham9_> 'bit enters the stage. 
-<patham9_> 'bit is dead now. 
-<patham9_> 'bot enters the stage. 
-<nars_> bot is dead now 
+//the word food stands for the concept FOOD
+<patham9_> <(*,food,FOOD) --> REPRESENT>. %1.00;0.90%
+//the word beer stands for the concept BEER
+<patham9_> <(*,beer,BEER) --> REPRESENT>. %1.00;0.90%
+//saying "I want food"
+<patham9_> (^say,I,want,food). :|: %1.00;0.90%
+ //leads to NARS having food (for example this is body feedback)
+<patham9_> <(\,SELF,_,HAS) --> FOOD>. :|: %1.00;0.90%
+ //adding the goal that it should have beer (giving more priority by adding multiple time)
+<patham9_> <(\,SELF,_,HAS) --> BEER>! %1.00;0.90%
+<patham9_> <(\,SELF,_,HAS) --> BEER>! %1.00;0.90%
+<patham9_> <(\,SELF,_,HAS) --> BEER>! %1.00;0.90%
+//leads to execution of saying "I want beer", supported by past experience
+   EXE $0.40;0.06;0.51$ ^say([I, want, beer, SELF])=null
 }}}
