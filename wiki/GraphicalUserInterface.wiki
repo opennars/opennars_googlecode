@@ -122,17 +122,17 @@ More complex example (still word level)
 Distinguishing words from the concepts they represent:
 {{{
 //the word food stands for the concept FOOD
-<patham9_> <(*,food,FOOD) --> REPRESENT>. %1.00;0.90%
+<patham9_> <(*,food,FOOD) --> REPRESENT>.
 //the word beer stands for the concept BEER
-<patham9_> <(*,beer,BEER) --> REPRESENT>. %1.00;0.90%
+<patham9_> <(*,beer,BEER) --> REPRESENT>.
 //saying "I want food"
-<patham9_> (^say,I,want,food). :|: %1.00;0.90%
+<patham9_> (^say,I,want,food). :|:
  //leads to NARS having food (for example this is body feedback)
-<patham9_> <(\,SELF,_,HAS) --> FOOD>. :|: %1.00;0.90%
- //adding the goal that it should have beer (giving more priority by adding multiple time)
-<patham9_> <(\,SELF,_,HAS) --> BEER>! %1.00;0.90%
-<patham9_> <(\,SELF,_,HAS) --> BEER>! %1.00;0.90%
-<patham9_> <(\,SELF,_,HAS) --> BEER>! %1.00;0.90%
+<patham9_> <(\,SELF,_,HAS) --> FOOD>. :|:
+ //adding the goal that it should have beer (giving more priority by adding multiple time, I was impatient :) )
+<patham9_> <(\,SELF,_,HAS) --> BEER>!
+<patham9_> <(\,SELF,_,HAS) --> BEER>!
+<patham9_> <(\,SELF,_,HAS) --> BEER>!
 //leads to execution of saying "I want beer", supported by past experience
-   EXE $0.40;0.06;0.51$ ^say([I, want, beer, SELF])=null
+   EXE ^say([I, want, beer, SELF])
 }}}
