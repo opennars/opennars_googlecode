@@ -94,10 +94,23 @@ will be converted to
 <(*,this,is,a,test) --> sentence>. :|:
 }}}
 so that NARS can reason about the sentence.
-Example:
+
+Examples using the IRC bot:
 {{{
-[05:40:05] <patham9_> (^say,I,want,food). :|: 
-[05:40:09] <patham9_> <(\,nars,_,has) --> food>. :|: 
-[05:40:13] <patham9_> <(\,nars,_,has) --> beer>! 
-[05:40:14] <nars> EXE: $0.40;0.36;0.64$ ^say([I, want, beer, SELF])=null 
+//saying I want food
+<patham9_> (^say,I,want,food). :|: 
+//leads to NARS having food
+<patham9_> <(\,SELF,_,has) --> food>. :|: 
+//adding the goal that it should have beer
+<patham9_> <(\,nars,_,has) --> beer>! 
+//leads to execution of saying "I want beer"
+<nars> EXE: $0.40;0.36;0.64$ ^say([I, want, beer, SELF])=null 
+}}}
+
+Natural Language Example:
+{{{
+<patham9_> 'bit enters the stage. 
+<patham9_> 'bit is dead now. 
+<patham9_> 'bot enters the stage. 
+<nars_> bot is dead now 
 }}}
