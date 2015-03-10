@@ -106,14 +106,14 @@ Natural Language Example:
 }}}
 
 
-More complex example (still word level)
+More complex example (the words equal the concepts of interest)
 {{{
 //saying I want food
 <patham9_> (^say,I,want,food). :|: 
 //leads to NARS having food
 <patham9_> <(\,SELF,_,has) --> food>. :|: 
 //adding the goal that it should have beer
-<patham9_> <(\,nars,_,has) --> beer>! 
+<patham9_> <(\,SELF,_,has) --> beer>! 
 //leads to execution of saying "I want beer", supported by past experience
 <nars> EXE: ^say([I, want, beer, SELF])
 }}}
@@ -134,5 +134,5 @@ Distinguishing words from the concepts they represent:
 <patham9_> <(\,SELF,_,HAS) --> BEER>!
 <patham9_> <(\,SELF,_,HAS) --> BEER>!
 //leads to execution of saying "I want beer", supported by past experience
-   EXE ^say([I, want, beer, SELF])
+<nars> EXE ^say([I, want, beer, SELF])
 }}}
