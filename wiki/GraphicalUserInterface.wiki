@@ -102,7 +102,7 @@ Natural Language Example (this works by reasoning directly about the structure o
 <patham9_> 'bit enters the stage. 
 <patham9_> 'bit is dead now. 
 <patham9_> 'bot enters the stage. 
-<nars_> bot is dead now 
+<nars> bot is dead now 
 }}}
 
 Complex NLP example distinguishing words from the concepts they represent (mapping sentences to meaning in not necessary unambiguous way):
