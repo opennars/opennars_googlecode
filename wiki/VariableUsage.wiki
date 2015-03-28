@@ -56,21 +56,23 @@ uncle(X,Y) :- parent(Z,Y), brother(X,Z).
 In Narsese, a similar representation is:
 
 {{{
-<(&&,<(*,#Z,$Y) --> parent>,<(*,$X,#Z) --> brother>) ==> <(*,$X,$Y) --> uncle>>.
+<(&&,<#1 --> human>,<$Y --> (/,parent,#1,_)>,<$X --> (/,brother,_,#1)>) ==> <(*,$X,$Y) --> uncle>>.
 }}}
 
 Let's try with:
 
 {{{
-<(*,adam,tom) --> parent>.
-<(*,eva,tom) --> parent>.
-<(*,tim,adam) --> brother>.
-<(*,tim,tom) --> uncle>?
+<{tim} --> human>.
+<{tom} --> human>.
+<{john} --> human>.
+<{tom} --> (/,parent,{john},_)>.
+<{tim} --> (/,brother,_,{john})>.
+<(*,{?who},{?ofWho}) --> uncle>?
 }}}
 
 {{{
 works:
-<(*,tim,tom) --> uncle>. %1.00;0.73% {281 ...
+Answer <(*,{tim},{tom}) --> uncle>. %1.00;0.35%
 }}}
 
 More complicated cases: 
